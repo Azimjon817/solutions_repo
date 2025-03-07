@@ -79,6 +79,9 @@ The idealized projectile model can be adapted to more complex real-world situati
 
 ---
 
+[Simulation](project_motion.html)
+
+
 ## 4. Discussion on Limitations and Extensions
 
 ### 4.1 Limitations of the Idealized Model
@@ -92,6 +95,8 @@ The idealized projectile model can be adapted to more complex real-world situati
 - **Wind Effects:** Include horizontal wind acceleration to model more complex trajectories.
 
 ---
+
+
 
 ## Conclusion
 
