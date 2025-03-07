@@ -179,144 +179,74 @@
 <hr/>
 <h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
 <h3 id="11-derivation-of-the-equations-of-motion">1.1 Derivation of the Equations of Motion</h3>
-<p>Consider a projectile launched with an initial velocity <span class="arithmatex">\( v_0 \)</span> at an angle <span class="arithmatex">\( \theta \)</span> with respect to the horizontal. Assuming no air resistance and that the only force acting is gravity (<span class="arithmatex">\( g \)</span>), we start with the basic differential equations for the horizontal and vertical components.</p>
+<p>Consider a projectile launched with an initial velocity <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span> with respect to the horizontal. Assuming no air resistance and that the only force acting is gravity (<span class="arithmatex">\(g\)</span>), we start with the basic differential equations for the horizontal and vertical components.</p>
 <ul>
 <li>
 <p><strong>Horizontal Motion</strong> (no acceleration):
-  [
+  $$
   \frac{d^2x}{dt^2} = 0 \quad \Rightarrow \quad x(t) = v_0 \cos(\theta) \, t + x_0
-  ]
-  With <span class="arithmatex">\( x_0 = 0 \)</span>, we have:
-  [
+  $$
+  With <span class="arithmatex">\(x_0 = 0\)</span>, we have:
+  $$
   x(t) = v_0 \cos(\theta) \, t
-  ]</p>
+  $$</p>
 </li>
 <li>
-<p><strong>Vertical Motion</strong> (constant acceleration due to gravity):
-  [
-  \frac{d^2y}{dt^2} = -g \quad \Rightarrow \quad y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2 + y_0
-  ]
-  Assuming launch from the ground (<span class="arithmatex">\( y_0 = 0 \)</span>):
-  [
-  y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2
-  ]</p>
+<p><strong>Vertical Motion</strong> (constant acceleration due to gravity):</p>
 </li>
 </ul>
-<p>These equations form the family of solutions for projectile motion. Variations in the initial conditions <span class="arithmatex">\( v_0 \)</span>, <span class="arithmatex">\( \theta \)</span>, and even <span class="arithmatex">\( y_0 \)</span> (launch height) yield different trajectories, offering a rich parameter space to explore.</p>
+<p>$$
+  \frac{d^2y}{dt^2} = -g \quad \Rightarrow \quad y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2 + y_0
+  $$
+  Assuming launch from the ground (<span class="arithmatex">\(y_0 = 0\)</span>):
+  $$
+  y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2
+  $$</p>
+<p>These equations form the family of solutions for projectile motion. Variations in the initial conditions <span class="arithmatex">\(v_0\)</span>, <span class="arithmatex">\(\theta\)</span>, and even <span class="arithmatex">\(y_0\)</span> (launch height) yield different trajectories, offering a rich parameter space to explore.</p>
 <h3 id="12-family-of-solutions">1.2 Family of Solutions</h3>
 <ul>
-<li><strong>Dependence on <span class="arithmatex">\( v_0 \)</span>:</strong> A higher initial velocity increases both the horizontal distance and the maximum height reached.</li>
-<li><strong>Dependence on <span class="arithmatex">\( \theta \)</span>:</strong> The angle of projection determines the shape of the trajectory. The horizontal range <span class="arithmatex">\( R \)</span> (assuming launch and landing at the same height) is given by:
-  [
+<li><strong>Dependence on <span class="arithmatex">\(v_0\)</span>:</strong> A higher initial velocity increases both the horizontal distance and the maximum height reached.</li>
+<li><strong>Dependence on <span class="arithmatex">\(\theta\)</span>:</strong> The angle of projection determines the shape of the trajectory. The horizontal range <span class="arithmatex">\(R\)</span> (assuming launch and landing at the same height) is given by:
+  $$
   R = \frac{v_0^2 \sin(2\theta)}{g}
-  ]
-  This result comes from solving <span class="arithmatex">\( y(t) = 0 \)</span> (for <span class="arithmatex">\( t &gt; 0 \)</span>) and substituting back into <span class="arithmatex">\( x(t) \)</span>.</li>
-<li><strong>Dependence on <span class="arithmatex">\( g \)</span>:</strong> The gravitational acceleration <span class="arithmatex">\( g \)</span> inversely affects the range and the maximum height. Lower <span class="arithmatex">\( g \)</span> (as on the Moon) leads to longer ranges and higher trajectories.</li>
+  $$
+  This result comes from solving <span class="arithmatex">\(y(t) = 0\)</span> (for <span class="arithmatex">\(t &gt; 0\)</span>) and substituting back into <span class="arithmatex">\(x(t)\)</span>.</li>
+<li><strong>Dependence on <span class="arithmatex">\(g\)</span>:</strong> The gravitational acceleration <span class="arithmatex">\(g\)</span> inversely affects the range and the maximum height. Lower <span class="arithmatex">\(g\)</span> (as on the Moon) leads to longer ranges and higher trajectories.</li>
 </ul>
 <hr/>
 <h2 id="2-analysis-of-the-range">2. Analysis of the Range</h2>
 <h3 id="21-range-as-a-function-of-the-projection-angle">2.1 Range as a Function of the Projection Angle</h3>
 <p>For a projectile launched from ground level, the horizontal range is:
-[
+$$
 R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}
-]
-This formula shows a sinusoidal dependence on <span class="arithmatex">\( 2\theta \)</span> with a maximum when <span class="arithmatex">\( 2\theta = 90^\circ \)</span> (i.e., <span class="arithmatex">\( \theta = 45^\circ \)</span>). As <span class="arithmatex">\( \theta \)</span> deviates from <span class="arithmatex">\( 45^\circ \)</span>, the range decreases.</p>
+$$
+This formula shows a sinusoidal dependence on <span class="arithmatex">\(2\theta\)</span> with a maximum when <span class="arithmatex">\(2\theta = 90^\circ\)</span> (i.e., <span class="arithmatex">\(\theta = 45^\circ\)</span>). As <span class="arithmatex">\(\theta\)</span> deviates from <span class="arithmatex">\(45^\circ\)</span>, the range decreases.</p>
 <h3 id="22-effects-of-other-parameters">2.2 Effects of Other Parameters</h3>
 <ul>
-<li><strong>Initial Velocity (<span class="arithmatex">\( v_0 \)</span>)</strong>: The range increases quadratically with <span class="arithmatex">\( v_0 \)</span>. Doubling the speed results in a fourfold increase in range.</li>
-<li><strong>Gravitational Acceleration (<span class="arithmatex">\( g \)</span>)</strong>: The range is inversely proportional to <span class="arithmatex">\( g \)</span>. A smaller <span class="arithmatex">\( g \)</span> leads to a longer range.</li>
-<li><strong>Launch Height (<span class="arithmatex">\( y_0 \)</span>)</strong>: For projectiles launched from an elevated position, the time of flight increases, leading to a longer range. The equations become more complex, typically requiring solving a quadratic equation in <span class="arithmatex">\( t \)</span>.</li>
+<li><strong>Initial Velocity (<span class="arithmatex">\(v_0\)</span>)</strong>: The range increases quadratically with <span class="arithmatex">\(v_0\)</span>. Doubling the speed results in a fourfold increase in range.</li>
+<li><strong>Gravitational Acceleration (<span class="arithmatex">\(g\)</span>)</strong>: The range is inversely proportional to <span class="arithmatex">\(g\)</span>. A smaller <span class="arithmatex">\(g\)</span> leads to a longer range.</li>
+<li><strong>Launch Height (<span class="arithmatex">\(y_0\)</span>)</strong>: For projectiles launched from an elevated position, the time of flight increases, leading to a longer range. The equations become more complex, typically requiring solving a quadratic equation in <span class="arithmatex">\(t\)</span>.</li>
 </ul>
 <hr/>
 <h2 id="3-practical-applications">3. Practical Applications</h2>
 <p>The idealized projectile model can be adapted to more complex real-world situations:</p>
 <ul>
 <li><strong>Uneven Terrain:</strong> When the launch and landing heights differ, the time of flight is determined by solving
-  [
+  $$
   y(t) = y_0 + v_0 \sin(\theta) \, t - \frac{1}{2} g t^2 = y_{\text{landing}}
-  ]</li>
+  $$</li>
 <li><strong>Air Resistance:</strong> Introducing a drag force (often modeled as proportional to the velocity or the square of the velocity) leads to non-linear differential equations that may require numerical solutions.</li>
 <li><strong>Sports and Engineering:</strong> From predicting the flight of a soccer ball to the trajectory of missiles, understanding projectile motion is key in many fields.</li>
 </ul>
 <hr/>
-<h2 id="4-implementation">4. Implementation</h2>
-<p>Below is an example Python script that uses <code>matplotlib</code> to simulate projectile motion and plot the range as a function of the angle of projection for various initial conditions.</p>
-<pre><code class="language-python"># projectile_motion_simulation.py
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-def compute_trajectory(v0, theta_deg, g=9.81):
-    """
-    Computes the time, x, and y arrays for a projectile launched with initial velocity v0
-    at an angle theta (in degrees).
-    """
-    theta = np.radians(theta_deg)
-    # Time of flight for projectile landing back to y=0 (ignoring launch height)
-    t_flight = 2 * v0 * np.sin(theta) / g
-    t = np.linspace(0, t_flight, num=500)
-
-    # Trajectory equations
-    x = v0 * np.cos(theta) * t
-    y = v0 * np.sin(theta) * t - 0.5 * g * t**2
-    return t, x, y
-
-def plot_trajectory(v0, theta_deg, g=9.81):
-    t, x, y = compute_trajectory(v0, theta_deg, g)
-    plt.figure(figsize=(8, 4))
-    plt.plot(x, y, label=f'{theta_deg}°')
-    plt.xlabel('Horizontal Distance (m)')
-    plt.ylabel('Vertical Distance (m)')
-    plt.title(f'Projectile Trajectory (v0 = {v0} m/s, θ = {theta_deg}°)')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-
-def range_vs_angle(v0, g=9.81):
-    """
-    Computes and plots the horizontal range as a function of the angle of projection.
-    """
-    angles = np.linspace(0, 90, 90)
-    ranges = (v0**2 * np.sin(np.radians(2 * angles))) / g
-
-    plt.figure(figsize=(8, 4))
-    plt.plot(angles, ranges, 'b-', lw=2)
-    plt.xlabel('Angle of Projection (°)')
-    plt.ylabel('Range (m)')
-    plt.title(f'Range vs Angle (v0 = {v0} m/s)')
-    plt.grid(True)
-    plt.show()
-
-if __name__ == '__main__':
-    # Example parameters
-    initial_velocity = 30  # m/s
-    angles_to_plot = [30, 45, 60]
-
-    # Plot trajectories for different angles
-    for angle in angles_to_plot:
-        plot_trajectory(initial_velocity, angle)
-
-    # Plot range vs angle for the given initial velocity
-    range_vs_angle(initial_velocity)
-</code></pre>
-<h3 id="how-to-run-the-simulation">How to Run the Simulation</h3>
-<ol>
-<li><strong>Save the Code:</strong> Copy the above code into a file named <code>projectile_motion_simulation.py</code> or open it in a Jupyter Notebook cell.</li>
-<li><strong>Execute the Script:</strong> Run the script using:
-   <code>bash
-   python projectile_motion_simulation.py</code>
-   Or run the cell if you are using a notebook.</li>
-<li><strong>Explore Variations:</strong> Adjust parameters such as <code>initial_velocity</code>, <code>g</code>, or add a launch height parameter to see how the trajectory and range are affected.</li>
-</ol>
-<hr/>
-<h2 id="5-discussion-on-limitations-and-extensions">5. Discussion on Limitations and Extensions</h2>
-<h3 id="51-limitations-of-the-idealized-model">5.1 Limitations of the Idealized Model</h3>
+<h2 id="4-discussion-on-limitations-and-extensions">4. Discussion on Limitations and Extensions</h2>
+<h3 id="41-limitations-of-the-idealized-model">4.1 Limitations of the Idealized Model</h3>
 <ul>
 <li><strong>No Air Resistance:</strong> The simulation assumes a vacuum. In reality, drag can significantly affect the projectile’s path.</li>
 <li><strong>Flat Terrain Assumption:</strong> The standard equations assume the projectile lands at the same vertical height from which it was launched.</li>
 <li><strong>Constant Gravity:</strong> In real scenarios (especially in astrophysics), gravity may vary with height.</li>
 </ul>
-<h3 id="52-extensions-for-a-more-realistic-model">5.2 Extensions for a More Realistic Model</h3>
+<h3 id="42-extensions-for-a-more-realistic-model">4.2 Extensions for a More Realistic Model</h3>
 <ul>
 <li><strong>Air Resistance:</strong> Incorporate drag forces that are proportional to velocity or the square of the velocity. This generally requires numerical integration (e.g., using <code>scipy.integrate.solve_ivp</code>).</li>
 <li><strong>Variable Launch and Landing Heights:</strong> Modify the equations to account for different initial and final heights.</li>
