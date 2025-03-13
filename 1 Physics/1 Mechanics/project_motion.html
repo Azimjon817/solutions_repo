@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projectile Motion</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Projectile Trajectories</h2>
+    <canvas id="trajectoryChart"></canvas>
+    <h2>Range vs. Angle</h2>
+    <canvas id="rangeChart"></canvas>
+
+    <script>
+        function computeTrajectory(v0, thetaDeg, g = 9.81) {
+            let theta = thetaDeg * Math.PI / 180;
+            let tFlight = 2 * v0 * Math.sin(theta) / g;
+            let t = [...Array(500).keys()].map(i => i * tFlight / 500);
+            let x = t.map(ti => v0 * Math.cos(theta) * ti);
+            let y = t.map(ti => v0 * Math.sin(theta) * ti - 0.5 * g * ti ** 2);
+
+            // Remove negative y values to prevent rendering issues
+            let validPoints = x.map((xi, i) => ({ x: xi, y: y[i] })).filter(p => p.y >= 0);
+            
+            return validPoints;
+        }
+
+        function plotTrajectory() {
+            let ctx = document.getElementById('trajectoryChart').getContext('2d');
+            let datasets = [];
+            let angles = [30, 45, 60];
+            let v0 = 30;
+
+            angles.forEach(angle => {
+                let trajectory = computeTrajectory(v0, angle);
+                datasets.push({
+                    label: `${angle}°`,
+                    data: trajectory,
+                    borderColor: getRandomColor(),
+                    fill: false,
+                    showLine: true
+                });
+            });
+
+            new Chart(ctx, {
+                type: 'scatter',
+                data: { datasets },
+                options: {
+                    scales: {
+                        x: { type: 'linear', title: { display: true, text: 'Horizontal Distance (m)' } },
+                        y: { type: 'linear', title: { display: true, text: 'Vertical Distance (m)' } }
+                    }
+                }
+            });
+        }
+
+        function plotRangeVsAngle() {
+            let ctx = document.getElementById('rangeChart').getContext('2d');
+            let angles = [...Array(91).keys()];
+            let v0 = 30;
+            let g = 9.81;
+            let ranges = angles.map(theta => (v0 ** 2 * Math.sin(2 * theta * Math.PI / 180)) / g);
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: angles,
+                    datasets: [{
+                        label: 'Range (m)',
+                        data: ranges,
+                        borderColor: 'blue',
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { type: 'linear', title: { display: true, text: 'Angle of Projection (°)' } },
+                        y: { type: 'linear', title: { display: true, text: 'Range (m)' } }
+                    }
+                }
+            });
+        }
+
+        function getRandomColor() {
+            return `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }
+
+        plotTrajectory();
+        plotRangeVsAngle();
+    </script>
+</body>
+</html>
