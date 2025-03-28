@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Simulation</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        canvas { background: #000; display: block; margin: auto; }
+    </style>
+</head>
+<body>
+    <h2>Kepler's Third Law - Orbital Simulation</h2>
+    <canvas id="orbitCanvas" width="600" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById("orbitCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const G = 6.674e-11; 
+        const M = 5.972e24; 
+        const AU = 149.6e9 / 1000000;
+        const scale = 150; 
+        const planet = { x: canvas.width / 2 + 100, y: canvas.height / 2, vx: 0, vy: -0.8 };
+        const star = { x: canvas.width / 2, y: canvas.height / 2 };
+
+        function update() {
+            let dx = planet.x - star.x;
+            let dy = planet.y - star.y;
+            let r = Math.sqrt(dx * dx + dy * dy);
+            let F = (G * M) / (r * r);
+            let ax = -F * (dx / r);
+            let ay = -F * (dy / r);
+
+            planet.vx += ax;
+            planet.vy += ay;
+            planet.x += planet.vx;
+            planet.y += planet.vy;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "blue";
+            ctx.beginPath();
+            ctx.arc(planet.x, planet.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function animate() {
+            update();
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

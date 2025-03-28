@@ -11,14 +11,12 @@ Kepler's Third Law states that the square of the orbital period (T) is proportio
 
 ## Mathematical Formulation
 Kepler's Third Law can be written as:
-$
-T^2 = \frac{4\pi^2 r^3}{GM}
-$
+$T^2 = \frac{4\pi^2 r^3}{GM}$
 where:
-- $ T $ is the orbital period,
-- $ r $ is the orbital radius,
-- $ G $ is the gravitational constant ($6.674 \times 10^{-11} $ m³/kg/s²),
-- $ M $ is the mass of the central body.
+- $T$ is the orbital period,
+- $r$ is the orbital radius,
+- $G$ is the gravitational constant ($6.674 \times 10^{-11} $ m³/kg/s²),
+- $M$ is the mass of the central body.
 
 ## Deliverables
 - A Markdown document with a Python script or Jupyter Notebook implementing the simulations.
@@ -42,17 +40,15 @@ Escape velocity is the minimum speed required to break free from a celestial bod
 
 ## Mathematical Formulation
 The escape velocity $ v_e $ is given by:
-$
-v_e = \sqrt{\frac{2GM}{r}}
-$
+$v_e = \sqrt{\frac{2GM}{r}}$
 where:
-- $ G $ is the gravitational constant,
-- $ M $ is the mass of the celestial body,
-- $ r $ is the radius from the center of the body.
+- $G$ is the gravitational constant,
+- $M$ is the mass of the celestial body,
+- $r$ is the radius from the center of the body.
 
 For first, second, and third cosmic velocities:
-- First cosmic velocity (orbital speed): $ v_1 = \sqrt{\frac{GM}{r}} $
-- Second cosmic velocity (escape velocity): $ v_2 = \sqrt{2} v_1 $
+- First cosmic velocity (orbital speed): $v_1 = \sqrt{\frac{GM}{r}}$
+- Second cosmic velocity (escape velocity): $v_2 = \sqrt{2} v_1$
 - Third cosmic velocity (solar system escape velocity): Depends on position in the system.
 
 ## Deliverables
@@ -76,14 +72,10 @@ When an object is released from a moving rocket, its trajectory depends on initi
 
 ## Mathematical Formulation
 Using Newton’s Law of Gravitation and motion equations:
-$
-F = \frac{GMm}{r^2}
-$
+$F = \frac{GMm}{r^2}$
 The equations of motion for a payload in free space are given by:
-$
-\frac{d^2r}{dt^2} = -\frac{GM}{r^2}
-$
-where $ r $ is the distance from Earth's center.
+$\frac{d^2r}{dt^2} = -\frac{GM}{r^2}$
+where $r$ is the distance from Earth's center.
 
 ## Hints and Resources
 - Use Newton’s Law of Gravitation and Kepler’s Laws to derive equations.

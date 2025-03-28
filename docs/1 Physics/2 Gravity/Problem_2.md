@@ -11,43 +11,33 @@ The concept of escape velocity is crucial for understanding the conditions requi
 
 ## Mathematical Formulation
 ### Escape Velocity
-The escape velocity $ v_e $ is the minimum speed an object must have to break free from the gravitational pull of a celestial body without any additional propulsion. It is derived from the energy conservation principle:
+The escape velocity$v_e$is the minimum speed an object must have to break free from the gravitational pull of a celestial body without any additional propulsion. It is derived from the energy conservation principle:
 
-$
-KE + PE = 0 \Rightarrow \frac{1}{2} m v_e^2 - \frac{GMm}{r} = 0
-$
+$KE + PE = 0 \Rightarrow \frac{1}{2} m v_e^2 - \frac{GMm}{r} = 0$
 
-Solving for $ v_e $:
+Solving for$v_e$:
 
-$
-v_e = \sqrt{\frac{2GM}{r}}
-$
+$v_e = \sqrt{\frac{2GM}{r}}$
 
 where:
-- $ G $ is the gravitational constant ($6.674 \times 10^{-11} $ m³/kg/s²),
-- $ M $ is the mass of the celestial body,
-- $ r $ is the radius from the center of the body.
+-$G$is the gravitational constant ($6.674 \times 10^{-11}$m³/kg/s²),
+-$M$is the mass of the celestial body,
+-$r$is the radius from the center of the body.
 
 ### First Cosmic Velocity (Orbital Speed)
 This is the velocity needed to maintain a circular orbit around a celestial body:
 
-$
-v_1 = \sqrt{\frac{GM}{r}}
-$
+$v_1 = \sqrt{\frac{GM}{r}}$
 
 ### Second Cosmic Velocity (Escape Velocity)
-The escape velocity is simply $ \sqrt{2} $ times the first cosmic velocity:
+The escape velocity is simply$\sqrt{2}$times the first cosmic velocity:
 
-$
-v_2 = \sqrt{2} v_1 = \sqrt{\frac{2GM}{r}}
-$
+$v_2 = \sqrt{2} v_1 = \sqrt{\frac{2GM}{r}}$
 
 ### Third Cosmic Velocity (Solar System Escape)
 This is the speed required to leave the influence of the Sun's gravity from a planet’s orbit. It depends on the planet’s distance from the Sun:
 
-$
-v_3 = \sqrt{\frac{2G M_{sun}}{r_{planet}}}
-$
+$v_3 = \sqrt{\frac{2G M_{sun}}{r_{planet}}}$
 
 ## Importance in Space Exploration
 - **Satellites:** Must reach the first cosmic velocity to maintain stable orbits.
