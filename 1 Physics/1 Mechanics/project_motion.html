@@ -6,31 +6,43 @@
     <title>Projectile Motion</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        body {
+            text-align: center;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
         canvas {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
+            max-width: 45%;
+            height: 300px;
         }
     </style>
 </head>
 <body>
-    <h2>Projectile Trajectories</h2>
-    <canvas id="trajectoryChart"></canvas>
-    <h2>Range vs. Angle</h2>
-    <canvas id="rangeChart"></canvas>
+    <h2>Projectile Motion Analysis</h2>
+    <div class="chart-container">
+        <div>
+            <h3>Projectile Trajectories</h3>
+            <canvas id="trajectoryChart"></canvas>
+        </div>
+        <div>
+            <h3>Range vs. Angle</h3>
+            <canvas id="rangeChart"></canvas>
+        </div>
+    </div>
 
     <script>
         function computeTrajectory(v0, thetaDeg, g = 9.81) {
             let theta = thetaDeg * Math.PI / 180;
-            let tFlight = 2 * v0 * Math.sin(theta) / g;
-            let t = [...Array(500).keys()].map(i => i * tFlight / 500);
+            let tFlight = (2 * v0 * Math.sin(theta)) / g;
+            let t = [...Array(500).keys()].map(i => (i * tFlight) / 500);
             let x = t.map(ti => v0 * Math.cos(theta) * ti);
             let y = t.map(ti => v0 * Math.sin(theta) * ti - 0.5 * g * ti ** 2);
-
-            // Remove negative y values to prevent rendering issues
-            let validPoints = x.map((xi, i) => ({ x: xi, y: y[i] })).filter(p => p.y >= 0);
-            
-            return validPoints;
+            return x.map((xi, i) => ({ x: xi, y: y[i] })).filter(p => p.y >= 0);
         }
 
         function plotTrajectory() {
@@ -54,6 +66,7 @@
                 type: 'scatter',
                 data: { datasets },
                 options: {
+                    maintainAspectRatio: false,
                     scales: {
                         x: { type: 'linear', title: { display: true, text: 'Horizontal Distance (m)' } },
                         y: { type: 'linear', title: { display: true, text: 'Vertical Distance (m)' } }
@@ -81,6 +94,7 @@
                     }]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     scales: {
                         x: { type: 'linear', title: { display: true, text: 'Angle of Projection (°)' } },
                         y: { type: 'linear', title: { display: true, text: 'Range (m)' } }
@@ -98,3 +112,4 @@
     </script>
 </body>
 </html>
+
