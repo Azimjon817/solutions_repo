@@ -78,18 +78,20 @@ The idealized projectile model can be adapted to more complex real-world situati
 - **Sports and Engineering:** From predicting the flight of a soccer ball to the trajectory of missiles, understanding projectile motion is key in many fields.
 
 ---
+## 4. Simulation of the project within html project
+
 
 [Simulation](project_motion.html)
 
 
-## 4. Discussion on Limitations and Extensions
+## 5. Discussion on Limitations and Extensions
 
-### 4.1 Limitations of the Idealized Model
+### 5.1 Limitations of the Idealized Model
 - **No Air Resistance:** The simulation assumes a vacuum. In reality, drag can significantly affect the projectile’s path.
 - **Flat Terrain Assumption:** The standard equations assume the projectile lands at the same vertical height from which it was launched.
 - **Constant Gravity:** In real scenarios (especially in astrophysics), gravity may vary with height.
 
-### 4.2 Extensions for a More Realistic Model
+### 5.2 Extensions for a More Realistic Model
 - **Air Resistance:** Incorporate drag forces that are proportional to velocity or the square of the velocity. This generally requires numerical integration (e.g., using `scipy.integrate.solve_ivp`).
 - **Variable Launch and Landing Heights:** Modify the equations to account for different initial and final heights.
 - **Wind Effects:** Include horizontal wind acceleration to model more complex trajectories.

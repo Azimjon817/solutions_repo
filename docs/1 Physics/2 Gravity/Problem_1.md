@@ -15,7 +15,7 @@ $T^2 = \frac{4\pi^2 r^3}{GM}$
 where:
 - $T$ is the orbital period,
 - $r$ is the orbital radius,
-- $G$ is the gravitational constant ($6.674 \times 10^{-11} $ m³/kg/s²),
+- $G$ is the gravitational constant (6.674 \times 10^{-11} m³/kg/s²),
 - $M$ is the mass of the central body.
 
 ## Deliverables
