@@ -239,15 +239,16 @@ This formula shows a sinusoidal dependence on <span class="arithmatex">\(2\theta
 <li><strong>Sports and Engineering:</strong> From predicting the flight of a soccer ball to the trajectory of missiles, understanding projectile motion is key in many fields.</li>
 </ul>
 <hr/>
+<h2 id="4-simulation-of-the-project-within-html-project">4. Simulation of the project within html project</h2>
 <p><a href="../project_motion.html">Simulation</a></p>
-<h2 id="4-discussion-on-limitations-and-extensions">4. Discussion on Limitations and Extensions</h2>
-<h3 id="41-limitations-of-the-idealized-model">4.1 Limitations of the Idealized Model</h3>
+<h2 id="5-discussion-on-limitations-and-extensions">5. Discussion on Limitations and Extensions</h2>
+<h3 id="51-limitations-of-the-idealized-model">5.1 Limitations of the Idealized Model</h3>
 <ul>
 <li><strong>No Air Resistance:</strong> The simulation assumes a vacuum. In reality, drag can significantly affect the projectile’s path.</li>
 <li><strong>Flat Terrain Assumption:</strong> The standard equations assume the projectile lands at the same vertical height from which it was launched.</li>
 <li><strong>Constant Gravity:</strong> In real scenarios (especially in astrophysics), gravity may vary with height.</li>
 </ul>
-<h3 id="42-extensions-for-a-more-realistic-model">4.2 Extensions for a More Realistic Model</h3>
+<h3 id="52-extensions-for-a-more-realistic-model">5.2 Extensions for a More Realistic Model</h3>
 <ul>
 <li><strong>Air Resistance:</strong> Incorporate drag forces that are proportional to velocity or the square of the velocity. This generally requires numerical integration (e.g., using <code>scipy.integrate.solve_ivp</code>).</li>
 <li><strong>Variable Launch and Landing Heights:</strong> Modify the equations to account for different initial and final heights.</li>

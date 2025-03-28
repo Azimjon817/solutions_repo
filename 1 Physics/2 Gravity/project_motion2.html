@@ -3,56 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Velocity Simulation</title>
-    <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        canvas { background: #000; display: block; margin: auto; }
-    </style>
+    <title>Orbital Simulation</title>
+    <link rel="stylesheet" href="styles1.css">
 </head>
 <body>
-    <h2>Escape Velocity Simulation</h2>
-    <label for="planet">Select a Planet:</label>
-    <select id="planet">
-        <option value="earth">Earth</option>
-        <option value="mars">Mars</option>
-        <option value="jupiter">Jupiter</option>
-    </select>
-    <canvas id="velocityCanvas" width="600" height="400"></canvas>
-    <script>
-        const canvas = document.getElementById("velocityCanvas");
-        const ctx = canvas.getContext("2d");
+    <h2>Kepler's Third Law - Orbital Simulation</h2>
+    
+    <div class="controls">
+        <label for="speed">Simulation Speed:</label>
+        <select id="speed">
+            <option value="1">Normal</option>
+            <option value="5">Fast</option>
+            <option value="10">Faster</option>
+        </select>
+    </div>
 
-        const G = 6.674e-11;
-        const planets = {
-            earth: { M: 5.972e24, R: 6371000, color: "blue" },
-            mars: { M: 6.417e23, R: 3389000, color: "red" },
-            jupiter: { M: 1.898e27, R: 69911000, color: "orange" }
-        };
-
-        function calculateEscapeVelocity(M, R) {
-            return Math.sqrt((2 * G * M) / R);
-        }
-
-        function drawEscapeVelocity(planet) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const data = planets[planet];
-            const ve = calculateEscapeVelocity(data.M, data.R);
-
-            ctx.fillStyle = data.color;
-            ctx.beginPath();
-            ctx.arc(300, 200, 50, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = "white";
-            ctx.font = "18px Arial";
-            ctx.fillText(`Escape Velocity: ${ve.toFixed(2)} m/s`, 200, 50);
-        }
-
-        document.getElementById("planet").addEventListener("change", (event) => {
-            drawEscapeVelocity(event.target.value);
-        });
-
-        drawEscapeVelocity("earth");
-    </script>
+    <canvas id="orbitCanvas" width="600" height="600"></canvas>
+    
+    <script src="script1.js"></script>
 </body>
 </html>
