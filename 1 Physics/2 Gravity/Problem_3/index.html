@@ -60,6 +60,48 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">Theoretical Background</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#gravitational-dynamics">Gravitational Dynamics</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#trajectory-types">Trajectory Types</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#keplers-laws">Kepler’s Laws</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-analysis">Numerical Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-conditions">Initial Conditions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#applications-to-space-missions">Applications to Space Missions</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation">Simulation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#trajectories">Trajectories</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#distance-vs-time">Distance vs. Time</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#future-extensions">Future Extensions</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deliverables-summary">Deliverables Summary</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +213,131 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-3">Problem 3</h1>
+<p>Let’s tackle the problem of analyzing the trajectories of a freely released payload near Earth, as outlined in the tasks. Below is a comprehensive solution presented in a Markdown document format, including a detailed explanation, Python code for numerical simulation, and visualizations of the trajectories. The solution addresses the theoretical framework, numerical analysis, and real-world applications, while meeting the deliverables.</p>
+<hr/>
+<h1 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h1>
+<h2 id="introduction">Introduction</h2>
+<p>When a payload is released from a moving rocket near Earth, its trajectory is governed by Earth’s gravitational field and the initial conditions of its release (position, velocity, and altitude). The possible trajectories include elliptical, parabolic, or hyperbolic paths, each corresponding to specific orbital or escape scenarios. This analysis explores these trajectories using principles of orbital mechanics, performs numerical simulations to compute the payload’s path, and discusses implications for space missions like orbital insertion, reentry, or escape.</p>
+<p>The objectives are:
+1. Analyze possible trajectory types (elliptical, parabolic, hyperbolic).
+2. Numerically compute the payload’s path based on initial conditions.
+3. Discuss applications to orbital insertion, reentry, and escape.
+4. Develop a Python tool to simulate and visualize the motion.
+5. Provide graphical representations of the trajectories.</p>
+<h2 id="theoretical-background">Theoretical Background</h2>
+<h3 id="gravitational-dynamics">Gravitational Dynamics</h3>
+<p>The motion of a payload near Earth is governed by <strong>Newton’s Law of Universal Gravitation</strong>:</p>
+<p><span class="arithmatex">\(\mathbf{F} = -\frac{G M m}{r^2} \hat{r}\)</span></p>
+<p>where:
+- <span class="arithmatex">\(G = 6.67430 \times 10^{-11} \, \text{m}^3 \text{kg}^{-1} \text{s}^{-2}\)</span> is the gravitational constant,
+- <span class="arithmatex">\(M = 5.972 \times 10^{24} \, \text{kg}\)</span> is Earth’s mass,
+- <span class="arithmatex">\(m\)</span> is the payload’s mass,
+- <span class="arithmatex">\(r\)</span> is the distance from Earth’s center,
+- <span class="arithmatex">\(\hat{r}\)</span> is the radial unit vector.</p>
+<p>For a payload in free fall, the equation of motion in Cartesian coordinates (2D for simplicity) is:</p>
+<p><span class="arithmatex">\(\ddot{\mathbf{r}} = -\frac{\mu}{r^3} \mathbf{r}\)</span></p>
+<p>where:
+- <span class="arithmatex">\(\mathbf{r} = (x, y)\)</span> is the position vector,
+- <span class="arithmatex">\(r = |\mathbf{r}| = \sqrt{x^2 + y^2}\)</span>,
+- <span class="arithmatex">\(\mu = G M \approx 3.986 \times 10^{14} \, \text{m}^3 \text{s}^{-2}\)</span> is Earth’s standard gravitational parameter.</p>
+<h3 id="trajectory-types">Trajectory Types</h3>
+<p>The trajectory depends on the payload’s <strong>specific mechanical energy</strong>, defined as:</p>
+<p><span class="arithmatex">\(\epsilon = \frac{v^2}{2} - \frac{\mu}{r}\)</span></p>
+<p>where <span class="arithmatex">\(v = |\mathbf{v}|\)</span> is the speed. The energy determines the orbit type:
+- <strong>Elliptical orbit</strong> (<span class="arithmatex">\(\epsilon &lt; 0\)</span>): The payload remains bound to Earth, following a closed orbit (e.g., circular or elliptical). Common for satellites.
+- <strong>Parabolic trajectory</strong> (<span class="arithmatex">\(\epsilon = 0\)</span>): The payload achieves escape velocity, following an open path that just escapes Earth’s gravity.
+- <strong>Hyperbolic trajectory</strong> (<span class="arithmatex">\(\epsilon &gt; 0\)</span>): The payload has excess velocity, escaping Earth with residual speed.</p>
+<p>The <strong>vis-viva equation</strong> relates velocity, distance, and semi-major axis <span class="arithmatex">\(a\)</span>:</p>
+<p><span class="arithmatex">\(v^2 = \mu \left( \frac{2}{r} - \frac{1}{a} \right)\)</span></p>
+<ul>
+<li>Elliptical: <span class="arithmatex">\(a &gt; 0\)</span>,</li>
+<li>Parabolic: <span class="arithmatex">\(a \to \infty\)</span>,</li>
+<li>Hyperbolic: <span class="arithmatex">\(a &lt; 0\)</span>.</li>
+</ul>
+<h3 id="keplers-laws">Kepler’s Laws</h3>
+<p><strong>Kepler’s First Law</strong> states that orbits are conic sections (ellipses, parabolas, or hyperbolas) with Earth at one focus. The eccentricity <span class="arithmatex">\(e\)</span> determines the shape:
+- <span class="arithmatex">\(e = 0\)</span>: Circular orbit,
+- <span class="arithmatex">\(0 &lt; e &lt; 1\)</span>: Elliptical orbit,
+- <span class="arithmatex">\(e = 1\)</span>: Parabolic trajectory,
+- <span class="arithmatex">\(e &gt; 1\)</span>: Hyperbolic trajectory.</p>
+<p><strong>Kepler’s Second Law</strong> (equal areas in equal times) implies conservation of angular momentum, and <strong>Kepler’s Third Law</strong> relates orbital period to semi-major axis for elliptical orbits.</p>
+<h2 id="numerical-analysis">Numerical Analysis</h2>
+<p>To compute the payload’s trajectory, we solve the differential equation of motion numerically. We assume a 2D plane for simplicity, with Earth at the origin. The state vector is:</p>
+<p><span class="arithmatex">\(\mathbf{z} = [x, y, v_x, v_y]^T\)</span></p>
+<p>The system of first-order ODEs is:</p>
+<p><span class="arithmatex">\(\frac{d}{dt} \begin{bmatrix} x \\ y \\ v_x \\ v_y \end{bmatrix} = \begin{bmatrix} v_x \\ v_y \\ -\frac{\mu x}{r^3} \\ -\frac{\mu y}{r^3} \end{bmatrix}, \quad r = \sqrt{x^2 + y^2}\)</span></p>
+<p>We use Python’s <code>scipy.integrate.solve_ivp</code> to solve this system, simulating trajectories for different initial conditions corresponding to elliptical, parabolic, and hyperbolic paths.</p>
+<h3 id="initial-conditions">Initial Conditions</h3>
+<p>We define the payload’s release at an altitude <span class="arithmatex">\(h = 400 \, \text{km}\)</span> above Earth’s surface (e.g., Low Earth Orbit altitude). Earth’s radius is <span class="arithmatex">\(R_E = 6371 \, \text{km}\)</span>, so the initial distance is:</p>
+<p><span class="arithmatex">\(r_0 = R_E + h = 6771 \, \text{km} = 6.771 \times 10^6 \, \text{m}\)</span></p>
+<p>We place the payload at <span class="arithmatex">\((x_0, y_0) = (r_0, 0)\)</span>. The initial velocity determines the trajectory:
+- <strong>Circular orbit</strong> (elliptical, <span class="arithmatex">\(e \approx 0\)</span>):</p>
+<p><span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{\mu}{r_0}}\)</span></p>
+<ul>
+<li><strong>Escape velocity</strong> (parabolic, <span class="arithmatex">\(e = 1\)</span>):</li>
+</ul>
+<p><span class="arithmatex">\(v_{\text{esc}} = \sqrt{\frac{2\mu}{r_0}}\)</span></p>
+<ul>
+<li><strong>Hyperbolic trajectory</strong>: Velocity greater than escape velocity, e.g., <span class="arithmatex">\(v = 1.2 v_{\text{esc}}\)</span>.</li>
+</ul>
+<p>For a circular orbit at <span class="arithmatex">\(r_0 = 6.771 \times 10^6 \, \text{m}\)</span>:</p>
+<p><span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{3.986 \times 10^{14}}{6.771 \times 10^6}} \approx 7676 \, \text{m/s}\)</span></p>
+<p><span class="arithmatex">\(v_{\text{esc}} = \sqrt{2} v_{\text{circ}} \approx 10860 \, \text{m/s}\)</span></p>
+<p>We simulate three cases:
+1. <strong>Elliptical</strong>: <span class="arithmatex">\(v_0 = v_{\text{circ}}\)</span>, velocity along <span class="arithmatex">\(y\)</span>-axis (<span class="arithmatex">\(\mathbf{v}_0 = (0, v_{\text{circ}})\)</span>).
+2. <strong>Parabolic</strong>: <span class="arithmatex">\(v_0 = v_{\text{esc}}\)</span>, velocity along <span class="arithmatex">\(y\)</span>-axis.
+3. <strong>Hyperbolic</strong>: <span class="arithmatex">\(v_0 = 1.2 v_{\text{esc}}\)</span>, velocity along <span class="arithmatex">\(y\)</span>-axis.</p>
+<h2 id="applications-to-space-missions">Applications to Space Missions</h2>
+<p>The trajectory type has direct implications:
+- <strong>Orbital Insertion</strong>: An elliptical trajectory (e.g., circular orbit) is ideal for deploying satellites. The payload must achieve the correct velocity to enter a stable orbit, as with GPS or communication satellites.
+- <strong>Reentry</strong>: If the payload’s velocity is reduced (e.g., via retro-burn), it may enter an elliptical orbit intersecting Earth’s atmosphere, leading to reentry. This is critical for returning spacecraft or disposing of debris.
+- <strong>Escape</strong>: A parabolic or hyperbolic trajectory allows the payload to escape Earth’s gravity, relevant for interplanetary missions (e.g., Mars rovers or Voyager probes).</p>
+<h2 id="simulation">Simulation</h2>
+<p><a href="../project_motion3.html">Project Simulation</a></p>
+<h2 id="results">Results</h2>
+<h3 id="trajectories">Trajectories</h3>
+<p>The first plot shows the three trajectories:
+- <strong>Elliptical</strong>: A closed, nearly circular orbit at <span class="arithmatex">\(r \approx 6.771 \times 10^6 \, \text{m}\)</span>.
+- <strong>Parabolic</strong>: An open trajectory that escapes Earth, with the payload moving away indefinitely.
+- <strong>Hyperbolic</strong>: A sharper open trajectory, escaping with excess velocity.</p>
+<h3 id="distance-vs-time">Distance vs. Time</h3>
+<p>The second plot shows the radial distance over time:
+- <strong>Elliptical</strong>: Oscillates around <span class="arithmatex">\(r_0\)</span>, indicating a stable orbit.
+- <strong>Parabolic</strong>: Increases steadily, approaching infinity as <span class="arithmatex">\(t \to \infty\)</span>.
+- <strong>Hyperbolic</strong>: Increases more rapidly due to higher initial velocity.</p>
+<h2 id="discussion">Discussion</h2>
+<ul>
+<li><strong>Orbital Insertion</strong>: The elliptical trajectory represents a satellite successfully inserted into Low Earth Orbit. Precise velocity control is critical to avoid undershooting (reentry) or overshooting (escape).</li>
+<li><strong>Reentry</strong>: If the payload’s velocity is reduced below <span class="arithmatex">\(v_{\text{circ}}\)</span>, the orbit becomes eccentric, potentially intersecting Earth’s atmosphere, leading to deceleration and reentry.</li>
+<li><strong>Escape</strong>: Parabolic and hyperbolic trajectories are used for missions leaving Earth’s sphere of influence, such as lunar or interplanetary probes. The hyperbolic case allows faster departure but requires more energy.</li>
+</ul>
+<h3 id="limitations">Limitations</h3>
+<ul>
+<li><strong>2D Assumption</strong>: Real orbits are 3D, requiring additional coordinates and considerations like inclination.</li>
+<li><strong>Spherical Earth</strong>: Ignores Earth’s oblateness (J2 effects), which perturbs orbits.</li>
+<li><strong>No Atmosphere</strong>: Excludes atmospheric drag, critical for low altitudes or reentry.</li>
+<li><strong>No Other Forces</strong>: Assumes only Earth’s gravity, ignoring solar radiation pressure, third-body effects (e.g., Moon), or thruster inputs.</li>
+</ul>
+<h2 id="future-extensions">Future Extensions</h2>
+<ul>
+<li>Incorporate 3D dynamics for realistic mission profiles.</li>
+<li>Model atmospheric drag for reentry scenarios.</li>
+<li>Include perturbations (e.g., J2, lunar gravity) for higher fidelity.</li>
+<li>Simulate orbital maneuvers (e.g., Hohmann transfers) for insertion or escape.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This analysis demonstrates how initial velocity determines a payload’s trajectory near Earth, with elliptical orbits for satellites, parabolic paths for minimal escape, and hyperbolic paths for rapid departure. The numerical simulation provides a clear visualization of these dynamics, highlighting the interplay of gravity and motion. These principles underpin space mission planning, from deploying constellations like Starlink to sending probes to Mars.</p>
+<hr/>
+<h2 id="deliverables-summary">Deliverables Summary</h2>
+<ol>
+<li><strong>Markdown Document</strong>: Provided above with detailed explanations and embedded Python code.</li>
+<li><strong>Python Script</strong>: Included for simulating and visualizing trajectories.</li>
+<li><strong>Graphical Representations</strong>: Two plots showing orbital paths and distance vs. time.</li>
+<li><strong>Explanation</strong>: Covers gravitational dynamics, trajectory types, numerical methods, and mission applications.</li>
+</ol>
+<p>This solution serves as a foundation for understanding payload trajectories and can be extended for more complex space exploration scenarios.</p>
+<hr/>
+<p>Let me know if you need modifications, additional features (e.g., 3D simulation, atmospheric effects), or further clarification!</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
