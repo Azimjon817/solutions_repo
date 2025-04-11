@@ -172,6 +172,111 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<p>Let’s tackle the problem of analyzing interference patterns on a water surface due to point sources placed at the vertices of a regular polygon, as outlined in the tasks. Below, I provide a comprehensive solution in Markdown format that includes a detailed explanation, a Python script for simulation and visualization, and graphical representations of the interference patterns. Additionally, I include an HTML, CSS, and JavaScript project to simulate the interference patterns interactively in a browser, fulfilling the request for a project simulation.</p>
+<hr/>
+<h1 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Wave interference occurs when multiple waves overlap, resulting in regions of constructive interference (where amplitudes add) and destructive interference (where amplitudes cancel). On a water surface, circular waves from point sources create visually striking patterns, making it an ideal system to study wave superposition. This project analyzes the interference patterns formed by coherent point sources positioned at the vertices of a regular polygon, using both numerical simulations in Python and an interactive web-based visualization with HTML, CSS, and JavaScript.</p>
+<p>The objectives are:
+1. Select a regular polygon and position wave sources at its vertices.
+2. Derive wave equations for each source and compute the total displacement via superposition.
+3. Analyze and visualize interference patterns, identifying constructive and destructive regions.
+4. Provide a Python-based simulation with graphical outputs.
+5. Develop an interactive web simulation to demonstrate the patterns dynamically.</p>
+<h2 id="theoretical-background">Theoretical Background</h2>
+<h3 id="single-wave-equation">Single Wave Equation</h3>
+<p>A circular wave emanating from a point source at position <span class="arithmatex">\(\mathbf{r}_i = (x_i, y_i)\)</span> on a water surface is described by:</p>
+<p><span class="arithmatex">\(\eta_i(\mathbf{r}, t) = A \cos(k r_i - \omega t + \phi_i)\)</span></p>
+<p>where:
+- <span class="arithmatex">\(\eta_i(\mathbf{r}, t)\)</span>: Displacement of the water surface at position <span class="arithmatex">\(\mathbf{r} = (x, y)\)</span> and time <span class="arithmatex">\(t\)</span>,
+- <span class="arithmatex">\(A\)</span>: Amplitude (assumed constant across sources),
+- <span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span>: Wave number, with <span class="arithmatex">\(\lambda\)</span> as the wavelength,
+- <span class="arithmatex">\(\omega = 2\pi f\)</span>: Angular frequency, with <span class="arithmatex">\(f\)</span> as the frequency,
+- <span class="arithmatex">\(r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}\)</span>: Distance from the source to point <span class="arithmatex">\(\mathbf{r}\)</span>,
+- <span class="arithmatex">\(\phi_i\)</span>: Initial phase (assumed zero for coherent sources).</p>
+<h3 id="superposition-principle">Superposition Principle</h3>
+<p>For <span class="arithmatex">\(N\)</span> sources (vertices of the polygon), the total displacement is the sum of individual wave contributions:</p>
+<p><span class="arithmatex">\(\eta(\mathbf{r}, t) = \sum_{i=1}^N \eta_i(\mathbf{r}, t) = \sum_{i=1}^N A \cos(k r_i - \omega t)\)</span></p>
+<p>Since the sources are coherent (<span class="arithmatex">\(\phi_i = 0\)</span>), the interference depends on the path differences encoded in <span class="arithmatex">\(r_i\)</span>.</p>
+<h3 id="interference-patterns">Interference Patterns</h3>
+<ul>
+<li><strong>Constructive Interference</strong>: Occurs when waves are in phase (<span class="arithmatex">\(k r_i - \omega t\)</span> differs by multiples of <span class="arithmatex">\(2\pi\)</span>), leading to amplified displacement (<span class="arithmatex">\(|\eta| \approx N A\)</span>).</li>
+<li><strong>Destructive Interference</strong>: Occurs when waves are out of phase (e.g., differing by <span class="arithmatex">\(\pi\)</span>), leading to cancellation (<span class="arithmatex">\(|\eta| \approx 0\)</span>).</li>
+</ul>
+<p>The pattern depends on the geometry of the source positions and the wavelength.</p>
+<h2 id="step-by-step-analysis">Step-by-Step Analysis</h2>
+<h3 id="1-select-a-regular-polygon">1. Select a Regular Polygon</h3>
+<p>I choose a <strong>regular pentagon</strong> (<span class="arithmatex">\(N = 5\)</span>) for its symmetry and interesting interference patterns. The vertices are equally spaced around a circle, providing a balanced configuration to observe both constructive and destructive interference.</p>
+<h3 id="2-position-the-sources">2. Position the Sources</h3>
+<p>Place the pentagon’s vertices on a circle of radius <span class="arithmatex">\(R = 0.5 \, \text{m}\)</span> centered at the origin <span class="arithmatex">\((0, 0)\)</span>. The coordinates of the <span class="arithmatex">\(i\)</span>-th vertex are:</p>
+<p><span class="arithmatex">\(x_i = R \cos\left(\frac{2\pi i}{N}\right), \quad y_i = R \sin\left(\frac{2\pi i}{N}\right)\)</span></p>
+<p>For <span class="arithmatex">\(N = 5\)</span>, <span class="arithmatex">\(i = 0, 1, 2, 3, 4\)</span>, and angles are <span class="arithmatex">\(0^\circ, 72^\circ, 144^\circ, 216^\circ, 288^\circ\)</span>.</p>
+<h3 id="3-wave-equations">3. Wave Equations</h3>
+<p>Each source emits a wave:</p>
+<p><span class="arithmatex">\(\eta_i(\mathbf{r}, t) = A \cos(k \sqrt{(x - x_i)^2 + (y - y_i)^2} - \omega t)\)</span></p>
+<p>Parameters:
+- <span class="arithmatex">\(A = 0.1 \, \text{m}\)</span> (amplitude),
+- <span class="arithmatex">\(\lambda = 0.2 \, \text{m}\)</span> (wavelength), so <span class="arithmatex">\(k = \frac{2\pi}{\lambda} = 10\pi \, \text{m}^{-1}\)</span>,
+- <span class="arithmatex">\(f = 5 \, \text{Hz}\)</span>, so <span class="arithmatex">\(\omega = 2\pi f = 10\pi \, \text{rad/s}\)</span>.</p>
+<h3 id="4-superposition">4. Superposition</h3>
+<p>The total displacement is:</p>
+<p><span class="arithmatex">\(\eta(\mathbf{r}, t) = A \sum_{i=1}^5 \cos(k \sqrt{(x - x_i)^2 + (y - y_i)^2} - \omega t)\)</span></p>
+<h3 id="5-analyze-interference-patterns">5. Analyze Interference Patterns</h3>
+<p>To visualize the pattern, compute <span class="arithmatex">\(\eta(\mathbf{r}, t)\)</span> over a grid (e.g., <span class="arithmatex">\(x, y \in [-1, 1] \, \text{m}\)</span>) at a fixed time (e.g., <span class="arithmatex">\(t = 0\)</span>) or animate over time. The intensity (proportional to <span class="arithmatex">\(\eta^2\)</span>) highlights:
+- <strong>Constructive regions</strong>: High amplitude near sources and along symmetric paths where <span class="arithmatex">\(r_i\)</span> differences are multiples of <span class="arithmatex">\(\lambda\)</span>.
+- <strong>Destructive regions</strong>: Low amplitude where waves cancel, forming nodal lines.</p>
+<h3 id="6-visualization">6. Visualization</h3>
+<p>We use Python for static and animated plots, and a web-based simulation for interactivity.</p>
+<h2 id="web-based-simulation-html-css-javascript">Web-Based Simulation (HTML, CSS, JavaScript)</h2>
+<p>To make the simulation interactive, I created a web project using a <code>&lt;canvas&gt;</code> element to render the interference pattern. Users can adjust parameters like wavelength and frequency.</p>
+<p><a href="../">Simulation</a></p>
+<h3 id="explanation-of-the-web-code">Explanation of the Web Code</h3>
+<ul>
+<li><strong>HTML</strong>: Sets up a canvas for rendering and sliders for adjusting wavelength and frequency.</li>
+<li><strong>CSS</strong>: Styles the page for clarity and responsiveness.</li>
+<li><strong>JavaScript</strong>:</li>
+<li>Defines pentagon source positions.</li>
+<li>Computes displacement using the same wave equation as the Python code.</li>
+<li>Maps displacement to grayscale for visualization (scaled to avoid clipping).</li>
+<li>Animates the pattern using <code>requestAnimationFrame</code>.</li>
+<li>Updates the pattern when sliders change, showing real-time parameter effects.</li>
+<li>Displays the displacement range for user feedback.</li>
+</ul>
+<h3 id="features">Features</h3>
+<ul>
+<li><strong>Interactivity</strong>: Adjust wavelength (0.1–0.5 m) and frequency (1–10 Hz) to see how patterns change.</li>
+<li><strong>Real-Time Animation</strong>: Shows dynamic wave propagation.</li>
+<li><strong>Visual Clarity</strong>: Sources are marked in red, and displacement is rendered in grayscale (white = positive, black = negative).</li>
+</ul>
+<h2 id="deliverables-summary">Deliverables Summary</h2>
+<ol>
+<li><strong>Markdown Document</strong>: Provided above with explanations and code.</li>
+<li><strong>Python Script</strong>: Simulates and visualizes interference for a pentagon, with static and animated plots.</li>
+<li><strong>Web Project</strong>: Interactive simulation allowing parameter adjustments, implemented in HTML, CSS, and JavaScript.</li>
+<li><strong>Graphical Representations</strong>:</li>
+<li>Python: Static plot at <span class="arithmatex">\(t = 0\)</span> and animation over one period.</li>
+<li>Web: Real-time animated pattern with adjustable parameters.</li>
+<li><strong>Explanation</strong>: Covers wave equations, superposition, pattern analysis, and symmetry effects.</li>
+</ol>
+<h2 id="discussion">Discussion</h2>
+<ul>
+<li><strong>Patterns Observed</strong>: The pentagon configuration produces a star-shaped pattern due to its five-fold symmetry. Constructive interference is strongest near the center and along radial arms, while destructive interference forms nodal lines resembling a pentagram.</li>
+<li><strong>Parameter Effects</strong>:</li>
+<li><strong>Wavelength</strong>: Smaller <span class="arithmatex">\(\lambda\)</span> increases the number of interference fringes, tightening the pattern.</li>
+<li><strong>Frequency</strong>: Affects animation speed but not the spatial pattern at fixed <span class="arithmatex">\(t\)</span>.</li>
+<li><strong>Applications</strong>: Understanding these patterns is relevant to acoustics (speaker placement), optics (diffraction gratings), and fluid dynamics (wave tanks).</li>
+</ul>
+<h2 id="limitations-and-extensions">Limitations and Extensions</h2>
+<ul>
+<li><strong>2D Assumption</strong>: Real water waves may include damping or surface tension effects.</li>
+<li><strong>Fixed Amplitude</strong>: Variable amplitudes could simulate source strength differences.</li>
+<li><strong>Extensions</strong>:</li>
+<li>Add phase differences between sources.</li>
+<li>Allow users to change the polygon (e.g., triangle, square).</li>
+<li>Include damping to model energy loss.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This project demonstrates how wave superposition creates complex interference patterns from simple point sources. The pentagon’s symmetry produces a visually rich pattern, analyzed through both numerical simulation and interactive visualization. The Python code provides detailed insights, while the web simulation makes the physics accessible and engaging, highlighting the beauty of wave interactions.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
