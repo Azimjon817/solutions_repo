@@ -266,7 +266,6 @@
 <p><span class="arithmatex">\(\mathbf{z} = [x, y, v_x, v_y]^T\)</span></p>
 <p>The system of first-order ODEs is:</p>
 <p><span class="arithmatex">\(\frac{d}{dt} \begin{bmatrix} x \\ y \\ v_x \\ v_y \end{bmatrix} = \begin{bmatrix} v_x \\ v_y \\ -\frac{\mu x}{r^3} \\ -\frac{\mu y}{r^3} \end{bmatrix}, \quad r = \sqrt{x^2 + y^2}\)</span></p>
-<p>We use Python’s <code>scipy.integrate.solve_ivp</code> to solve this system, simulating trajectories for different initial conditions corresponding to elliptical, parabolic, and hyperbolic paths.</p>
 <h3 id="initial-conditions">Initial Conditions</h3>
 <p>We define the payload’s release at an altitude <span class="arithmatex">\(h = 400 \, \text{km}\)</span> above Earth’s surface (e.g., Low Earth Orbit altitude). Earth’s radius is <span class="arithmatex">\(R_E = 6371 \, \text{km}\)</span>, so the initial distance is:</p>
 <p><span class="arithmatex">\(r_0 = R_E + h = 6771 \, \text{km} = 6.771 \times 10^6 \, \text{m}\)</span></p>
