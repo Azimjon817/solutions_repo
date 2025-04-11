@@ -78,8 +78,6 @@ The system of first-order ODEs is:
 
 $\frac{d}{dt} \begin{bmatrix} x \\ y \\ v_x \\ v_y \end{bmatrix} = \begin{bmatrix} v_x \\ v_y \\ -\frac{\mu x}{r^3} \\ -\frac{\mu y}{r^3} \end{bmatrix}, \quad r = \sqrt{x^2 + y^2}$
 
-We use Python’s `scipy.integrate.solve_ivp` to solve this system, simulating trajectories for different initial conditions corresponding to elliptical, parabolic, and hyperbolic paths.
-
 ### Initial Conditions
 
 We define the payload’s release at an altitude $h = 400 \, \text{km}$ above Earth’s surface (e.g., Low Earth Orbit altitude). Earth’s radius is $R_E = 6371 \, \text{km}$, so the initial distance is:

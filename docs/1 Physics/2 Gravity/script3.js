@@ -1,6 +1,7 @@
 // simulation.js
 const canvas = document.getElementById('trajectoryCanvas');
 const ctx = canvas.getContext('2d');
+const resetButton = document.getElementById('resetButton');
 
 canvas.width = 800;
 canvas.height = 600;
@@ -14,6 +15,15 @@ let payload = {
     vx: 50, // Initial velocity in x (m/s)
     vy: 0,  // Initial velocity in y (m/s)
 };
+
+function resetPayload() {
+    payload.x = 100;
+    payload.y = 100;
+    payload.vx = 50;
+    payload.vy = 0;
+}
+
+resetButton.addEventListener('click', resetPayload);
 
 function update() {
     // Update velocity
