@@ -172,6 +172,79 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="central-limit-theorem-exploration-through-simulation">Central Limit Theorem Exploration through Simulation</h1>
+<h2 id="1-simulating-sampling-distributions">1. Simulating Sampling Distributions</h2>
+<p>We explore the Central Limit Theorem (CLT) using three different types of population distributions:</p>
+<ul>
+<li><strong>Uniform distribution</strong>: A distribution where every value between 0 and 1 has equal probability.</li>
+<li><strong>Exponential distribution</strong>: A right-skewed distribution often used to model time between events.</li>
+<li><strong>Binomial distribution</strong>: A discrete distribution representing the number of successes in a fixed number of independent trials with the same probability of success.</li>
+</ul>
+<p>For each of these distributions, we generate a large population dataset containing 100,000 values to represent the entire population.</p>
+<hr/>
+<h2 id="2-sampling-and-visualization">2. Sampling and Visualization</h2>
+<p>From each population distribution, we draw random samples of different sizes—5, 10, 30, and 50. For each sample size, we perform the following:</p>
+<ul>
+<li>Repeat the sampling process 1000 times.</li>
+<li>Calculate the mean of each sample.</li>
+<li>Visualize the distribution of these sample means using histograms.</li>
+</ul>
+<h3 id="observations">Observations:</h3>
+<ul>
+<li>As the sample size increases, the distribution of the sample means begins to resemble a normal distribution, regardless of the original population shape.</li>
+<li>This is the essence of the Central Limit Theorem: the sampling distribution of the sample mean becomes approximately normal as the sample size increases, even if the population distribution is not normal.</li>
+</ul>
+<hr/>
+<h2 id="3-parameter-exploration">3. Parameter Exploration</h2>
+<h3 id="convergence-to-normality">Convergence to Normality:</h3>
+<ul>
+<li><strong>Uniform Distribution</strong>: Being symmetric and bounded, this distribution quickly shows convergence to normality. Even sample sizes of 10 begin to show a bell-shaped curve.</li>
+<li><strong>Exponential Distribution</strong>: Initially highly skewed, it requires larger sample sizes (30 or 50) for the sampling distribution of the mean to approximate a normal distribution.</li>
+<li><strong>Binomial Distribution</strong>: Since the binomial distribution with parameters n = 10 and p = 0.5 is already symmetric, the sample mean distributions become nearly normal with relatively small samples.</li>
+</ul>
+<h3 id="impact-of-population-variance">Impact of Population Variance:</h3>
+<ul>
+<li>The variability in the original population affects how spread out the sampling distribution is.</li>
+<li>The larger the population variance, the wider the sampling distribution of the mean will be.</li>
+<li>Importantly, the standard deviation of the sampling distribution (called the standard error) decreases as the sample size increases, following the formula:</li>
+</ul>
+<p>$$
+  \text{Standard Error} = \frac{\sigma}{\sqrt{n}}
+  $$</p>
+<p>where <span class="arithmatex">\(\sigma\)</span> is the population standard deviation and <span class="arithmatex">\(n\)</span> is the sample size.</p>
+<hr/>
+<h2 id="4-practical-applications">4. Practical Applications</h2>
+<h3 id="why-the-central-limit-theorem-matters">Why the Central Limit Theorem Matters:</h3>
+<ol>
+<li>
+<p><strong>Estimating Population Parameters</strong>:</p>
+</li>
+<li>
+<p>We can use the sample mean to estimate the population mean, even if the population is not normally distributed, provided the sample size is large enough.</p>
+</li>
+<li>
+<p><strong>Quality Control in Manufacturing</strong>:</p>
+</li>
+<li>
+<p>In industries, random samples are taken from production lines. Thanks to the CLT, the average quality measures from these samples can help infer the overall quality with high confidence.</p>
+</li>
+<li>
+<p><strong>Predicting Outcomes in Finance</strong>:</p>
+</li>
+<li>
+<p>Financial analysts often rely on the CLT to model returns and assess risk. The expected average returns from many small, independent investments tend to follow a normal distribution.</p>
+</li>
+</ol>
+<hr/>
+<h2 id="html-simulation">HTML Simulation</h2>
+<p><a href="">Exploring the Central Limit Theorem through simulations</a></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This simulation demonstrates the power and universality of the Central Limit Theorem:</p>
+<ul>
+<li>Regardless of the shape of the original population distribution, the distribution of the sample mean tends toward a normal distribution as sample size increases.</li>
+<li>The rate of convergence depends on both the shape and the variance of the original distribution.</li>
+<li>The CLT is a cornerstone of statistical inference and is foundational to many real-world applications across science, industry, and finance.</li>
+</ul>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">

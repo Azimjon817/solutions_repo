@@ -1,0 +1,66 @@
+/* styles.css */
+body {
+    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  h1 {
+    margin-top: 30px;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px #fff;
+  }
+  
+  .controls {
+    margin: 20px 0;
+    padding: 15px 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  label {
+    font-size: 1rem;
+    color: #34495e;
+  }
+  
+  input, select, button {
+    margin-left: 8px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    border: 1px solid #b2bec3;
+    font-size: 1rem;
+  }
+  
+  button {
+    background: #0984e3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  button:hover {
+    background: #74b9ff;
+  }
+  
+  #histogram {
+    margin: 30px 0 10px 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+  }
+  
+  #explanation {
+    max-width: 700px;
+    text-align: center;
+    color: #636e72;
+    font-size: 1.1rem;
+  }
