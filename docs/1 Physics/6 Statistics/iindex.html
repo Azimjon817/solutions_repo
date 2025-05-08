@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Central Limit Theorem Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Exploring the Central Limit Theorem</h1>
+  <div class="controls">
+    <label>Distribution:
+      <select id="distribution">
+        <option value="uniform">Uniform (0,1)</option>
+        <option value="exponential">Exponential (λ=1)</option>
+        <option value="custom">Custom: Dice (1-6)</option>
+      </select>
+    </label>
+    <label>Sample Size (n):
+      <input type="number" id="sampleSize" value="5" min="1" max="100">
+    </label>
+    <label>Number of Samples:
+      <input type="number" id="numSamples" value="1000" min="100" max="10000" step="100">
+    </label>
+    <button id="runBtn">Run Simulation</button>
+  </div>
+  <canvas id="histogram" width="800" height="400"></canvas>
+  <p id="explanation">
+    As you increase the sample size, the distribution of sample means approaches a normal distribution, regardless of the original distribution.
+  </p>
+  <script src="script.js"></script>
+</body>
+</html>
