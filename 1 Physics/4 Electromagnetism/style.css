@@ -77,3 +77,14 @@ footer {
   color: #aaa;
   letter-spacing: 0.5px;
 }
+.container {
+    position: relative; /* Add this to position the zoom display */
+}
+
+canvas {
+    cursor: grab; /* Show grab cursor when hovering over canvas */
+}
+
+canvas:active {
+    cursor: grabbing; /* Show grabbing cursor when dragging */
+}
