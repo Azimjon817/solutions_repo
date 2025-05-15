@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo π Estimation</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Monte Carlo π Estimation</h1>
+        <div class="simulation-container">
+            <canvas id="monteCarloCanvas" width="600" height="600"></canvas>
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-label">Total Points:</span>
+                    <span id="totalPoints" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Points Inside:</span>
+                    <span id="pointsInside" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Current π Estimate:</span>
+                    <span id="piEstimate" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Error:</span>
+                    <span id="error" class="stat-value">0%</span>
+                </div>
+                <div class="controls">
+                    <button id="startBtn" class="btn">Start</button>
+                    <button id="resetBtn" class="btn">Reset</button>
+                    <div class="speed-control">
+                        <label for="speed">Speed:</label>
+                        <input type="range" id="speed" min="1" max="100" value="50">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="explanation">
+            <h2>How it works:</h2>
+            <p>This simulation estimates π by randomly placing points in a square containing a quarter circle.</p>
+            <p>The ratio of points inside the quarter circle to total points, multiplied by 4, gives us our π estimate.</p>
+            <p>π ≈ 4 × (points inside circle / total points)</p>
+        </div>
+    </div>
+    <script src="script1.js"></script>
+</body>
+</html>
