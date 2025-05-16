@@ -1,0 +1,241 @@
+:root {
+    --primary-color: #7ed6df;
+    --secondary-color: #00b894;
+    --accent-color: #e74c3c;
+    --background-dark: #1a1a2e;
+    --background-light: #16213e;
+    --text-color: #ffffff;
+    --panel-bg: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-light) 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(30, 30, 40, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    padding: 32px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+    text-align: center;
+    color: var(--primary-color);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.simulation-container {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.canvas-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+canvas {
+    background: #222;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--primary-color);
+    width: 100%;
+    height: auto;
+}
+
+.trajectory-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+.control-panel {
+    background: var(--panel-bg);
+    border-radius: 16px;
+    padding: 20px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.stat-value {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-group label {
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: var(--background-dark);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.info-panel {
+    background: var(--panel-bg);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 24px;
+}
+
+.info-panel h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.info-panel p {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.formulas {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.formulas h3 {
+    color: var(--secondary-color);
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.formulas ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.formulas li {
+    color: #ccc;
+    margin: 8px 0;
+    font-family: 'Courier New', monospace;
+}
+
+@media (max-width: 768px) {
+    .simulation-container {
+        flex-direction: column;
+    }
+    
+    .control-panel {
+        min-width: auto;
+    }
+}
+
+/* Animation for the projectile */
+@keyframes glow {
+    0% { box-shadow: 0 0 5px var(--accent-color); }
+    50% { box-shadow: 0 0 20px var(--accent-color); }
+    100% { box-shadow: 0 0 5px var(--accent-color); }
+}
+
+.projectile {
+    animation: glow 2s infinite;
+}
