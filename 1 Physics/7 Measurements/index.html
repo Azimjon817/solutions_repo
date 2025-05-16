@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth's Gravitational Acceleration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Earth's Gravitational Acceleration</h1>
+        <div class="simulation-container">
+            <div class="canvas-wrapper">
+                <canvas id="gravityCanvas" width="800" height="600"></canvas>
+                <div class="atmosphere-layer"></div>
+            </div>
+            <div class="control-panel">
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Height:</span>
+                        <span id="height" class="stat-value">0 m</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Velocity:</span>
+                        <span id="velocity" class="stat-value">0 m/s</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time:</span>
+                        <span id="time" class="stat-value">0 s</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Acceleration:</span>
+                        <span id="acceleration" class="stat-value">9.81 m/s²</span>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button id="startBtn" class="btn">Start</button>
+                    <button id="resetBtn" class="btn">Reset</button>
+                    <div class="height-control">
+                        <label for="heightSlider">Initial Height:</label>
+                        <input type="range" id="heightSlider" min="100" max="500" value="500">
+                        <span id="heightValue">500m</span>
+                    </div>
+                    <div class="air-resistance">
+                        <label>
+                            <input type="checkbox" id="airResistance">
+                            Enable Air Resistance
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-panel">
+            <h2>About the Simulation</h2>
+            <p>This simulation demonstrates Earth's gravitational acceleration (g = 9.81 m/s²).</p>
+            <p>Key features:</p>
+            <ul>
+                <li>Real-time physics simulation</li>
+                <li>Adjustable initial height</li>
+                <li>Optional air resistance</li>
+                <li>Visual representation of atmosphere layers</li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

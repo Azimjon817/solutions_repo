@@ -92,6 +92,18 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-period-measurement">1. Period Measurement</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-calculating-gravitational-acceleration">2. Calculating Gravitational Acceleration</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-uncertainty-analysis">3. Uncertainty Analysis</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-earths-gravitational-acceleration-simulation">4. Earth's Gravitational Acceleration simulation</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +184,35 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h3 id="measuring-earths-gravitational-acceleration-with-a-pendulum"><strong>Measuring Earth's Gravitational Acceleration with a Pendulum</strong></h3>
+<hr/>
+<p>To determine the acceleration due to gravity <span class="arithmatex">\(g\)</span>, we use a simple pendulum and analyze its oscillatory motion. The pendulum consists of a string of known length with a small mass at the end. When displaced slightly and released, it undergoes periodic motion, and the time it takes to complete one full swing is called the <strong>period</strong>.</p>
+<h4 id="1-period-measurement"><strong>1. Period Measurement</strong></h4>
+<p>We begin by measuring the time it takes for the pendulum to complete 10 full oscillations. This timing is repeated 10 times to improve accuracy and allow statistical analysis.</p>
+<p>The period <span class="arithmatex">\(T\)</span> (time for one oscillation) is calculated by dividing the average time for 10 oscillations <span class="arithmatex">\(\overline{t_{10}}\)</span> by 10:</p>
+<div class="arithmatex">\[
+T = \frac{\overline{t_{10}}}{10}
+\]</div>
+<h4 id="2-calculating-gravitational-acceleration"><strong>2. Calculating Gravitational Acceleration</strong></h4>
+<p>The relationship between the period <span class="arithmatex">\(T\)</span>, the pendulum length <span class="arithmatex">\(L\)</span>, and the gravitational acceleration <span class="arithmatex">\(g\)</span> is:</p>
+<div class="arithmatex">\[
+g = \frac{4\pi^2 L}{T^2}
+\]</div>
+<p>By measuring <span class="arithmatex">\(L\)</span> and calculating <span class="arithmatex">\(T\)</span>, we can determine <span class="arithmatex">\(g\)</span>.</p>
+<h4 id="3-uncertainty-analysis"><strong>3. Uncertainty Analysis</strong></h4>
+<p>Uncertainty is a key part of experimental work. The uncertainty in the length <span class="arithmatex">\(L\)</span> is estimated as half the resolution of the measuring tool. For the time measurements, we calculate the standard deviation of the 10 trials of <span class="arithmatex">\(t_{10}\)</span>, then find the uncertainty in the mean:</p>
+<div class="arithmatex">\[
+\delta T = \frac{s}{10\sqrt{n}}
+\]</div>
+<p>where <span class="arithmatex">\(s\)</span> is the standard deviation and <span class="arithmatex">\(n = 10\)</span> is the number of trials.</p>
+<p>Finally, the uncertainty in <span class="arithmatex">\(g\)</span> is determined using uncertainty propagation:</p>
+<div class="arithmatex">\[
+\delta g = g \cdot \sqrt{\left(\frac{\delta L}{L}\right)^2 + \left(2 \cdot \frac{\delta T}{T}\right)^2}
+\]</div>
+<p>This allows us to report <span class="arithmatex">\(g\)</span> with a meaningful uncertainty, reflecting the reliability of our measurements.</p>
+<hr/>
+<h4 id="4-earths-gravitational-acceleration-simulation"><strong>4. Earth's Gravitational Acceleration simulation</strong></h4>
+<p><strong><a href="../">Link to simulation</a></strong></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
