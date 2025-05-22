@@ -50,15 +50,35 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#cosmic-velocities-definitions-derivations-and-applications-in-space-exploration">Cosmic Velocities: Definitions, Derivations, and Applications in Space Exploration</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-definition-and-physical-meaning">1. Definition and Physical Meaning</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-mathematical-analysis-and-influencing-parameters">2. Mathematical Analysis and Influencing Parameters</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-real-world-calculations-for-earth-mars-and-jupiter">3. Real-World Calculations for Earth, Mars, and Jupiter</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-applications-in-space-exploration">4. Applications in Space Exploration</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#5-implementation">5. Implementation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#6-discussion-limitations-and-advanced-considerations">6. Discussion: Limitations and Advanced Considerations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-of-cosmic-velosities">Simulation of Cosmic Velosities</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal">2 Gravity</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_1/">Orbital Period and Orbital Radius</a>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_1/">Problem 1</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_2/">Escape Velocities and Cosmic Velocities</a>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_2/">Problem 2</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_3/">Problem 3</a>
 </li>
@@ -172,118 +192,143 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
-<h1 id="forced-damped-pendulum-and-orbital-mechanics">Forced Damped Pendulum and Orbital Mechanics</h1>
-<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
-<h3 id="11-governing-equation-of-motion">1.1 Governing Equation of Motion</h3>
-<p>The forced damped pendulum is governed by the following nonlinear differential equation:</p>
-<div class="arithmatex">\[ \frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{l} \sin\theta = A \cos(\omega t) \]</div>
-<p>where:
-- <span class="arithmatex">\( \theta \)</span> is the angular displacement,
-- <span class="arithmatex">\( b \)</span> is the damping coefficient,
-- <span class="arithmatex">\( g \)</span> is the gravitational acceleration,
-- <span class="arithmatex">\( l \)</span> is the length of the pendulum,
-- <span class="arithmatex">\( A \)</span> is the amplitude of the external driving force,
-- <span class="arithmatex">\( \omega \)</span> is the driving frequency.</p>
-<h3 id="12-approximate-solutions-for-small-angle-oscillations">1.2 Approximate Solutions for Small-Angle Oscillations</h3>
-<p>For small angles (<span class="arithmatex">\( \theta \approx \sin\theta \)</span>), the equation simplifies to:</p>
-<div class="arithmatex">\[ \frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{l} \theta = A \cos(\omega t) \]</div>
-<p>Solving this linearized equation provides insights into resonance, stability, and the behavior of the pendulum under small perturbations.</p>
-<h3 id="13-resonance-conditions-and-energy-implications">1.3 Resonance Conditions and Energy Implications</h3>
-<p>Resonance occurs when <span class="arithmatex">\( \omega \approx \sqrt{g/l} \)</span>, leading to large oscillations. Energy transfer efficiency is maximized at resonance, which can cause instability or even chaotic motion depending on the damping coefficient and driving amplitude.</p>
-<h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
-<h3 id="21-influence-of-system-parameters">2.1 Influence of System Parameters</h3>
+<h2 id="cosmic-velocities-definitions-derivations-and-applications-in-space-exploration"><strong>Cosmic Velocities: Definitions, Derivations, and Applications in Space Exploration</strong></h2>
+<h3 id="1-definition-and-physical-meaning"><strong>1. Definition and Physical Meaning</strong></h3>
+<p>In astrodynamics, the <strong>first, second, and third cosmic velocities</strong> represent critical speeds for a body to achieve specific orbital or escape conditions relative to a celestial body.</p>
+<hr/>
+<h4 id="11-first-cosmic-velocity-orbital-velocity"><strong>1.1 First Cosmic Velocity (Orbital Velocity)</strong></h4>
 <ul>
-<li><strong>Damping coefficient (b):</strong> High damping leads to overdamped motion, while low damping results in sustained oscillations.</li>
-<li><strong>Driving amplitude (A):</strong> Higher amplitudes increase the possibility of nonlinear and chaotic behavior.</li>
-<li><strong>Driving frequency (<span class="arithmatex">\( \omega \)</span>):</strong> Determines whether the system undergoes resonance, quasi-periodic motion, or chaos.</li>
+<li><strong>Definition</strong>: The minimum speed an object must have to maintain a <strong>stable circular orbit</strong> just above the surface of a planet or celestial body.</li>
+<li><strong>Physical Meaning</strong>: The object is in free fall but constantly missing the surface due to its horizontal speed.</li>
+<li><strong>Formula</strong>:</li>
 </ul>
-<h3 id="22-transition-from-regular-to-chaotic-motion">2.2 Transition from Regular to Chaotic Motion</h3>
-<p>The system exhibits a transition from periodic to chaotic motion as parameters change. A Poincaré section and bifurcation diagram can help visualize these transitions.</p>
-<h2 id="3-practical-applications">3. Practical Applications</h2>
+<p>$$
+  v_1 = \sqrt{\frac{GM}{R}}
+  $$</p>
+<hr/>
+<h4 id="12-second-cosmic-velocity-escape-velocity"><strong>1.2 Second Cosmic Velocity (Escape Velocity)</strong></h4>
 <ul>
-<li><strong>Energy Harvesting:</strong> Used in piezoelectric and electromagnetic energy conversion systems.</li>
-<li><strong>Suspension Bridges:</strong> Can experience forced oscillations leading to instability (e.g., Tacoma Narrows Bridge collapse).</li>
-<li><strong>Oscillating Circuits:</strong> Analogous to driven RLC circuits with damping and external forcing.</li>
+<li><strong>Definition</strong>: The minimum speed required to <strong>completely escape the gravitational field</strong> of a celestial body without further propulsion.</li>
+<li><strong>Physical Meaning</strong>: Object has just enough kinetic energy to reach infinity with zero velocity.</li>
+<li><strong>Formula</strong>:</li>
 </ul>
-<h2 id="4-implementation">4. Implementation</h2>
-<p>A Python-based simulation using numerical integration (Runge-Kutta method) will be developed to model the motion and analyze its characteristics.</p>
-<h3 id="customizing-fonts-in-plots">Customizing Fonts in Plots</h3>
-<p>To enhance readability, custom fonts will be applied to all visualizations using Matplotlib:</p>
-<pre><code class="language-python">import matplotlib.pyplot as plt
-from matplotlib import font_manager
-
-# Set global font style
-plt.rcParams['font.family'] = 'Georgia'  # Change to preferred font
-plt.rcParams['font.size'] = 14  # Adjust font size
-</code></pre>
-<h3 id="deliverables">Deliverables:</h3>
+<p>$$
+  v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2} \cdot v_1
+  $$</p>
+<hr/>
+<h4 id="13-third-cosmic-velocity-interplanetaryinterstellar-velocity"><strong>1.3 Third Cosmic Velocity (Interplanetary/Interstellar Velocity)</strong></h4>
 <ul>
-<li>Python script implementing forced damped pendulum simulation.</li>
-<li>Graphical outputs (phase portraits, bifurcation diagrams, and Poincaré sections).</li>
-<li>Explanation of results and potential extensions (nonlinear damping, non-periodic driving forces).</li>
+<li><strong>Definition</strong>: The minimum speed needed for a spacecraft to <strong>escape the Sun’s gravity</strong> from Earth orbit (or another planet), enabling <strong>interplanetary or interstellar travel</strong>.</li>
+<li><strong>Physical Meaning</strong>: Escape from both Earth’s and the Sun’s gravitational pulls.</li>
+<li><strong>Approximate Value from Earth's surface</strong>: \~<strong>16.7 km/s</strong></li>
 </ul>
 <hr/>
-<h1 id="gravity-and-orbital-mechanics">Gravity and Orbital Mechanics</h1>
-<h2 id="problem-1-orbital-period-and-orbital-radius">Problem 1: Orbital Period and Orbital Radius</h2>
-<h3 id="11-derivation-of-keplers-third-law">1.1 Derivation of Kepler’s Third Law</h3>
-<p>Kepler’s Third Law states:</p>
-<div class="arithmatex">\[ T^2 \propto r^3 \]</div>
-<p>where:
-- <span class="arithmatex">\( T \)</span> is the orbital period,
-- <span class="arithmatex">\( r \)</span> is the orbital radius.</p>
-<p>Using Newton’s laws, we derive:</p>
-<div class="arithmatex">\[ T^2 = \frac{4\pi^2 r^3}{GM} \]</div>
-<p>where <span class="arithmatex">\( G \)</span> is the gravitational constant and <span class="arithmatex">\( M \)</span> is the central mass.</p>
-<h3 id="12-implications-for-astronomy">1.2 Implications for Astronomy</h3>
+<h3 id="2-mathematical-analysis-and-influencing-parameters"><strong>2. Mathematical Analysis and Influencing Parameters</strong></h3>
+<p>Each velocity depends on:</p>
 <ul>
-<li>Used to determine planetary masses and distances.</li>
-<li>Essential for satellite mission planning.</li>
-<li>Extends to exoplanet detection via transit methods.</li>
+<li><span class="arithmatex">\(G\)</span>: Gravitational constant</li>
+<li><span class="arithmatex">\(M\)</span>: Mass of the celestial body</li>
+<li><span class="arithmatex">\(R\)</span>: Radius of the celestial body (distance from the center of mass)</li>
 </ul>
-<h3 id="13-computational-verification">1.3 Computational Verification</h3>
-<p>A numerical simulation will model circular orbits and verify the period-radius relationship.</p>
-<h3 id="deliverables_1">Deliverables:</h3>
+<div class="arithmatex">\[
+v_1 \propto \sqrt{\frac{M}{R}}, \quad v_2 \propto \sqrt{\frac{M}{R}}, \quad v_3 \propto \text{(depends on both Earth and Sun parameters)}
+\]</div>
+<hr/>
+<h3 id="3-real-world-calculations-for-earth-mars-and-jupiter"><strong>3. Real-World Calculations for Earth, Mars, and Jupiter</strong></h3>
+<p>Let’s calculate <span class="arithmatex">\(v_1\)</span>, <span class="arithmatex">\(v_2\)</span>, and approximate <span class="arithmatex">\(v_3\)</span> for:</p>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>Mass (kg)</th>
+<th>Radius (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td><span class="arithmatex">\(5.97 \times 10^{24}\)</span></td>
+<td><span class="arithmatex">\(6.37 \times 10^6\)</span></td>
+</tr>
+<tr>
+<td>Mars</td>
+<td><span class="arithmatex">\(6.42 \times 10^{23}\)</span></td>
+<td><span class="arithmatex">\(3.39 \times 10^6\)</span></td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td><span class="arithmatex">\(1.90 \times 10^{27}\)</span></td>
+<td><span class="arithmatex">\(6.99 \times 10^7\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We use:</p>
+<div class="arithmatex">\[
+v_1 = \sqrt{\frac{GM}{R}}, \quad v_2 = \sqrt{2} \cdot v_1
+\]</div>
+<p>Approximate <span class="arithmatex">\(v_3\)</span> for Earth uses Sun’s parameters and Earth’s orbital speed.</p>
+<hr/>
+<h3 id="4-applications-in-space-exploration"><strong>4. Applications in Space Exploration</strong></h3>
+<h4 id="first-cosmic-velocity-applications"><strong>First Cosmic Velocity Applications</strong>:</h4>
 <ul>
-<li>Python notebook simulating circular orbits.</li>
-<li>Graphical representations of orbital motion.</li>
-<li>Discussion on elliptical orbits and generalizations.</li>
+<li>Launching <strong>artificial satellites</strong></li>
+<li>Establishing <strong>space stations</strong> in low Earth orbit (LEO)</li>
 </ul>
-<h2 id="problem-2-escape-velocities-and-cosmic-velocities">Problem 2: Escape Velocities and Cosmic Velocities</h2>
-<h3 id="21-definitions">2.1 Definitions</h3>
+<h4 id="second-cosmic-velocity-applications"><strong>Second Cosmic Velocity Applications</strong>:</h4>
 <ul>
-<li><strong>First cosmic velocity (orbital velocity):</strong> <span class="arithmatex">\( v_o = \sqrt{GM/r} \)</span></li>
-<li><strong>Second cosmic velocity (escape velocity):</strong> <span class="arithmatex">\( v_e = \sqrt{2GM/r} \)</span></li>
-<li><strong>Third cosmic velocity (solar system escape):</strong> Higher than <span class="arithmatex">\( v_e \)</span> to escape Sun’s gravity.</li>
+<li>Missions to the <strong>Moon, Mars, or deep space</strong></li>
+<li>Any <strong>escape trajectory</strong> from Earth</li>
 </ul>
-<h3 id="22-mathematical-analysis">2.2 Mathematical Analysis</h3>
-<p>Escape velocity depends on mass and radius of the celestial body:</p>
-<div class="arithmatex">\[ v_e = \sqrt{2gr} \]</div>
-<p>where <span class="arithmatex">\( g \)</span> is the gravitational acceleration at the surface.</p>
-<h3 id="23-applications-in-space-exploration">2.3 Applications in Space Exploration</h3>
+<h4 id="third-cosmic-velocity-applications"><strong>Third Cosmic Velocity Applications</strong>:</h4>
 <ul>
-<li>Satellite launches (low Earth orbit requires first cosmic velocity).</li>
-<li>Interplanetary missions (Mars rovers, interstellar probes).</li>
-<li>Space tourism and future colonization.</li>
+<li><strong>Interplanetary missions</strong> (e.g., Voyager, New Horizons)</li>
+<li><strong>Interstellar probes</strong> aiming to exit the Solar System</li>
 </ul>
-<h3 id="24-computational-simulation">2.4 Computational Simulation</h3>
-<p>A Python model will calculate and visualize escape velocities for Earth, Mars, and Jupiter.</p>
-<h3 id="deliverables_2">Deliverables:</h3>
+<p>Understanding these speeds is critical in:</p>
 <ul>
-<li>Python script modeling escape velocities.</li>
-<li>Graphical outputs (velocity vs. celestial body comparisons).</li>
-<li>Discussion on interplanetary travel requirements.</li>
+<li>Fuel and trajectory planning</li>
+<li>Selecting launch windows</li>
+<li>Ensuring mission success</li>
 </ul>
 <hr/>
-<h2 id="additional-python-projects">Additional Python Projects</h2>
-<h3 id="1-projectile-motion-with-air-resistance"><strong>1. Projectile Motion with Air Resistance</strong></h3>
-<p><a href="../project_motion2.html">simulation</a></p>
-<h2 id="conclusion">Conclusion</h2>
-<p>This project bridges theoretical analysis with computational modeling, providing insights into oscillatory dynamics and celestial mechanics. The simulations and visualizations will help in understanding forced oscillations, orbital mechanics, and escape conditions in various physical contexts.</p>
+<h3 id="5-implementation"><strong>5. Implementation</strong></h3>
+<h4 id="python-model-outline"><strong>Python Model Outline</strong>:</h4>
+<ol>
+<li>Define planetary data: <span class="arithmatex">\(M, R\)</span></li>
+<li>Calculate <span class="arithmatex">\(v_1\)</span>, <span class="arithmatex">\(v_2\)</span>, and estimate <span class="arithmatex">\(v_3\)</span></li>
+<li>Visualize results using bar or line plots</li>
+</ol>
+<h4 id="visualization-ideas"><strong>Visualization Ideas</strong>:</h4>
+<ul>
+<li>Bar chart comparing <span class="arithmatex">\(v_1, v_2, v_3\)</span> for each planet</li>
+<li>Overlay orbital/escape trajectories (optional)</li>
+<li>Log scale comparison (for emphasis on large values)</li>
+</ul>
+<hr/>
+<h3 id="6-discussion-limitations-and-advanced-considerations"><strong>6. Discussion: Limitations and Advanced Considerations</strong></h3>
+<h4 id="limitations"><strong>Limitations</strong>:</h4>
+<ul>
+<li>Assumes spherical, non-rotating planets</li>
+<li>Ignores atmospheric drag</li>
+<li><span class="arithmatex">\(v_3\)</span> estimated simplistically, without full orbital mechanics</li>
+</ul>
+<h4 id="possible-extensions"><strong>Possible Extensions</strong>:</h4>
+<ul>
+<li>Add <strong>atmospheric effects</strong> for realistic launch speeds</li>
+<li>Incorporate <strong>rocket equation</strong> for fuel analysis</li>
+<li>Use <strong>patched conic approximation</strong> for precise interplanetary trajectories</li>
+</ul>
+<hr/>
+<h3 id="conclusion"><strong>Conclusion</strong></h3>
+<p>Understanding the <strong>three cosmic velocities</strong> forms the basis of all <strong>orbital mechanics</strong> and <strong>space mission planning</strong>. From satellite launches to Mars missions and beyond, these speeds dictate what's possible—and how much energy it will cost.</p>
+<hr/>
+<h3 id="simulation-of-cosmic-velosities">Simulation of Cosmic Velosities</h3>
+<p><em><a href="../project_motion2.html">Simulation</a></em></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../../2%20Gravity/Problem_1/" title="Orbital Period and Orbital Radius">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../../2%20Gravity/Problem_1/" title="Problem 1">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">

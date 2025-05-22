@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Orbital Period and Orbital Radius - Physics and Mathematics</title>
+<title>Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Orbital Period and Orbital Radius";
+        var mkdocs_page_name = "Problem 1";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -54,19 +54,11 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">2 Gravity</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Orbital Period and Orbital Radius</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#task">Task</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#mathematical-formulation">Mathematical Formulation</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
-</li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Escape Velocities and Cosmic Velocities</a>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
 </li>
@@ -171,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Orbital Period and Orbital Radius</li>
+<li class="breadcrumb-item active">Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -179,101 +171,132 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="orbital-period-and-orbital-radius">Orbital Period and Orbital Radius</h1>
-<h2 id="motivation">Motivation</h2>
-<p>Kepler's Third Law states that the square of the orbital period (T) is proportional to the cube of the orbital radius (r). This fundamental principle of celestial mechanics enables calculations of planetary motions and gravitational interactions, with applications ranging from satellite navigation to planetary science.</p>
-<h2 id="task">Task</h2>
-<ol>
-<li>Derive the mathematical relationship between the square of the orbital period and the cube of the orbital radius for circular orbits.</li>
-<li>Discuss its implications for astronomy, such as planetary mass and distance calculations.</li>
-<li>Analyze real-world examples (e.g., the Moon’s orbit around Earth, planetary orbits in the Solar System).</li>
-<li>Implement a computational model to simulate circular orbits and verify the relationship.</li>
-</ol>
-<h2 id="mathematical-formulation">Mathematical Formulation</h2>
-<p>Kepler's Third Law can be written as:
-<span class="arithmatex">\(T^2 = \frac{4\pi^2 r^3}{GM}\)</span>
-where:
-- <span class="arithmatex">\(T\)</span> is the orbital period,
-- <span class="arithmatex">\(r\)</span> is the orbital radius,
-- <span class="arithmatex">\(G\)</span> is the gravitational constant (6.674 \times 10^{-11} m³/kg/s²),
-- <span class="arithmatex">\(M\)</span> is the mass of the central body.</p>
-<h2 id="deliverables">Deliverables</h2>
+<h2 id="problem-1">Problem 1</h2>
+<h2 id="keplers-third-law-and-circular-orbits-theory-application-and-simulation"><strong>Kepler’s Third Law and Circular Orbits: Theory, Application, and Simulation</strong></h2>
+<h3 id="1-theoretical-foundation"><strong>1. Theoretical Foundation</strong></h3>
+<h4 id="derivation-of-the-relationship-between-orbital-period-and-radius"><strong>Derivation of the Relationship Between Orbital Period and Radius</strong></h4>
+<p>For a body in <strong>uniform circular orbit</strong> around a much larger mass (e.g., a planet orbiting a star), Newton’s Law of Gravitation and the concept of centripetal force give us:</p>
+<div class="arithmatex">\[
+F_{\text{gravity}} = F_{\text{centripetal}}
+\]</div>
+<div class="arithmatex">\[
+\frac{G M m}{r^2} = \frac{m v^2}{r}
+\]</div>
+<p>Where:</p>
 <ul>
-<li>A Markdown document with a Python script or Jupyter Notebook implementing the simulations.</li>
-<li>Detailed explanations of the concepts.</li>
-<li>Graphical representations of circular orbits and the relationship between orbital period and radius.</li>
-<li>Discussion on extending the relationship to elliptical orbits.</li>
-<li>An interactive HTML simulation of orbital mechanics.</li>
+<li><span class="arithmatex">\(G\)</span>: Gravitational constant</li>
+<li><span class="arithmatex">\(M\)</span>: Mass of the central body</li>
+<li><span class="arithmatex">\(m\)</span>: Mass of the orbiting body</li>
+<li><span class="arithmatex">\(r\)</span>: Orbital radius</li>
+<li><span class="arithmatex">\(v\)</span>: Orbital speed</li>
+</ul>
+<p>Solving for <span class="arithmatex">\(v\)</span>:</p>
+<div class="arithmatex">\[
+v = \sqrt{\frac{GM}{r}}
+\]</div>
+<p>The <strong>orbital period</strong> <span class="arithmatex">\(T\)</span> is the time to complete one full orbit:</p>
+<div class="arithmatex">\[
+T = \frac{2\pi r}{v}
+\]</div>
+<p>Substituting <span class="arithmatex">\(v\)</span>:</p>
+<div class="arithmatex">\[
+T = 2\pi r \left(\frac{r}{GM}\right)^{1/2} = 2\pi \sqrt{\frac{r^3}{GM}}
+\]</div>
+<p>Squaring both sides:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2}{GM} r^3
+\]</div>
+<hr/>
+<h3 id="2-implications-for-astronomy"><strong>2. Implications for Astronomy</strong></h3>
+<p>This equation is a form of <strong>Kepler’s Third Law</strong> for circular orbits. It states:</p>
+<blockquote>
+<p><strong>The square of the orbital period is proportional to the cube of the orbital radius.</strong></p>
+</blockquote>
+<h4 id="applications-in-astronomy">Applications in Astronomy:</h4>
+<ul>
+<li><strong>Calculate masses</strong> of planets or stars by observing orbiting bodies.</li>
+<li><strong>Infer distances</strong> between celestial bodies based on their periods.</li>
+<li><strong>Compare orbits</strong> in multi-body systems using ratios:</li>
+</ul>
+<p>$$
+  \frac{T_1^2}{r_1^3} = \frac{T_2^2}{r_2^3} \quad (\text{if orbiting the same body})
+  $$</p>
+<p>This relation holds <strong>independently of the orbiting object’s mass</strong>—a profound insight enabling early astronomers to model the solar system.</p>
+<hr/>
+<h3 id="3-real-world-examples"><strong>3. Real-World Examples</strong></h3>
+<h4 id="moons-orbit-around-earth"><strong>Moon’s Orbit Around Earth:</strong></h4>
+<ul>
+<li>Average radius <span class="arithmatex">\(r \approx 3.84 \times 10^8 \, \text{m}\)</span></li>
+<li>Orbital period <span class="arithmatex">\(T \approx 27.3 \, \text{days}\)</span></li>
+<li>Plugging into <span class="arithmatex">\(T^2 = \frac{4\pi^2}{GM} r^3\)</span> confirms the law using Earth's mass <span class="arithmatex">\(M \approx 5.97 \times 10^{24} \, \text{kg}\)</span></li>
+</ul>
+<h4 id="planets-in-the-solar-system"><strong>Planets in the Solar System:</strong></h4>
+<ul>
+<li>For all planets orbiting the Sun, the ratio <span class="arithmatex">\(T^2/r^3\)</span> is constant (in appropriate units), confirming Kepler’s law.</li>
+<li>
+<p>Example:</p>
+</li>
+<li>
+<p>Earth: <span class="arithmatex">\(T = 1\)</span> year, <span class="arithmatex">\(r = 1\)</span> AU</p>
+</li>
+<li>Mars: <span class="arithmatex">\(T = 1.88\)</span> years, <span class="arithmatex">\(r = 1.52\)</span> AU → <span class="arithmatex">\((1.88)^2 \approx (1.52)^3\)</span></li>
 </ul>
 <hr/>
-<h1 id="escape-velocities-and-cosmic-velocities">Escape Velocities and Cosmic Velocities</h1>
-<h2 id="motivation_1">Motivation</h2>
-<p>Escape velocity is the minimum speed required to break free from a celestial body’s gravitational pull. The first, second, and third cosmic velocities define the thresholds for orbiting, escaping, and leaving a star system, which are crucial for space exploration.</p>
-<h2 id="task_1">Task</h2>
-<ol>
-<li>Define and explain the first, second, and third cosmic velocities.</li>
-<li>Analyze the mathematical derivations and factors affecting these velocities.</li>
-<li>Calculate and visualize these velocities for Earth, Mars, and Jupiter.</li>
-<li>Discuss their significance in space exploration, including satellite launches and interplanetary missions.</li>
-</ol>
-<h2 id="mathematical-formulation_1">Mathematical Formulation</h2>
-<p>The escape velocity $ v_e $ is given by:
-<span class="arithmatex">\(v_e = \sqrt{\frac{2GM}{r}}\)</span>
-where:
-- <span class="arithmatex">\(G\)</span> is the gravitational constant,
-- <span class="arithmatex">\(M\)</span> is the mass of the celestial body,
-- <span class="arithmatex">\(r\)</span> is the radius from the center of the body.</p>
-<p>For first, second, and third cosmic velocities:
-- First cosmic velocity (orbital speed): <span class="arithmatex">\(v_1 = \sqrt{\frac{GM}{r}}\)</span>
-- Second cosmic velocity (escape velocity): <span class="arithmatex">\(v_2 = \sqrt{2} v_1\)</span>
-- Third cosmic velocity (solar system escape velocity): Depends on position in the system.</p>
-<h2 id="deliverables_1">Deliverables</h2>
+<h3 id="4-implementation"><strong>4. Implementation</strong></h3>
+<h4 id="computational-model-outline-python"><strong>Computational Model Outline (Python)</strong></h4>
+<p>A simulation can:</p>
 <ul>
-<li>A Markdown document with a Python script or Jupyter Notebook implementing the calculations and visualizations.</li>
-<li>Detailed explanations of the physics involved.</li>
-<li>Graphical representations of escape and cosmic velocities for different celestial bodies.</li>
-<li>An interactive HTML simulation for escape velocity calculations.</li>
+<li>Model circular orbits for various radii</li>
+<li>Calculate orbital periods from Newtonian dynamics</li>
+<li>Verify that <span class="arithmatex">\(T^2 \propto r^3\)</span></li>
+</ul>
+<h4 id="simulation-features"><strong>Simulation Features:</strong></h4>
+<ol>
+<li><strong>Define constants</strong>: <span class="arithmatex">\(G, M\)</span></li>
+<li><strong>Iterate over various radii</strong></li>
+<li><strong>Compute <span class="arithmatex">\(T\)</span> for each radius</strong></li>
+<li><strong>Plot <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(r^3\)</span></strong></li>
+</ol>
+<h4 id="visualization-goals"><strong>Visualization Goals:</strong></h4>
+<ul>
+<li><strong>Circular Orbits</strong>: Animate motion using matplotlib</li>
+<li><strong>T² vs R³ Plot</strong>: Should yield a straight line</li>
+<li><strong>Log-log plot</strong>: Slope should be \~1.5 (confirming <span class="arithmatex">\(T \propto r^{3/2}\)</span>)</li>
 </ul>
 <hr/>
-<h1 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h1>
-<h2 id="motivation_2">Motivation</h2>
-<p>When an object is released from a moving rocket, its trajectory depends on initial velocity, altitude, and gravitational forces. Understanding these trajectories is crucial for space missions, including satellite deployments and reentry planning.</p>
-<h2 id="task_2">Task</h2>
-<ol>
-<li>Analyze possible trajectories (e.g., parabolic, hyperbolic, elliptical) of a payload released near Earth.</li>
-<li>Perform a numerical simulation to compute the path based on initial conditions.</li>
-<li>Discuss how these trajectories relate to orbital insertion, reentry, or escape scenarios.</li>
-<li>Develop a computational tool to simulate and visualize the motion of a payload under Earth’s gravity.</li>
-</ol>
-<h2 id="mathematical-formulation_2">Mathematical Formulation</h2>
-<p>Using Newton’s Law of Gravitation and motion equations:
-<span class="arithmatex">\(F = \frac{GMm}{r^2}\)</span>
-The equations of motion for a payload in free space are given by:
-<span class="arithmatex">\(\frac{d^2r}{dt^2} = -\frac{GM}{r^2}\)</span>
-where <span class="arithmatex">\(r\)</span> is the distance from Earth's center.</p>
-<h2 id="hints-and-resources">Hints and Resources</h2>
+<h3 id="5-extension-to-elliptical-orbits-and-other-celestial-systems"><strong>5. Extension to Elliptical Orbits and Other Celestial Systems</strong></h3>
+<p>While the derivation assumes <strong>circular orbits</strong>, Kepler’s Third Law also applies to <strong>elliptical orbits</strong> if <span class="arithmatex">\(r\)</span> is replaced by the <strong>semi-major axis <span class="arithmatex">\(a\)</span></strong>:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2}{GM} a^3
+\]</div>
+<h4 id="implications">Implications:</h4>
 <ul>
-<li>Use Newton’s Law of Gravitation and Kepler’s Laws to derive equations.</li>
-<li>Implement numerical simulations using Python.</li>
-<li>Explore real-world applications in space mission planning and planetary exploration.</li>
-</ul>
-<h2 id="deliverables_2">Deliverables</h2>
-<ul>
-<li>A Markdown document with a Python script or Jupyter Notebook implementing the simulations.</li>
-<li>Detailed explanations of the physics behind payload trajectories.</li>
-<li>Graphical representations of different trajectory types near Earth.</li>
-<li>An interactive HTML simulation to visualize payload trajectories.</li>
+<li>Used to determine orbits of comets and exoplanets</li>
+<li>Enables tracking of satellites in elliptical Earth orbits</li>
+<li>Informs orbital mechanics in space missions</li>
 </ul>
 <hr/>
-<h2 id="html-simulation">HTML Simulation</h2>
-<p>Below is an interactive simulation using HTML, JavaScript, and the Canvas API to visualize Kepler's Third Law and circular orbits.</p>
-<p><a href="../project_motion.html">Orbital Simulation</a></p>
-<p>This simulation visually demonstrates an orbiting body obeying Kepler’s Third Law. It updates planetary motion in real time using Newtonian mechanics.</p>
+<h3 id="discussion-limitations-and-realism"><strong>Discussion: Limitations and Realism</strong></h3>
+<h4 id="limitations"><strong>Limitations:</strong></h4>
+<ul>
+<li>Assumes a two-body system (neglects perturbations from other bodies)</li>
+<li>Ignores relativity (significant in very strong gravitational fields)</li>
+<li>Assumes constant central mass (not valid for accreting or binary systems)</li>
+</ul>
+<h4 id="possible-extensions"><strong>Possible Extensions:</strong></h4>
+<ul>
+<li>Include <strong>orbital eccentricity</strong> and use elliptical models</li>
+<li>Simulate <strong>N-body systems</strong> to account for gravitational interactions</li>
+<li>Introduce <strong>relativistic corrections</strong> for high-precision astrophysics</li>
+</ul>
+<hr/>
+<h3 id="simulation-of-kaplers-third-law">Simulation of Kapler's Third Law</h3>
+<p><em><a href="../project_motion.html">Simulation</a></em></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../../1%20Mechanics/Problem_2/" title="Problem 2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../Problem_2/" title="Escape Velocities and Cosmic Velocities">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../Problem_2/" title="Problem 2">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">

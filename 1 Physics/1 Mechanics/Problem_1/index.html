@@ -48,6 +48,40 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#family-of-solutions">Family of Solutions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-the-range">2. Analysis of the Range</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#dependence-on-launch-angle">Dependence on Launch Angle</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#influence-of-other-parameters">Influence of Other Parameters</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-practical-applications">3. Practical Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-implementation">4. Implementation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-outline">Simulation Outline</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#graphical-output">Graphical Output</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion-limitations-and-realism">Discussion: Limitations and Realism</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations-of-the-ideal-model">Limitations of the Ideal Model</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#suggestions-for-realistic-extensions">Suggestions for Realistic Extensions</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-of-projectile-motion">Simulation of Projectile Motion</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -56,9 +90,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">2 Gravity</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_1/">Orbital Period and Orbital Radius</a>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_1/">Problem 1</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_2/">Escape Velocities and Cosmic Velocities</a>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_2/">Problem 2</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_3/">Problem 3</a>
 </li>
@@ -172,94 +206,94 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<p>Below is an example of a Markdown document that both explains the theoretical framework behind projectile motion and implements a simulation in Python. You can use this as a starting point for your project.</p>
-<hr/>
-<h1 id="projectile-motion-analysis-and-simulation">Projectile Motion Analysis and Simulation</h1>
-<p>Projectile motion, while seemingly simple, provides a versatile framework for exploring key principles of physics. In this document, we will derive the fundamental equations of motion, analyze the range as a function of the projection angle and other parameters, discuss practical applications, and implement a computational simulation.</p>
-<hr/>
 <h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
-<h3 id="11-derivation-of-the-equations-of-motion">1.1 Derivation of the Equations of Motion</h3>
-<p>Consider a projectile launched with an initial velocity <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span> with respect to the horizontal. Assuming no air resistance and that the only force acting is gravity (<span class="arithmatex">\(g\)</span>), we start with the basic differential equations for the horizontal and vertical components.</p>
+<p>Projectile motion refers to the motion of an object launched into the air, subject only to gravitational acceleration. We derive its equations from Newton’s second law of motion.</p>
+<p>Let an object be projected with an initial velocity <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span> above the horizontal. The motion can be decomposed into horizontal (x) and vertical (y) components:</p>
 <ul>
-<li>
-<p><strong>Horizontal Motion</strong> (no acceleration):
-  $$
-  \frac{d^2x}{dt^2} = 0 \quad \Rightarrow \quad x(t) = v_0 \cos(\theta) \, t + x_0
-  $$
-  With <span class="arithmatex">\(x_0 = 0\)</span>, we have:
-  $$
-  x(t) = v_0 \cos(\theta) \, t
-  $$</p>
-</li>
-<li>
-<p><strong>Vertical Motion</strong> (constant acceleration due to gravity):</p>
-</li>
+<li><strong>Horizontal motion:</strong></li>
 </ul>
 <p>$$
-  \frac{d^2y}{dt^2} = -g \quad \Rightarrow \quad y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2 + y_0
-  $$
-  Assuming launch from the ground (<span class="arithmatex">\(y_0 = 0\)</span>):
-  $$
-  y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2
+  x(t) = v_0 \cos(\theta) \cdot t
   $$</p>
-<p>These equations form the family of solutions for projectile motion. Variations in the initial conditions <span class="arithmatex">\(v_0\)</span>, <span class="arithmatex">\(\theta\)</span>, and even <span class="arithmatex">\(y_0\)</span> (launch height) yield different trajectories, offering a rich parameter space to explore.</p>
-<h3 id="12-family-of-solutions">1.2 Family of Solutions</h3>
+<p>No acceleration in this direction (ignoring air resistance), so velocity is constant.</p>
 <ul>
-<li><strong>Dependence on <span class="arithmatex">\(v_0\)</span>:</strong> A higher initial velocity increases both the horizontal distance and the maximum height reached.</li>
-<li><strong>Dependence on <span class="arithmatex">\(\theta\)</span>:</strong> The angle of projection determines the shape of the trajectory. The horizontal range <span class="arithmatex">\(R\)</span> (assuming launch and landing at the same height) is given by:
-  $$
-  R = \frac{v_0^2 \sin(2\theta)}{g}
-  $$
-  This result comes from solving <span class="arithmatex">\(y(t) = 0\)</span> (for <span class="arithmatex">\(t &gt; 0\)</span>) and substituting back into <span class="arithmatex">\(x(t)\)</span>.</li>
-<li><strong>Dependence on <span class="arithmatex">\(g\)</span>:</strong> The gravitational acceleration <span class="arithmatex">\(g\)</span> inversely affects the range and the maximum height. Lower <span class="arithmatex">\(g\)</span> (as on the Moon) leads to longer ranges and higher trajectories.</li>
+<li><strong>Vertical motion:</strong></li>
 </ul>
+<p>$$
+  y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2}gt^2
+  $$</p>
+<p>Here, <span class="arithmatex">\(g\)</span> is the acceleration due to gravity, and the motion is uniformly accelerated.</p>
+<p>To derive these, start from the differential equation of motion in each direction:</p>
+<div class="arithmatex">\[
+\frac{d^2x}{dt^2} = 0, \quad \frac{d^2y}{dt^2} = -g
+\]</div>
+<p>Solving gives the velocity and position functions as shown above.</p>
+<h3 id="family-of-solutions">Family of Solutions</h3>
+<p>The general solution varies based on:</p>
+<ul>
+<li><strong>Initial speed <span class="arithmatex">\(v_0\)</span></strong></li>
+<li><strong>Launch angle <span class="arithmatex">\(\theta\)</span></strong></li>
+<li><strong>Gravitational field strength <span class="arithmatex">\(g\)</span></strong></li>
+</ul>
+<p>Each unique set of initial conditions produces a different trajectory. For a fixed <span class="arithmatex">\(v_0\)</span>, varying <span class="arithmatex">\(\theta\)</span> results in a family of parabolic paths.</p>
 <hr/>
 <h2 id="2-analysis-of-the-range">2. Analysis of the Range</h2>
-<h3 id="21-range-as-a-function-of-the-projection-angle">2.1 Range as a Function of the Projection Angle</h3>
-<p>For a projectile launched from ground level, the horizontal range is:
-$$
-R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}
-$$
-This formula shows a sinusoidal dependence on <span class="arithmatex">\(2\theta\)</span> with a maximum when <span class="arithmatex">\(2\theta = 90^\circ\)</span> (i.e., <span class="arithmatex">\(\theta = 45^\circ\)</span>). As <span class="arithmatex">\(\theta\)</span> deviates from <span class="arithmatex">\(45^\circ\)</span>, the range decreases.</p>
-<h3 id="22-effects-of-other-parameters">2.2 Effects of Other Parameters</h3>
+<p>The range <span class="arithmatex">\(R\)</span> is the horizontal distance the projectile travels before returning to the same vertical level:</p>
+<div class="arithmatex">\[
+R = \frac{v_0^2 \sin(2\theta)}{g}
+\]</div>
+<h3 id="dependence-on-launch-angle">Dependence on Launch Angle</h3>
 <ul>
-<li><strong>Initial Velocity (<span class="arithmatex">\(v_0\)</span>)</strong>: The range increases quadratically with <span class="arithmatex">\(v_0\)</span>. Doubling the speed results in a fourfold increase in range.</li>
-<li><strong>Gravitational Acceleration (<span class="arithmatex">\(g\)</span>)</strong>: The range is inversely proportional to <span class="arithmatex">\(g\)</span>. A smaller <span class="arithmatex">\(g\)</span> leads to a longer range.</li>
-<li><strong>Launch Height (<span class="arithmatex">\(y_0\)</span>)</strong>: For projectiles launched from an elevated position, the time of flight increases, leading to a longer range. The equations become more complex, typically requiring solving a quadratic equation in <span class="arithmatex">\(t\)</span>.</li>
+<li><span class="arithmatex">\(R\)</span> is maximized when <span class="arithmatex">\(\sin(2\theta) = 1\)</span>, i.e., <span class="arithmatex">\(\theta = 45^\circ\)</span></li>
+<li>Symmetric behavior: <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(90^\circ - \theta\)</span> yield the same range</li>
+</ul>
+<h3 id="influence-of-other-parameters">Influence of Other Parameters</h3>
+<ul>
+<li><strong>Initial velocity <span class="arithmatex">\(v_0\)</span></strong>: Quadratic relationship; doubling <span class="arithmatex">\(v_0\)</span> quadruples the range</li>
+<li><strong>Gravitational acceleration <span class="arithmatex">\(g\)</span></strong>: Inverse relationship; weaker gravity increases range</li>
+<li><strong>Angle <span class="arithmatex">\(\theta\)</span></strong>: Nonlinear relationship via the <span class="arithmatex">\(\sin(2\theta)\)</span> term</li>
 </ul>
 <hr/>
 <h2 id="3-practical-applications">3. Practical Applications</h2>
-<p>The idealized projectile model can be adapted to more complex real-world situations:</p>
+<p>The basic projectile model is idealized but can be adapted:</p>
 <ul>
-<li><strong>Uneven Terrain:</strong> When the launch and landing heights differ, the time of flight is determined by solving
-  $$
-  y(t) = y_0 + v_0 \sin(\theta) \, t - \frac{1}{2} g t^2 = y_{\text{landing}}
-  $$</li>
-<li><strong>Air Resistance:</strong> Introducing a drag force (often modeled as proportional to the velocity or the square of the velocity) leads to non-linear differential equations that may require numerical solutions.</li>
-<li><strong>Sports and Engineering:</strong> From predicting the flight of a soccer ball to the trajectory of missiles, understanding projectile motion is key in many fields.</li>
+<li><strong>Uneven terrain</strong>: Modify the vertical condition (i.e., the landing height <span class="arithmatex">\(y = y_1 \neq 0\)</span>) and solve for time of flight</li>
+<li><strong>Air resistance</strong>: Introduce drag force proportional to velocity; this leads to a system of nonlinear differential equations, typically solved numerically</li>
+<li><strong>Wind</strong>: Acts as an external force; can be included as a constant or variable horizontal acceleration</li>
+<li><strong>Applications</strong>: Sports (ballistics, golf, basketball), aerospace (rocket trajectories), engineering (civil structures and debris paths)</li>
 </ul>
 <hr/>
-<h2 id="4-simulation-of-the-project-within-html-project">4. Simulation of the project within html project</h2>
-<p><a href="../project_motion.html">Simulation</a></p>
-<h2 id="5-discussion-on-limitations-and-extensions">5. Discussion on Limitations and Extensions</h2>
-<h3 id="51-limitations-of-the-idealized-model">5.1 Limitations of the Idealized Model</h3>
+<h2 id="4-implementation">4. Implementation</h2>
+<p>A computational tool (e.g., Python script) can numerically simulate projectile motion and visualize how the range varies with different launch angles and parameters.</p>
+<h3 id="simulation-outline">Simulation Outline</h3>
+<ol>
+<li>Input parameters: <span class="arithmatex">\(v_0, \theta, g\)</span></li>
+<li>Calculate trajectory: Use time steps to compute <span class="arithmatex">\(x(t), y(t)\)</span></li>
+<li>Detect when <span class="arithmatex">\(y(t) = 0\)</span> to find range</li>
+<li>Plot range as a function of <span class="arithmatex">\(\theta\)</span> from <span class="arithmatex">\(0^\circ\)</span> to <span class="arithmatex">\(90^\circ\)</span></li>
+</ol>
+<h3 id="graphical-output">Graphical Output</h3>
 <ul>
-<li><strong>No Air Resistance:</strong> The simulation assumes a vacuum. In reality, drag can significantly affect the projectile’s path.</li>
-<li><strong>Flat Terrain Assumption:</strong> The standard equations assume the projectile lands at the same vertical height from which it was launched.</li>
-<li><strong>Constant Gravity:</strong> In real scenarios (especially in astrophysics), gravity may vary with height.</li>
-</ul>
-<h3 id="52-extensions-for-a-more-realistic-model">5.2 Extensions for a More Realistic Model</h3>
-<ul>
-<li><strong>Air Resistance:</strong> Incorporate drag forces that are proportional to velocity or the square of the velocity. This generally requires numerical integration (e.g., using <code>scipy.integrate.solve_ivp</code>).</li>
-<li><strong>Variable Launch and Landing Heights:</strong> Modify the equations to account for different initial and final heights.</li>
-<li><strong>Wind Effects:</strong> Include horizontal wind acceleration to model more complex trajectories.</li>
+<li><strong>Range vs. Angle Curve</strong>: Typically a sine-like curve peaking at <span class="arithmatex">\(45^\circ\)</span></li>
+<li><strong>Multiple curves</strong>: Show influence of varying <span class="arithmatex">\(v_0\)</span> or <span class="arithmatex">\(g\)</span></li>
 </ul>
 <hr/>
-<h2 id="conclusion">Conclusion</h2>
-<p>This project demonstrates how projectile motion can be explored theoretically and computationally. By deriving the equations of motion, analyzing the range as a function of projection angle and other parameters, and simulating trajectories with Python, one gains both theoretical insights and practical tools for further investigations into physics and engineering applications.</p>
-<p>Feel free to build upon this framework by adding more realistic features like air resistance and varying terrain, thereby expanding the utility of the model in real-world scenarios.</p>
+<h2 id="discussion-limitations-and-realism">Discussion: Limitations and Realism</h2>
+<h3 id="limitations-of-the-ideal-model">Limitations of the Ideal Model</h3>
+<ul>
+<li>Ignores air resistance, which shortens range and flattens trajectory</li>
+<li>Assumes flat and level ground</li>
+<li>Assumes constant gravity (not true for very high altitudes)</li>
+</ul>
+<h3 id="suggestions-for-realistic-extensions">Suggestions for Realistic Extensions</h3>
+<ul>
+<li>Include drag: <span class="arithmatex">\(F_d = -kv\)</span> or <span class="arithmatex">\(-kv^2\)</span>, added to equations of motion</li>
+<li>Use numerical solvers (Euler, Runge-Kutta) for systems with drag or wind</li>
+<li>Account for terrain elevation and variable gravitational fields</li>
+</ul>
 <hr/>
-<p>This Markdown document, along with the included Python code, provides a comprehensive overview and a hands-on tool to explore projectile motion.</p>
+<h3 id="simulation-of-projectile-motion">Simulation of Projectile Motion</h3>
+<p><em><a href="../project_motion.html">Simulation</a></em></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">

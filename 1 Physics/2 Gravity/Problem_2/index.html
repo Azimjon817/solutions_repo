@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Escape Velocities and Cosmic Velocities - Physics and Mathematics</title>
+<title>Problem 2 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Escape Velocities and Cosmic Velocities";
+        var mkdocs_page_name = "Problem 2";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -54,32 +54,10 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">2 Gravity</a>
 <ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Orbital Period and Orbital Radius</a>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Escape Velocities and Cosmic Velocities</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#task">Task</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#mathematical-formulation">Mathematical Formulation</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#escape-velocity">Escape Velocity</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#first-cosmic-velocity-orbital-speed">First Cosmic Velocity (Orbital Speed)</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#second-cosmic-velocity-escape-velocity">Second Cosmic Velocity (Escape Velocity)</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#third-cosmic-velocity-solar-system-escape">Third Cosmic Velocity (Solar System Escape)</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#importance-in-space-exploration">Importance in Space Exploration</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#html-simulation">HTML Simulation</a>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
@@ -185,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Escape Velocities and Cosmic Velocities</li>
+<li class="breadcrumb-item active">Problem 2</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -193,57 +171,140 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="escape-velocities-and-cosmic-velocities">Escape Velocities and Cosmic Velocities</h1>
-<h2 id="motivation">Motivation</h2>
-<p>The concept of escape velocity is crucial for understanding the conditions required to leave a celestial body's gravitational influence. Extending this concept, the first, second, and third cosmic velocities define the thresholds for orbiting, escaping, and leaving a star system. These principles underpin modern space exploration, from launching satellites to interplanetary missions.</p>
-<h2 id="task">Task</h2>
-<ol>
-<li>Define the first, second, and third cosmic velocities, explaining their physical meaning.</li>
-<li>Analyze the mathematical derivations and parameters affecting these velocities.</li>
-<li>Calculate and visualize these velocities for different celestial bodies like Earth, Mars, and Jupiter.</li>
-<li>Discuss their importance in space exploration, including launching satellites, missions to other planets, and potential interstellar travel.</li>
-</ol>
-<h2 id="mathematical-formulation">Mathematical Formulation</h2>
-<h3 id="escape-velocity">Escape Velocity</h3>
-<p>The escape velocity<span class="arithmatex">\(v_e\)</span>is the minimum speed an object must have to break free from the gravitational pull of a celestial body without any additional propulsion. It is derived from the energy conservation principle:</p>
-<p><span class="arithmatex">\(KE + PE = 0 \Rightarrow \frac{1}{2} m v_e^2 - \frac{GMm}{r} = 0\)</span></p>
-<p>Solving for<span class="arithmatex">\(v_e\)</span>:</p>
-<p><span class="arithmatex">\(v_e = \sqrt{\frac{2GM}{r}}\)</span></p>
-<p>where:
--<span class="arithmatex">\(G\)</span>is the gravitational constant (<span class="arithmatex">\(6.674 \times 10^{-11}\)</span>m³/kg/s²),
--<span class="arithmatex">\(M\)</span>is the mass of the celestial body,
--<span class="arithmatex">\(r\)</span>is the radius from the center of the body.</p>
-<h3 id="first-cosmic-velocity-orbital-speed">First Cosmic Velocity (Orbital Speed)</h3>
-<p>This is the velocity needed to maintain a circular orbit around a celestial body:</p>
-<p><span class="arithmatex">\(v_1 = \sqrt{\frac{GM}{r}}\)</span></p>
-<h3 id="second-cosmic-velocity-escape-velocity">Second Cosmic Velocity (Escape Velocity)</h3>
-<p>The escape velocity is simply<span class="arithmatex">\(\sqrt{2}\)</span>times the first cosmic velocity:</p>
-<p><span class="arithmatex">\(v_2 = \sqrt{2} v_1 = \sqrt{\frac{2GM}{r}}\)</span></p>
-<h3 id="third-cosmic-velocity-solar-system-escape">Third Cosmic Velocity (Solar System Escape)</h3>
-<p>This is the speed required to leave the influence of the Sun's gravity from a planet’s orbit. It depends on the planet’s distance from the Sun:</p>
-<p><span class="arithmatex">\(v_3 = \sqrt{\frac{2G M_{sun}}{r_{planet}}}\)</span></p>
-<h2 id="importance-in-space-exploration">Importance in Space Exploration</h2>
+<h2 id="problem-2">Problem 2</h2>
+<h2 id="cosmic-velocities-definitions-derivations-and-applications-in-space-exploration"><strong>Cosmic Velocities: Definitions, Derivations, and Applications in Space Exploration</strong></h2>
+<h3 id="1-definition-and-physical-meaning"><strong>1. Definition and Physical Meaning</strong></h3>
+<p>In astrodynamics, the <strong>first, second, and third cosmic velocities</strong> represent critical speeds for a body to achieve specific orbital or escape conditions relative to a celestial body.</p>
+<hr/>
+<h4 id="11-first-cosmic-velocity-orbital-velocity"><strong>1.1 First Cosmic Velocity (Orbital Velocity)</strong></h4>
 <ul>
-<li><strong>Satellites:</strong> Must reach the first cosmic velocity to maintain stable orbits.</li>
-<li><strong>Space Missions:</strong> Rockets need to achieve second cosmic velocity to leave Earth’s gravity and travel to other planets.</li>
-<li><strong>Interstellar Travel:</strong> Future missions aiming to leave the Solar System must reach the third cosmic velocity.</li>
+<li><strong>Definition</strong>: The minimum speed an object must have to maintain a <strong>stable circular orbit</strong> just above the surface of a planet or celestial body.</li>
+<li><strong>Physical Meaning</strong>: The object is in free fall but constantly missing the surface due to its horizontal speed.</li>
+<li><strong>Formula</strong>:</li>
 </ul>
-<h2 id="deliverables">Deliverables</h2>
+<p>$$
+  v_1 = \sqrt{\frac{GM}{R}}
+  $$</p>
+<hr/>
+<h4 id="12-second-cosmic-velocity-escape-velocity"><strong>1.2 Second Cosmic Velocity (Escape Velocity)</strong></h4>
 <ul>
-<li>A Markdown document with a Python script or Jupyter Notebook implementing the simulations.</li>
-<li>A detailed explanation of the subjects.</li>
-<li>Graphical representations of escape velocities and cosmic velocities for various celestial bodies.</li>
-<li>An interactive HTML simulation demonstrating escape velocities.</li>
+<li><strong>Definition</strong>: The minimum speed required to <strong>completely escape the gravitational field</strong> of a celestial body without further propulsion.</li>
+<li><strong>Physical Meaning</strong>: Object has just enough kinetic energy to reach infinity with zero velocity.</li>
+<li><strong>Formula</strong>:</li>
+</ul>
+<p>$$
+  v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2} \cdot v_1
+  $$</p>
+<hr/>
+<h4 id="13-third-cosmic-velocity-interplanetaryinterstellar-velocity"><strong>1.3 Third Cosmic Velocity (Interplanetary/Interstellar Velocity)</strong></h4>
+<ul>
+<li><strong>Definition</strong>: The minimum speed needed for a spacecraft to <strong>escape the Sun’s gravity</strong> from Earth orbit (or another planet), enabling <strong>interplanetary or interstellar travel</strong>.</li>
+<li><strong>Physical Meaning</strong>: Escape from both Earth’s and the Sun’s gravitational pulls.</li>
+<li><strong>Approximate Value from Earth's surface</strong>: \~<strong>16.7 km/s</strong></li>
 </ul>
 <hr/>
-<h2 id="html-simulation">HTML Simulation</h2>
-<p>Below is an interactive simulation using HTML, JavaScript, and the Canvas API to visualize escape velocity for different celestial bodies.</p>
-<p><a href="../project_motion2.html">Escape Velocity Simulation</a></p>
-<p>This simulation allows users to select different planets and see their respective escape velocities. </p>
+<h3 id="2-mathematical-analysis-and-influencing-parameters"><strong>2. Mathematical Analysis and Influencing Parameters</strong></h3>
+<p>Each velocity depends on:</p>
+<ul>
+<li><span class="arithmatex">\(G\)</span>: Gravitational constant</li>
+<li><span class="arithmatex">\(M\)</span>: Mass of the celestial body</li>
+<li><span class="arithmatex">\(R\)</span>: Radius of the celestial body (distance from the center of mass)</li>
+</ul>
+<div class="arithmatex">\[
+v_1 \propto \sqrt{\frac{M}{R}}, \quad v_2 \propto \sqrt{\frac{M}{R}}, \quad v_3 \propto \text{(depends on both Earth and Sun parameters)}
+\]</div>
+<hr/>
+<h3 id="3-real-world-calculations-for-earth-mars-and-jupiter"><strong>3. Real-World Calculations for Earth, Mars, and Jupiter</strong></h3>
+<p>Let’s calculate <span class="arithmatex">\(v_1\)</span>, <span class="arithmatex">\(v_2\)</span>, and approximate <span class="arithmatex">\(v_3\)</span> for:</p>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>Mass (kg)</th>
+<th>Radius (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td><span class="arithmatex">\(5.97 \times 10^{24}\)</span></td>
+<td><span class="arithmatex">\(6.37 \times 10^6\)</span></td>
+</tr>
+<tr>
+<td>Mars</td>
+<td><span class="arithmatex">\(6.42 \times 10^{23}\)</span></td>
+<td><span class="arithmatex">\(3.39 \times 10^6\)</span></td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td><span class="arithmatex">\(1.90 \times 10^{27}\)</span></td>
+<td><span class="arithmatex">\(6.99 \times 10^7\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We use:</p>
+<div class="arithmatex">\[
+v_1 = \sqrt{\frac{GM}{R}}, \quad v_2 = \sqrt{2} \cdot v_1
+\]</div>
+<p>Approximate <span class="arithmatex">\(v_3\)</span> for Earth uses Sun’s parameters and Earth’s orbital speed.</p>
+<hr/>
+<h3 id="4-applications-in-space-exploration"><strong>4. Applications in Space Exploration</strong></h3>
+<h4 id="first-cosmic-velocity-applications"><strong>First Cosmic Velocity Applications</strong>:</h4>
+<ul>
+<li>Launching <strong>artificial satellites</strong></li>
+<li>Establishing <strong>space stations</strong> in low Earth orbit (LEO)</li>
+</ul>
+<h4 id="second-cosmic-velocity-applications"><strong>Second Cosmic Velocity Applications</strong>:</h4>
+<ul>
+<li>Missions to the <strong>Moon, Mars, or deep space</strong></li>
+<li>Any <strong>escape trajectory</strong> from Earth</li>
+</ul>
+<h4 id="third-cosmic-velocity-applications"><strong>Third Cosmic Velocity Applications</strong>:</h4>
+<ul>
+<li><strong>Interplanetary missions</strong> (e.g., Voyager, New Horizons)</li>
+<li><strong>Interstellar probes</strong> aiming to exit the Solar System</li>
+</ul>
+<p>Understanding these speeds is critical in:</p>
+<ul>
+<li>Fuel and trajectory planning</li>
+<li>Selecting launch windows</li>
+<li>Ensuring mission success</li>
+</ul>
+<hr/>
+<h3 id="5-implementation"><strong>5. Implementation</strong></h3>
+<h4 id="python-model-outline"><strong>Python Model Outline</strong>:</h4>
+<ol>
+<li>Define planetary data: <span class="arithmatex">\(M, R\)</span></li>
+<li>Calculate <span class="arithmatex">\(v_1\)</span>, <span class="arithmatex">\(v_2\)</span>, and estimate <span class="arithmatex">\(v_3\)</span></li>
+<li>Visualize results using bar or line plots</li>
+</ol>
+<h4 id="visualization-ideas"><strong>Visualization Ideas</strong>:</h4>
+<ul>
+<li>Bar chart comparing <span class="arithmatex">\(v_1, v_2, v_3\)</span> for each planet</li>
+<li>Overlay orbital/escape trajectories (optional)</li>
+<li>Log scale comparison (for emphasis on large values)</li>
+</ul>
+<hr/>
+<h3 id="6-discussion-limitations-and-advanced-considerations"><strong>6. Discussion: Limitations and Advanced Considerations</strong></h3>
+<h4 id="limitations"><strong>Limitations</strong>:</h4>
+<ul>
+<li>Assumes spherical, non-rotating planets</li>
+<li>Ignores atmospheric drag</li>
+<li><span class="arithmatex">\(v_3\)</span> estimated simplistically, without full orbital mechanics</li>
+</ul>
+<h4 id="possible-extensions"><strong>Possible Extensions</strong>:</h4>
+<ul>
+<li>Add <strong>atmospheric effects</strong> for realistic launch speeds</li>
+<li>Incorporate <strong>rocket equation</strong> for fuel analysis</li>
+<li>Use <strong>patched conic approximation</strong> for precise interplanetary trajectories</li>
+</ul>
+<hr/>
+<h3 id="simulation-of-cosmic-velosities">Simulation of Cosmic Velosities</h3>
+<p><em><a href="../project_motion2.html">Simulation</a></em></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../Problem_1/" title="Orbital Period and Orbital Radius"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-left" href="../Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 <a class="btn btn-neutral float-right" href="../Problem_3/" title="Problem 3">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
