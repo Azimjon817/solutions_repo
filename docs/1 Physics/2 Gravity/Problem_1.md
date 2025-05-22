@@ -1,99 +1,151 @@
-# Orbital Period and Orbital Radius
+## Problem 1
 
-## Motivation
-Kepler's Third Law states that the square of the orbital period (T) is proportional to the cube of the orbital radius (r). This fundamental principle of celestial mechanics enables calculations of planetary motions and gravitational interactions, with applications ranging from satellite navigation to planetary science.
 
-## Task
-1. Derive the mathematical relationship between the square of the orbital period and the cube of the orbital radius for circular orbits.
-2. Discuss its implications for astronomy, such as planetary mass and distance calculations.
-3. Analyze real-world examples (e.g., the Moon’s orbit around Earth, planetary orbits in the Solar System).
-4. Implement a computational model to simulate circular orbits and verify the relationship.
+## **Kepler’s Third Law and Circular Orbits: Theory, Application, and Simulation**
 
-## Mathematical Formulation
-Kepler's Third Law can be written as:
-$T^2 = \frac{4\pi^2 r^3}{GM}$
-where:
-- $T$ is the orbital period,
-- $r$ is the orbital radius,
-- $G$ is the gravitational constant (6.674 \times 10^{-11} m³/kg/s²),
-- $M$ is the mass of the central body.
 
-## Deliverables
-- A Markdown document with a Python script or Jupyter Notebook implementing the simulations.
-- Detailed explanations of the concepts.
-- Graphical representations of circular orbits and the relationship between orbital period and radius.
-- Discussion on extending the relationship to elliptical orbits.
-- An interactive HTML simulation of orbital mechanics.
+### **1. Theoretical Foundation**
 
----
+#### **Derivation of the Relationship Between Orbital Period and Radius**
 
-# Escape Velocities and Cosmic Velocities
+For a body in **uniform circular orbit** around a much larger mass (e.g., a planet orbiting a star), Newton’s Law of Gravitation and the concept of centripetal force give us:
 
-## Motivation
-Escape velocity is the minimum speed required to break free from a celestial body’s gravitational pull. The first, second, and third cosmic velocities define the thresholds for orbiting, escaping, and leaving a star system, which are crucial for space exploration.
+$$
+F_{\text{gravity}} = F_{\text{centripetal}}
+$$
 
-## Task
-1. Define and explain the first, second, and third cosmic velocities.
-2. Analyze the mathematical derivations and factors affecting these velocities.
-3. Calculate and visualize these velocities for Earth, Mars, and Jupiter.
-4. Discuss their significance in space exploration, including satellite launches and interplanetary missions.
+$$
+\frac{G M m}{r^2} = \frac{m v^2}{r}
+$$
 
-## Mathematical Formulation
-The escape velocity $ v_e $ is given by:
-$v_e = \sqrt{\frac{2GM}{r}}$
-where:
-- $G$ is the gravitational constant,
-- $M$ is the mass of the celestial body,
-- $r$ is the radius from the center of the body.
+Where:
 
-For first, second, and third cosmic velocities:
-- First cosmic velocity (orbital speed): $v_1 = \sqrt{\frac{GM}{r}}$
-- Second cosmic velocity (escape velocity): $v_2 = \sqrt{2} v_1$
-- Third cosmic velocity (solar system escape velocity): Depends on position in the system.
+* $G$: Gravitational constant
+* $M$: Mass of the central body
+* $m$: Mass of the orbiting body
+* $r$: Orbital radius
+* $v$: Orbital speed
 
-## Deliverables
-- A Markdown document with a Python script or Jupyter Notebook implementing the calculations and visualizations.
-- Detailed explanations of the physics involved.
-- Graphical representations of escape and cosmic velocities for different celestial bodies.
-- An interactive HTML simulation for escape velocity calculations.
+Solving for $v$:
+
+$$
+v = \sqrt{\frac{GM}{r}}
+$$
+
+The **orbital period** $T$ is the time to complete one full orbit:
+
+$$
+T = \frac{2\pi r}{v}
+$$
+
+Substituting $v$:
+
+$$
+T = 2\pi r \left(\frac{r}{GM}\right)^{1/2} = 2\pi \sqrt{\frac{r^3}{GM}}
+$$
+
+Squaring both sides:
+
+$$
+T^2 = \frac{4\pi^2}{GM} r^3
+$$
 
 ---
 
-# Trajectories of a Freely Released Payload Near Earth
+### **2. Implications for Astronomy**
 
-## Motivation
-When an object is released from a moving rocket, its trajectory depends on initial velocity, altitude, and gravitational forces. Understanding these trajectories is crucial for space missions, including satellite deployments and reentry planning.
+This equation is a form of **Kepler’s Third Law** for circular orbits. It states:
 
-## Task
-1. Analyze possible trajectories (e.g., parabolic, hyperbolic, elliptical) of a payload released near Earth.
-2. Perform a numerical simulation to compute the path based on initial conditions.
-3. Discuss how these trajectories relate to orbital insertion, reentry, or escape scenarios.
-4. Develop a computational tool to simulate and visualize the motion of a payload under Earth’s gravity.
+> **The square of the orbital period is proportional to the cube of the orbital radius.**
 
-## Mathematical Formulation
-Using Newton’s Law of Gravitation and motion equations:
-$F = \frac{GMm}{r^2}$
-The equations of motion for a payload in free space are given by:
-$\frac{d^2r}{dt^2} = -\frac{GM}{r^2}$
-where $r$ is the distance from Earth's center.
+#### Applications in Astronomy:
 
-## Hints and Resources
-- Use Newton’s Law of Gravitation and Kepler’s Laws to derive equations.
-- Implement numerical simulations using Python.
-- Explore real-world applications in space mission planning and planetary exploration.
+* **Calculate masses** of planets or stars by observing orbiting bodies.
+* **Infer distances** between celestial bodies based on their periods.
+* **Compare orbits** in multi-body systems using ratios:
 
-## Deliverables
-- A Markdown document with a Python script or Jupyter Notebook implementing the simulations.
-- Detailed explanations of the physics behind payload trajectories.
-- Graphical representations of different trajectory types near Earth.
-- An interactive HTML simulation to visualize payload trajectories.
+  $$
+  \frac{T_1^2}{r_1^3} = \frac{T_2^2}{r_2^3} \quad (\text{if orbiting the same body})
+  $$
+
+This relation holds **independently of the orbiting object’s mass**—a profound insight enabling early astronomers to model the solar system.
 
 ---
 
-## HTML Simulation
-Below is an interactive simulation using HTML, JavaScript, and the Canvas API to visualize Kepler's Third Law and circular orbits.
+### **3. Real-World Examples**
 
-[Orbital Simulation](project_motion.html)
+#### **Moon’s Orbit Around Earth:**
 
-This simulation visually demonstrates an orbiting body obeying Kepler’s Third Law. It updates planetary motion in real time using Newtonian mechanics.
+* Average radius $r \approx 3.84 \times 10^8 \, \text{m}$
+* Orbital period $T \approx 27.3 \, \text{days}$
+* Plugging into $T^2 = \frac{4\pi^2}{GM} r^3$ confirms the law using Earth's mass $M \approx 5.97 \times 10^{24} \, \text{kg}$
+
+#### **Planets in the Solar System:**
+
+* For all planets orbiting the Sun, the ratio $T^2/r^3$ is constant (in appropriate units), confirming Kepler’s law.
+* Example:
+
+  * Earth: $T = 1$ year, $r = 1$ AU
+  * Mars: $T = 1.88$ years, $r = 1.52$ AU → $(1.88)^2 \approx (1.52)^3$
+
+---
+
+### **4. Implementation**
+
+#### **Computational Model Outline (Python)**
+
+A simulation can:
+
+* Model circular orbits for various radii
+* Calculate orbital periods from Newtonian dynamics
+* Verify that $T^2 \propto r^3$
+
+#### **Simulation Features:**
+
+1. **Define constants**: $G, M$
+2. **Iterate over various radii**
+3. **Compute $T$ for each radius**
+4. **Plot $T^2$ vs. $r^3$**
+
+#### **Visualization Goals:**
+
+* **Circular Orbits**: Animate motion using matplotlib
+* **T² vs R³ Plot**: Should yield a straight line
+* **Log-log plot**: Slope should be \~1.5 (confirming $T \propto r^{3/2}$)
+
+---
+
+### **5. Extension to Elliptical Orbits and Other Celestial Systems**
+
+While the derivation assumes **circular orbits**, Kepler’s Third Law also applies to **elliptical orbits** if $r$ is replaced by the **semi-major axis $a$**:
+
+$$
+T^2 = \frac{4\pi^2}{GM} a^3
+$$
+
+#### Implications:
+
+* Used to determine orbits of comets and exoplanets
+* Enables tracking of satellites in elliptical Earth orbits
+* Informs orbital mechanics in space missions
+
+---
+
+### **Discussion: Limitations and Realism**
+
+#### **Limitations:**
+
+* Assumes a two-body system (neglects perturbations from other bodies)
+* Ignores relativity (significant in very strong gravitational fields)
+* Assumes constant central mass (not valid for accreting or binary systems)
+
+#### **Possible Extensions:**
+
+* Include **orbital eccentricity** and use elliptical models
+* Simulate **N-body systems** to account for gravitational interactions
+* Introduce **relativistic corrections** for high-precision astrophysics
+---
+
+### Simulation of Kapler's Third Law
+*[Simulation](project_motion.html)*
 

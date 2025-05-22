@@ -1,61 +1,137 @@
-# Escape Velocities and Cosmic Velocities
+## Problem 2
 
-## Motivation
-The concept of escape velocity is crucial for understanding the conditions required to leave a celestial body's gravitational influence. Extending this concept, the first, second, and third cosmic velocities define the thresholds for orbiting, escaping, and leaving a star system. These principles underpin modern space exploration, from launching satellites to interplanetary missions.
 
-## Task
-1. Define the first, second, and third cosmic velocities, explaining their physical meaning.
-2. Analyze the mathematical derivations and parameters affecting these velocities.
-3. Calculate and visualize these velocities for different celestial bodies like Earth, Mars, and Jupiter.
-4. Discuss their importance in space exploration, including launching satellites, missions to other planets, and potential interstellar travel.
 
-## Mathematical Formulation
-### Escape Velocity
-The escape velocity$v_e$is the minimum speed an object must have to break free from the gravitational pull of a celestial body without any additional propulsion. It is derived from the energy conservation principle:
+## **Cosmic Velocities: Definitions, Derivations, and Applications in Space Exploration**
 
-$KE + PE = 0 \Rightarrow \frac{1}{2} m v_e^2 - \frac{GMm}{r} = 0$
 
-Solving for$v_e$:
+### **1. Definition and Physical Meaning**
 
-$v_e = \sqrt{\frac{2GM}{r}}$
-
-where:
--$G$is the gravitational constant ($6.674 \times 10^{-11}$m³/kg/s²),
--$M$is the mass of the celestial body,
--$r$is the radius from the center of the body.
-
-### First Cosmic Velocity (Orbital Speed)
-This is the velocity needed to maintain a circular orbit around a celestial body:
-
-$v_1 = \sqrt{\frac{GM}{r}}$
-
-### Second Cosmic Velocity (Escape Velocity)
-The escape velocity is simply$\sqrt{2}$times the first cosmic velocity:
-
-$v_2 = \sqrt{2} v_1 = \sqrt{\frac{2GM}{r}}$
-
-### Third Cosmic Velocity (Solar System Escape)
-This is the speed required to leave the influence of the Sun's gravity from a planet’s orbit. It depends on the planet’s distance from the Sun:
-
-$v_3 = \sqrt{\frac{2G M_{sun}}{r_{planet}}}$
-
-## Importance in Space Exploration
-- **Satellites:** Must reach the first cosmic velocity to maintain stable orbits.
-- **Space Missions:** Rockets need to achieve second cosmic velocity to leave Earth’s gravity and travel to other planets.
-- **Interstellar Travel:** Future missions aiming to leave the Solar System must reach the third cosmic velocity.
-
-## Deliverables
-- A Markdown document with a Python script or Jupyter Notebook implementing the simulations.
-- A detailed explanation of the subjects.
-- Graphical representations of escape velocities and cosmic velocities for various celestial bodies.
-- An interactive HTML simulation demonstrating escape velocities.
+In astrodynamics, the **first, second, and third cosmic velocities** represent critical speeds for a body to achieve specific orbital or escape conditions relative to a celestial body.
 
 ---
 
-## HTML Simulation
-Below is an interactive simulation using HTML, JavaScript, and the Canvas API to visualize escape velocity for different celestial bodies.
+#### **1.1 First Cosmic Velocity (Orbital Velocity)**
 
-[Escape Velocity Simulation](project_motion2.html)
+* **Definition**: The minimum speed an object must have to maintain a **stable circular orbit** just above the surface of a planet or celestial body.
+* **Physical Meaning**: The object is in free fall but constantly missing the surface due to its horizontal speed.
+* **Formula**:
 
-This simulation allows users to select different planets and see their respective escape velocities. 
+  $$
+  v_1 = \sqrt{\frac{GM}{R}}
+  $$
 
+---
+
+#### **1.2 Second Cosmic Velocity (Escape Velocity)**
+
+* **Definition**: The minimum speed required to **completely escape the gravitational field** of a celestial body without further propulsion.
+* **Physical Meaning**: Object has just enough kinetic energy to reach infinity with zero velocity.
+* **Formula**:
+
+  $$
+  v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2} \cdot v_1
+  $$
+
+---
+
+#### **1.3 Third Cosmic Velocity (Interplanetary/Interstellar Velocity)**
+
+* **Definition**: The minimum speed needed for a spacecraft to **escape the Sun’s gravity** from Earth orbit (or another planet), enabling **interplanetary or interstellar travel**.
+* **Physical Meaning**: Escape from both Earth’s and the Sun’s gravitational pulls.
+* **Approximate Value from Earth's surface**: \~**16.7 km/s**
+
+---
+
+### **2. Mathematical Analysis and Influencing Parameters**
+
+Each velocity depends on:
+
+* $G$: Gravitational constant
+* $M$: Mass of the celestial body
+* $R$: Radius of the celestial body (distance from the center of mass)
+
+$$
+v_1 \propto \sqrt{\frac{M}{R}}, \quad v_2 \propto \sqrt{\frac{M}{R}}, \quad v_3 \propto \text{(depends on both Earth and Sun parameters)}
+$$
+
+---
+
+### **3. Real-World Calculations for Earth, Mars, and Jupiter**
+
+Let’s calculate $v_1$, $v_2$, and approximate $v_3$ for:
+
+| Planet  | Mass (kg)             | Radius (m)         |
+| ------- | --------------------- | ------------------ |
+| Earth   | $5.97 \times 10^{24}$ | $6.37 \times 10^6$ |
+| Mars    | $6.42 \times 10^{23}$ | $3.39 \times 10^6$ |
+| Jupiter | $1.90 \times 10^{27}$ | $6.99 \times 10^7$ |
+
+We use:
+
+$$
+v_1 = \sqrt{\frac{GM}{R}}, \quad v_2 = \sqrt{2} \cdot v_1
+$$
+
+Approximate $v_3$ for Earth uses Sun’s parameters and Earth’s orbital speed.
+
+---
+
+### **4. Applications in Space Exploration**
+
+#### **First Cosmic Velocity Applications**:
+
+* Launching **artificial satellites**
+* Establishing **space stations** in low Earth orbit (LEO)
+
+#### **Second Cosmic Velocity Applications**:
+
+* Missions to the **Moon, Mars, or deep space**
+* Any **escape trajectory** from Earth
+
+#### **Third Cosmic Velocity Applications**:
+
+* **Interplanetary missions** (e.g., Voyager, New Horizons)
+* **Interstellar probes** aiming to exit the Solar System
+
+Understanding these speeds is critical in:
+
+* Fuel and trajectory planning
+* Selecting launch windows
+* Ensuring mission success
+
+---
+
+### **5. Implementation**
+
+#### **Python Model Outline**:
+
+1. Define planetary data: $M, R$
+2. Calculate $v_1$, $v_2$, and estimate $v_3$
+3. Visualize results using bar or line plots
+
+#### **Visualization Ideas**:
+
+* Bar chart comparing $v_1, v_2, v_3$ for each planet
+* Overlay orbital/escape trajectories (optional)
+* Log scale comparison (for emphasis on large values)
+
+---
+
+### **6. Discussion: Limitations and Advanced Considerations**
+
+#### **Limitations**:
+
+* Assumes spherical, non-rotating planets
+* Ignores atmospheric drag
+* $v_3$ estimated simplistically, without full orbital mechanics
+
+#### **Possible Extensions**:
+
+* Add **atmospheric effects** for realistic launch speeds
+* Incorporate **rocket equation** for fuel analysis
+* Use **patched conic approximation** for precise interplanetary trajectories
+
+---
+### Simulation of Cosmic Velosities 
+*[Simulation](project_motion2.html)*

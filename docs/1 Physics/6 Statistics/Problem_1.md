@@ -68,15 +68,7 @@ From each population distribution, we draw random samples of different sizes—5
    * Financial analysts often rely on the CLT to model returns and assess risk. The expected average returns from many small, independent investments tend to follow a normal distribution.
 
 ---
-## HTML Simulation
-[Exploring the Central Limit Theorem through simulations](iindex.html)
-
-## Conclusion
-
-This simulation demonstrates the power and universality of the Central Limit Theorem:
-
-* Regardless of the shape of the original population distribution, the distribution of the sample mean tends toward a normal distribution as sample size increases.
-* The rate of convergence depends on both the shape and the variance of the original distribution.
-* The CLT is a cornerstone of statistical inference and is foundational to many real-world applications across science, industry, and finance.
+### Exploring the Central Limit Theorem through simulations
+*[Simulation](iindex.html)*
 
 
