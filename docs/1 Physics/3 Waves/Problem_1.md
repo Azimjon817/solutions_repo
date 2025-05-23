@@ -86,33 +86,11 @@ $$
 * Complex interference zones, especially in the middle of the shape
 * Stable nodes (destructive) and antinodes (constructive) form spatially static interference fringes
 
----
 
-### **5. Visualization and Simulation Strategy**
-
-#### **Approach**
-
-* Create a 2D grid of points $(x, y)$
-* Calculate $\Psi(x, y, t)$ by summing waves from all 5 sources
-* Use snapshots at fixed $t$, or animate over time
-
-#### **Suggested Tools**
-
-* Python with:
-
-  * `NumPy` for numerical operations
-  * `Matplotlib` or `Plotly` for plotting 2D interference patterns
-  * `FuncAnimation` for dynamic visualization (optional)
-
-#### **Expected Output**
-
-* Contour plots or heatmaps of $\Psi(x, y, t)$
-* Clear visualization of interference zones
-* Dynamic animation (optional): how wavefronts interact over time
 
 ---
 
-### **6. Real-World Relevance**
+### **5. Real-World Relevance**
 
 This setup helps model:
 
@@ -123,7 +101,7 @@ This setup helps model:
 
 ---
 
-### **7. Limitations and Extensions**
+### **6. Limitations and Extensions**
 
 #### **Assumptions**
 
