@@ -76,11 +76,9 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#4-interference-analysis">4. Interference Analysis</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#5-visualization-and-simulation-strategy">5. Visualization and Simulation Strategy</a>
+<li class="toctree-l4"><a class="reference internal" href="#5-real-world-relevance">5. Real-World Relevance</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#6-real-world-relevance">6. Real-World Relevance</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#7-limitations-and-extensions">7. Limitations and Extensions</a>
+<li class="toctree-l4"><a class="reference internal" href="#6-limitations-and-extensions">6. Limitations and Extensions</a>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#simulation-of-interference-patterns-on-a-water-surface">Simulation of Interference Patterns on a water surface</a>
 </li>
@@ -254,32 +252,7 @@ k r_i - \omega t = (2n + 1)\pi
 <li>Stable nodes (destructive) and antinodes (constructive) form spatially static interference fringes</li>
 </ul>
 <hr/>
-<h3 id="5-visualization-and-simulation-strategy"><strong>5. Visualization and Simulation Strategy</strong></h3>
-<h4 id="approach"><strong>Approach</strong></h4>
-<ul>
-<li>Create a 2D grid of points <span class="arithmatex">\((x, y)\)</span></li>
-<li>Calculate <span class="arithmatex">\(\Psi(x, y, t)\)</span> by summing waves from all 5 sources</li>
-<li>Use snapshots at fixed <span class="arithmatex">\(t\)</span>, or animate over time</li>
-</ul>
-<h4 id="suggested-tools"><strong>Suggested Tools</strong></h4>
-<ul>
-<li>
-<p>Python with:</p>
-</li>
-<li>
-<p><code>NumPy</code> for numerical operations</p>
-</li>
-<li><code>Matplotlib</code> or <code>Plotly</code> for plotting 2D interference patterns</li>
-<li><code>FuncAnimation</code> for dynamic visualization (optional)</li>
-</ul>
-<h4 id="expected-output"><strong>Expected Output</strong></h4>
-<ul>
-<li>Contour plots or heatmaps of <span class="arithmatex">\(\Psi(x, y, t)\)</span></li>
-<li>Clear visualization of interference zones</li>
-<li>Dynamic animation (optional): how wavefronts interact over time</li>
-</ul>
-<hr/>
-<h3 id="6-real-world-relevance"><strong>6. Real-World Relevance</strong></h3>
+<h3 id="5-real-world-relevance"><strong>5. Real-World Relevance</strong></h3>
 <p>This setup helps model:</p>
 <ul>
 <li>Water ripple interactions (e.g., rain on puddles)</li>
@@ -288,7 +261,7 @@ k r_i - \omega t = (2n + 1)\pi
 <li>Acoustic interference in architectural acoustics</li>
 </ul>
 <hr/>
-<h3 id="7-limitations-and-extensions"><strong>7. Limitations and Extensions</strong></h3>
+<h3 id="6-limitations-and-extensions"><strong>6. Limitations and Extensions</strong></h3>
 <h4 id="assumptions"><strong>Assumptions</strong></h4>
 <ul>
 <li>No damping or attenuation</li>

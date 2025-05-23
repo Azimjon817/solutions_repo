@@ -1,42 +1,23 @@
-$(window).load(function () {
+function orbitPlanet(planetId, radius, period) {
+  const planet = document.getElementById(planetId);
+  const orbitCenterX = 300; // center of .solar-system
+  const orbitCenterY = 300;
+  let angle = 0;
 
-    var body = $("body"),
-        universe = $("#universe"),
-        solarsys = $("#solar-system");
+  function animate() {
+    const x = orbitCenterX + radius * Math.cos(angle);
+    const y = orbitCenterY + radius * Math.sin(angle);
+    planet.style.left = `${x}px`;
+    planet.style.top = `${y}px`;
 
-    var init = function () {
-        body.removeClass('view-2D opening').addClass("view-3D").delay(2000).queue(function () {
-            $(this).removeClass('hide-UI').addClass("set-speed");
-            $(this).dequeue();
-        });
-    };
+    // Angular velocity (rad/frame)
+    angle += (2 * Math.PI) / period;
+    requestAnimationFrame(animate);
+  }
 
-    var setView = function (view) { universe.removeClass().addClass(view); };
+  animate();
+}
 
-    $("#toggle-data").click(function (e) {
-        body.toggleClass("data-open data-close");
-        e.preventDefault();
-    });
-
-    $("#toggle-controls").click(function (e) {
-        body.toggleClass("controls-open controls-close");
-        e.preventDefault();
-    });
-
-    $("#data a").click(function (e) {
-        var ref = $(this).attr("class");
-        solarsys.removeClass().addClass(ref);
-        $(this).parent().find('a').removeClass('active');
-        $(this).addClass('active');
-        e.preventDefault();
-    });
-
-    $(".set-view").click(function () { body.toggleClass("view-3D view-2D"); });
-    $(".set-zoom").click(function () { body.toggleClass("zoom-large zoom-close"); });
-    $(".set-speed").click(function () { setView("scale-stretched set-speed"); });
-    $(".set-size").click(function () { setView("scale-s set-size"); });
-    $(".set-distance").click(function () { setView("scale-d set-distance"); });
-
-    init();
-
-});
+// Kepler's Third Law: T² ∝ R³ (here period ~ R^1.5 for visual simplicity)
+orbitPlanet("planet1", 100, 240); // radius 100, period ~100^1.5
+orbitPlanet("planet2", 150, 580); // radius 150, period ~150^1.5
