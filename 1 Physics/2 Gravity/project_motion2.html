@@ -3,23 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orbital Simulation</title>
-    <link rel="stylesheet" href="styles1.css">
+    <title>Cosmic Velocities Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2>Kepler's Third Law - Orbital Simulation</h2>
-    
-    <div class="controls">
-        <label for="speed">Simulation Speed:</label>
-        <select id="speed">
-            <option value="1">Normal</option>
-            <option value="5">Fast</option>
-            <option value="10">Faster</option>
-        </select>
-    </div>
+    <div class="container">
+        <header>
+            <h1>Cosmic Velocities Explorer</h1>
+            <p>Understanding Escape Velocities and Cosmic Speeds</p>
+        </header>
 
-    <canvas id="orbitCanvas" width="600" height="600"></canvas>
-    
-    <script src="script1.js"></script>
+        <main>
+            <section class="intro">
+                <h2>What are Escape Velocities?</h2>
+                <p>Escape velocity is the minimum speed needed for an object to break free from the gravitational influence of a massive body, without further propulsion.</p>
+            </section>
+
+            <section class="calculator">
+                <h2>Escape Velocity Calculator</h2>
+                <div class="calculator-container">
+                    <div class="input-group">
+                        <label for="mass">Mass of Celestial Body (kg):</label>
+                        <input type="number" id="mass" placeholder="e.g., 5.97e24 for Earth">
+                    </div>
+                    <div class="input-group">
+                        <label for="radius">Radius of Celestial Body (m):</label>
+                        <input type="number" id="radius" placeholder="e.g., 6371000 for Earth">
+                    </div>
+                    <button id="calculate">Calculate Escape Velocity</button>
+                    <div class="result">
+                        <p>Escape Velocity: <span id="result">-</span> m/s</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cosmic-speeds">
+                <h2>Cosmic Speeds</h2>
+                <div class="speed-cards">
+                    <div class="card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Earth's Escape Velocity</h3>
+                        <p>11.2 km/s</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-sun"></i>
+                        <h3>Solar System Escape</h3>
+                        <p>42.1 km/s</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-galaxy"></i>
+                        <h3>Galactic Escape</h3>
+                        <p>550 km/s</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="visualization">
+                <h2>Interactive Visualization</h2>
+                <div class="canvas-container">
+                    <canvas id="spaceCanvas"></canvas>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Created with ❤️ for Space Enthusiasts</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
