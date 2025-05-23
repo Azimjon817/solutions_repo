@@ -1,89 +1,114 @@
-const canvas = document.getElementById("orbitCanvas");
-const ctx = canvas.getContext("2d");
-
 // Constants
-const G = 6.674e-11;  // Gravitational constant (m³/kg/s²)
-const M = 1.989e30;   // Mass of the Sun (kg)
-const AU = 149.6e9;   // 1 Astronomical Unit in meters (Earth-Sun distance)
-const scale = 100 / AU; // Scale factor to fit orbit on canvas
-let dt = 60 * 60 * 24; // Time step (1 day in seconds)
+const G = 6.67430e-11; // Gravitational constant
 
-// Planet (Earth-like orbit)
-let planet = {
-    x: canvas.width / 2 + 150, // Position in pixels
-    y: canvas.height / 2,
-    vx: 0, 
-    vy: Math.sqrt(G * M / AU) * scale * dt, // Correct orbital speed
-    path: []
-};
+// DOM Elements
+const massInput = document.getElementById('mass');
+const radiusInput = document.getElementById('radius');
+const calculateBtn = document.getElementById('calculate');
+const resultSpan = document.getElementById('result');
+const canvas = document.getElementById('spaceCanvas');
+const ctx = canvas.getContext('2d');
 
-// Sun (Star) properties
-const star = {
-    x: canvas.width / 2,
-    y: canvas.height / 2
-};
+// Set canvas size
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
 
-function update() {
-    // Convert position from pixels to meters
-    let dx = (planet.x - star.x) / scale;
-    let dy = (planet.y - star.y) / scale;
-    let r = Math.sqrt(dx * dx + dy * dy);
+// Initialize canvas
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
-    // Apply Newton's Law of Universal Gravitation
-    let F = (G * M) / (r * r);
-    let ax = -F * (dx / r) * dt;
-    let ay = -F * (dy / r) * dt;
+// Escape Velocity Calculator
+function calculateEscapeVelocity(mass, radius) {
+    return Math.sqrt((2 * G * mass) / radius);
+}
 
-    // Update velocity
-    planet.vx += ax;
-    planet.vy += ay;
+// Event Listeners
+calculateBtn.addEventListener('click', () => {
+    const mass = parseFloat(massInput.value);
+    const radius = parseFloat(radiusInput.value);
 
-    // Update position
-    planet.x += planet.vx;
-    planet.y += planet.vy;
-
-    // Store orbital path for visualization
-    if (planet.path.length > 300) {
-        planet.path.shift(); // Keep path length manageable
+    if (isNaN(mass) || isNaN(radius) || mass <= 0 || radius <= 0) {
+        alert('Please enter valid positive numbers for mass and radius');
+        return;
     }
-    planet.path.push({ x: planet.x, y: planet.y });
-}
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw Sun
-    ctx.fillStyle = "yellow";
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, 10, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Draw orbital path
-    ctx.strokeStyle = "rgba(0, 255, 255, 0.5)";
-    ctx.beginPath();
-    for (let i = 0; i < planet.path.length; i++) {
-        ctx.lineTo(planet.path[i].x, planet.path[i].y);
-    }
-    ctx.stroke();
-
-    // Draw Planet
-    ctx.fillStyle = "blue";
-    ctx.beginPath();
-    ctx.arc(planet.x, planet.y, 5, 0, Math.PI * 2);
-    ctx.fill();
-}
-
-function animate() {
-    update();
-    draw();
-    requestAnimationFrame(animate);
-}
-
-// Speed control
-document.getElementById("speed").addEventListener("change", (event) => {
-    dt = 60 * 60 * 24 * parseInt(event.target.value); // Adjust simulation speed
+    const escapeVelocity = calculateEscapeVelocity(mass, radius);
+    resultSpan.textContent = escapeVelocity.toFixed(2);
 });
 
+// Space Visualization
+class Particle {
+    constructor(x, y, radius, color, velocity) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+        this.velocity = velocity;
+        this.alpha = 1;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    update() {
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+        this.alpha -= 0.01;
+    }
+}
+
+// Create particles
+const particles = [];
+function createParticles() {
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const colors = ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f'];
+
+    for (let i = 0; i < 50; i++) {
+        const radius = Math.random() * 2 + 1;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 2 + 1;
+        const velocity = {
+            x: Math.cos(angle) * speed,
+            y: Math.sin(angle) * speed
+        };
+
+        particles.push(new Particle(centerX, centerY, radius, color, velocity));
+    }
+}
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    ctx.fillStyle = 'rgba(26, 26, 46, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((particle, index) => {
+        if (particle.alpha <= 0) {
+            particles.splice(index, 1);
+        } else {
+            particle.update();
+            particle.draw();
+        }
+    });
+
+    if (particles.length < 50) {
+        createParticles();
+    }
+}
+
+// Start animation
 animate();
 
-
+// Add some initial particles
+createParticles();
