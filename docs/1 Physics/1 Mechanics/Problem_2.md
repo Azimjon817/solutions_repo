@@ -53,6 +53,10 @@ $$
 v_1 \propto \sqrt{\frac{M}{R}}, \quad v_2 \propto \sqrt{\frac{M}{R}}, \quad v_3 \propto \text{(depends on both Earth and Sun parameters)}
 $$
 
+![alt text](../image-2.png)
+![alt text](../image-4.png)
+![alt text](../image-5.png)
+![alt text](../image-8.png)
 ---
 
 ### **3. Real-World Calculations for Earth, Mars, and Jupiter**

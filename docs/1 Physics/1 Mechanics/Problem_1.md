@@ -77,6 +77,12 @@ The basic projectile model is idealized but can be adapted:
 
 A computational tool (e.g., Python script) can numerically simulate projectile motion and visualize how the range varies with different launch angles and parameters.
 
+<video controls src="projectile_motion.gif.mp4" title="docs/1 Physics/1 Mechanics/projectile_motion.gif.mp4"></video>
+
+<video controls src="../projectile_motion_no_air_resistance.gif.mp4" title="Title"></video>
+
+
+
 ### Simulation Outline
 
 1. Input parameters: $v_0, \theta, g$
@@ -105,5 +111,3 @@ A computational tool (e.g., Python script) can numerically simulate projectile m
 * Use numerical solvers (Euler, Runge-Kutta) for systems with drag or wind
 * Account for terrain elevation and variable gravitational fields
 ---
-### Simulation of Projectile Motion
-*[Simulation](project_motion.html)*
