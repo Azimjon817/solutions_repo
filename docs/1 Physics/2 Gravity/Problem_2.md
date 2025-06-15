@@ -56,7 +56,7 @@ $$
 v_1 \propto \sqrt{\frac{M}{R}}, \quad v_2 \propto \sqrt{\frac{M}{R}}, \quad v_3 \propto \text{(depends on both Earth and Sun parameters)}
 $$
 
-<video controls src="../cosmic_velocities_vivid_alternate.gif.mp4" title="Title"></video>
+
 
 ---
 
@@ -137,4 +137,4 @@ Understanding these speeds is critical in:
 
 ---
 ### Simulation of Cosmic Velosities 
-*[Simulation](project_motion2.html)*
+*[Simulation](project2.html)*

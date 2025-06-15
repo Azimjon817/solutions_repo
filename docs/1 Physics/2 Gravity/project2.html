@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orbital Velocity Calculation and Visualization</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #121212;
+      color: #eee;
+    }
+
+    h1 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #bbb;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      line-height: 1.4;
+      color: #ccc;
+      font-size: 1rem;
+    }
+
+    pre {
+      background-color: #222;
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 650px;
+      margin: 10px auto 30px auto;
+      overflow-x: auto;
+      color: #9cdcfe;
+      font-family: Consolas, monospace;
+      font-size: 0.9rem;
+    }
+
+    #chart-container {
+      width: 80%;
+      max-width: 800px;
+      margin: 40px auto;
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00bcd4aa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Orbital Velocity Calculation and Visualization for Earth, Mars, and Jupiter</h1>
+
+  <p>This page calculates and visualizes the orbital velocities (v1, v2, v3) of Earth, Mars, and Jupiter based on their distance from the Sun.</p>
+
+  <h2>Velocity Calculation</h2>
+
+  <p>The orbital velocity <em>v</em> is calculated using the formula:</p>
+  <pre>
+v = sqrt(G * M_sun / r)
+Where:
+G = Gravitational constant = 6.67430 × 10^-11 m³ kg⁻¹ s⁻²
+M_sun = Mass of the Sun = 1.989 × 10^30 kg
+r = Distance from the Sun (in meters)
+  </pre>
+
+  <h2>Graphical Visualization</h2>
+  <p>The following chart displays the orbital velocities of Earth, Mars, and Jupiter. The velocities are plotted on a logarithmic scale for better visualization of the differences.</p>
+
+  <div id="chart-container">
+    <canvas id="velocity-chart" width="800" height="400"></canvas>
+  </div>
+
+  <script>
+    const velocities = {
+      Earth: 29780,  // Orbital velocity of Earth in m/s
+      Mars: 24077,   // Orbital velocity of Mars in m/s
+      Jupiter: 13070 // Orbital velocity of Jupiter in m/s
+    };
+
+    const ctx = document.getElementById('velocity-chart').getContext('2d');
+
+    const velocityChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(velocities),
+        datasets: [{
+          label: 'Orbital Velocity (m/s)',
+          data: Object.values(velocities),
+          backgroundColor: ['#FF6347', '#4682B4', '#32CD32'],
+          borderColor: ['#FF4500', '#1E90FF', '#228B22'],
+          borderWidth: 1,
+          borderRadius: 6,
+          barPercentage: 0.6,
+          categoryPercentage: 0.7,
+        }]
+      },
+      options: {
+        indexAxis: 'y', // makes the bar chart horizontal
+        scales: {
+          x: {
+            beginAtZero: true,
+            type: 'logarithmic',  // Logarithmic scale for better comparison
+            ticks: {
+              color: '#ddd',
+              callback: function(value) {
+                return value.toExponential(1);
+              }
+            },
+            grid: {
+              color: '#333'
+            }
+          },
+          y: {
+            ticks: {
+              color: '#eee',
+              font: {
+                size: 14
+              }
+            },
+            grid: {
+              color: '#333'
+            }
+          }
+        },
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: '#eee',
+              font: {
+                size: 14,
+                weight: 'bold'
+              }
+            },
+            position: 'top',
+          },
+          tooltip: {
+            backgroundColor: '#222',
+            titleColor: '#fff',
+            bodyColor: '#eee',
+            callbacks: {
+              label: function(context) {
+                return context.raw.toExponential(1) + " m/s";
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
