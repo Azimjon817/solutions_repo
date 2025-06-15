@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payload Trajectories</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    /* Reset margin/padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #eee;
+      user-select: none;
+    }
+    #plot {
+      width: 90vw;
+      max-width: 900px;
+      height: 80vh;
+      background: #111;
+      border-radius: 12px;
+      box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.6),
+        0 0 30px #0af;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="plot"></div>
+
+  <script>
+    const G = 6.67430e-11;
+    const M_earth = 5.972e24;
+    const mu = G * M_earth;
+    const R_earth = 6371e3;
+    const h = 200e3;
+    const r0 = R_earth + h;
+    const v_esc = Math.sqrt(2 * mu / r0);
+
+    function simulateTrajectory(v0, t_max, dt) {
+      let x = r0, y = 0;
+      let vx = 0, vy = v0;
+      const positions = { x: [], y: [] };
+
+      for (let t = 0; t <= t_max; t += dt) {
+        const r = Math.sqrt(x * x + y * y);
+        const ax = -mu * x / Math.pow(r, 3);
+        const ay = -mu * y / Math.pow(r, 3);
+
+        vx += ax * dt;
+        vy += ay * dt;
+        x += vx * dt;
+        y += vy * dt;
+
+        positions.x.push(x);
+        positions.y.push(y);
+      }
+      return positions;
+    }
+
+    const dt = 10;
+    const t_max = 3600;
+
+    const v_sub = 0.7 * v_esc;
+    const v_orb = Math.sqrt(mu / r0);
+    const v_esc_sim = v_esc;
+    const v_hyp = 1.2 * v_esc;
+
+    const suborbital = simulateTrajectory(v_sub, t_max, dt);
+    const orbital = simulateTrajectory(v_orb, t_max, dt);
+    const escape = simulateTrajectory(v_esc_sim, t_max, dt);
+    const hyperbolic = simulateTrajectory(v_hyp, t_max, dt);
+
+    const earth_x = [], earth_y = [];
+    for (let theta = 0; theta <= 2 * Math.PI; theta += 0.01) {
+      earth_x.push(R_earth * Math.cos(theta));
+      earth_y.push(R_earth * Math.sin(theta));
+    }
+
+    const plotData = [
+      { x: earth_x, y: earth_y, mode: 'lines', name: 'Earth', line: { color: '#0077ff', width: 3 } },
+      { x: suborbital.x, y: suborbital.y, mode: 'lines', name: 'Suborbital', line: { color: '#ff4c4c', dash: 'dash', width: 2 } },
+      { x: orbital.x, y: orbital.y, mode: 'lines', name: 'Orbital', line: { color: '#4caf50', width: 2 } },
+      { x: escape.x, y: escape.y, mode: 'lines', name: 'Escape', line: { color: '#ffa500', dash: 'dot', width: 2 } },
+      { x: hyperbolic.x, y: hyperbolic.y, mode: 'lines', name: 'Hyperbolic', line: { color: '#d32f2f', dash: 'dot', width: 2 } }
+    ];
+
+    const layout = {
+      paper_bgcolor: '#111',
+      plot_bgcolor: '#111',
+      font: { color: '#eee' },
+      title: {
+        text: 'Payload Trajectories from 200 km Altitude',
+        font: { size: 24, color: '#0af' },
+      },
+      xaxis: {
+        title: 'X (meters)',
+        zerolinecolor: '#444',
+        gridcolor: '#222',
+        showgrid: true
+      },
+      yaxis: {
+        title: 'Y (meters)',
+        zerolinecolor: '#444',
+        gridcolor: '#222',
+        showgrid: true,
+        scaleanchor: "x",
+        scaleratio: 1
+      },
+      legend: {
+        font: { size: 14 },
+        bgcolor: 'transparent',
+        bordercolor: '#0af',
+        borderwidth: 1,
+        x: 0.8,
+        y: 0.95,
+      },
+      margin: { l: 60, r: 30, t: 80, b: 60 }
+    };
+
+    Plotly.newPlot('plot', plotData, layout, {responsive: true});
+  </script>
+</body>
+</html>

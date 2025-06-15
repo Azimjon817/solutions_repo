@@ -134,5 +134,5 @@ Use **numerical integration (e.g., Runge-Kutta 4th order)** to simulate:
 
 ---
 ### Simulation of Gravitational Trajectories Near Earth
-*[Simulation](project_motion3.html)*
+*[Simulation](project3.html)*
 
