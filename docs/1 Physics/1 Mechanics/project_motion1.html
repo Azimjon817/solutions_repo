@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Projectile Motion Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to bottom right, #dfe9f3, #ffffff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .controls label {
+            margin-right: 5px;
+        }
+        .controls input, .controls button {
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .controls button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background-color: #3267d6;
+        }
+        canvas {
+            border: 1px solid #333;
+            border-radius: 4px;
+            background: #fff;
+            margin-bottom: 20px;
+        }
+        #threeCanvas {
+            width: 800px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <label>Velocity (m/s):</label>
+        <input type="number" id="velocity" value="20" min="1" max="100" step="1">
+        <label>Elevation Angle (deg):</label>
+        <input type="number" id="angle" value="45" min="0" max="90" step="1">
+        <label>Azimuth Angle (deg):</label>
+        <input type="number" id="azimuth" value="0" min="-90" max="90" step="1">
+        <label>Gravity (m/s²):</label>
+        <input type="number" id="gravity" value="9.81" min="0.1" max="20" step="0.1">
+        <label>Drag (k):</label>
+        <input type="number" id="drag" value="0" min="0" max="0.1" step="0.001">
+        <button onclick="addTrajectory()">Add Trajectory</button>
+        <button onclick="startSimulation()">Start</button>
+        <button onclick="pauseSimulation()">Pause</button>
+        <button onclick="resetSimulation()">Reset</button>
+    </div>
+    <div id="threeCanvas"></div>
+    <canvas id="rangeCanvas" width="800" height="200"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Three.js Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 800 / 400, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(800, 400);
+        document.getElementById('threeCanvas').appendChild(renderer.domElement);
+
+        // Orbit Controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Grid and Axes
+        const gridHelper = new THREE.GridHelper(100, 10);
+        scene.add(gridHelper);
+        const axesHelper = new THREE.AxesHelper(50);
+        scene.add(axesHelper);
+
+        // Camera Position
+        camera.position.set(50, 50, 50);
+        camera.lookAt(0, 0, 0);
+
+        // 2D Canvas for Range Graph
+        const rangeCanvas = document.getElementById('rangeCanvas');
+        const ctxRange = rangeCanvas.getContext('2d');
+
+        let trajectories = [];
+        let animationFrameId;
+        let isPaused = false;
+
+        function degToRad(deg) {
+            return deg * Math.PI / 180;
+        }
+
+        function getRandomColor() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        function calculateTrajectory(v0, theta, phi, g, k) {
+            theta = degToRad(theta);
+            phi = degToRad(phi);
+            const dt = 0.01;
+            let t = 0;
+            let x = 0, y = 0, z = 0;
+            let vx = v0 * Math.cos(theta) * Math.cos(phi);
+            let vy = v0 * Math.sin(theta);
+            let vz = v0 * Math.cos(theta) * Math.sin(phi);
+            const points = [{ x, y, z }];
+
+            while (y >= 0) {
+                const v = Math.sqrt(vx * vx + vy * vy + vz * vz);
+                const ax = -k * vx * v;
+                const ay = -g - k * vy * v;
+                const az = -k * vz * v;
+                vx += ax * dt;
+                vy += ay * dt;
+                vz += az * dt;
+                x += vx * dt;
+                y += vy * dt;
+                z += vz * dt;
+                t += dt;
+                points.push({ x, y, z });
+                if (t > 100) break;
+            }
+            return points;
+        }
+
+        function calculateRange(v0, theta, phi, g, k) {
+            const points = calculateTrajectory(v0, theta, phi, g, k);
+            const lastPoint = points[points.length - 1];
+            return Math.sqrt(lastPoint.x * lastPoint.x + lastPoint.z * lastPoint.z);
+        }
+
+        function createTrajectoryMesh(points, color) {
+            const geometry = new THREE.BufferGeometry();
+            const positions = [];
+            points.forEach(p => {
+                positions.push(p.x, p.y, p.z);
+            });
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            const material = new THREE.LineBasicMaterial({ color });
+            return new THREE.Line(geometry, material);
+        }
+
+        function drawTrajectory(index) {
+            scene.children = scene.children.filter(child => child === gridHelper || child === axesHelper);
+
+            // Scale scene
+            let maxX = 1, maxY = 1, maxZ = 1;
+            trajectories.forEach(traj => {
+                const trajMaxX = Math.max(...traj.points.map(p => Math.abs(p.x)));
+                const trajMaxY = Math.max(...traj.points.map(p => p.y));
+                const trajMaxZ = Math.max(...traj.points.map(p => Math.abs(p.z)));
+                maxX = Math.max(maxX, trajMaxX);
+                maxY = Math.max(maxY, trajMaxY);
+                maxZ = Math.max(maxZ, trajMaxZ);
+            });
+            const scale = 50 / Math.max(maxX, maxY, maxZ);
+
+            // Draw trajectories
+            trajectories.forEach((traj, i) => {
+                const points = traj.points;
+                const currentIndex = i === trajectories.length - 1 ? Math.min(index, points.length - 1) : points.length - 1;
+                const subPoints = points.slice(0, currentIndex + 1);
+                const mesh = createTrajectoryMesh(subPoints.map(p => ({
+                    x: p.x * scale,
+                    y: p.y * scale,
+                    z: p.z * scale
+                })), traj.color);
+                scene.add(mesh);
+
+                if (i === trajectories.length - 1 && currentIndex < points.length) {
+                    const geometry = new THREE.SphereGeometry(0.5, 16, 16);
+                    const material = new THREE.MeshBasicMaterial({ color: traj.color });
+                    const sphere = new THREE.Mesh(geometry, material);
+                    const p = points[currentIndex];
+                    sphere.position.set(p.x * scale, p.y * scale, p.z * scale);
+                    scene.add(sphere);
+                }
+            });
+
+            renderer.render(scene, camera);
+            controls.update();
+
+            if (index < trajectories[trajectories.length - 1].points.length - 1 && !isPaused) {
+                animationFrameId = requestAnimationFrame(() => drawTrajectory(index + 1));
+            }
+        }
+
+        function drawRangeGraph() {
+            ctxRange.clearRect(0, 0, rangeCanvas.width, rangeCanvas.height);
+            const v0 = parseFloat(document.getElementById('velocity').value);
+            const phi = parseFloat(document.getElementById('azimuth').value);
+            const g = parseFloat(document.getElementById('gravity').value);
+            const k = parseFloat(document.getElementById('drag').value);
+            const angles = [];
+            const ranges = [];
+            for (let deg = 0; deg <= 90; deg += 1) {
+                angles.push(deg);
+                ranges.push(calculateRange(v0, deg, phi, g, k));
+            }
+
+            const maxRange = Math.max(...ranges);
+            const scaleX = rangeCanvas.width / 90;
+            const scaleY = rangeCanvas.height / maxRange * 0.8;
+
+            ctxRange.beginPath();
+            for (let i = 0; i < angles.length; i++) {
+                const x = angles[i] * scaleX;
+                const y = rangeCanvas.height - ranges[i] * scaleY;
+                if (i === 0) ctxRange.moveTo(x, y);
+                else ctxRange.lineTo(x, y);
+            }
+            ctxRange.strokeStyle = 'green';
+            ctxRange.lineWidth = 2;
+            ctxRange.stroke();
+
+            ctxRange.beginPath();
+            ctxRange.moveTo(0, rangeCanvas.height);
+            ctxRange.lineTo(rangeCanvas.width, rangeCanvas.height);
+            ctxRange.moveTo(0, rangeCanvas.height);
+            ctxRange.lineTo(0, 0);
+            ctxRange.strokeStyle = 'black';
+            ctxRange.lineWidth = 1;
+            ctxRange.stroke();
+        }
+
+        function addTrajectory() {
+            const v0 = parseFloat(document.getElementById('velocity').value);
+            const theta = parseFloat(document.getElementById('angle').value);
+            const phi = parseFloat(document.getElementById('azimuth').value);
+            const g = parseFloat(document.getElementById('gravity').value);
+            const k = parseFloat(document.getElementById('drag').value);
+
+            if (isNaN(v0) || isNaN(theta) || isNaN(phi) || isNaN(g) || isNaN(k) || v0 <= 0 || theta < 0 || theta > 90 || phi < -90 || phi > 90 || g <= 0 || k < 0) {
+                alert('Please enter valid values: velocity > 0, elevation angle 0-90°, azimuth angle -90-90°, gravity > 0, drag ≥ 0.');
+                return;
+            }
+
+            const points = calculateTrajectory(v0, theta, phi, g, k);
+            trajectories.push({ points, color: getRandomColor() });
+            drawRangeGraph();
+        }
+
+        function startSimulation() {
+            if (trajectories.length === 0) {
+                addTrajectory();
+            }
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            isPaused = false;
+            drawTrajectory(0);
+        }
+
+        function pauseSimulation() {
+            isPaused = true;
+        }
+
+        function resetSimulation() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            trajectories = [];
+            scene.children = [gridHelper, axesHelper];
+            ctxRange.clearRect(0, 0, rangeCanvas.width, rangeCanvas.height);
+            document.getElementById('velocity').value = 20;
+            document.getElementById('angle').value = 45;
+            document.getElementById('azimuth').value = 0;
+            document.getElementById('gravity').value = 9.81;
+            document.getElementById('drag').value = 0;
+        }
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+            controls.update();
+        }
+        animate();
+    </script>
+</body>
+</html>
