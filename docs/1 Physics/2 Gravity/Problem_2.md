@@ -33,6 +33,7 @@ In astrodynamics, the **first, second, and third cosmic velocities** represent c
   v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2} \cdot v_1
   $$
 
+
 ---
 
 #### **1.3 Third Cosmic Velocity (Interplanetary/Interstellar Velocity)**
@@ -54,6 +55,8 @@ Each velocity depends on:
 $$
 v_1 \propto \sqrt{\frac{M}{R}}, \quad v_2 \propto \sqrt{\frac{M}{R}}, \quad v_3 \propto \text{(depends on both Earth and Sun parameters)}
 $$
+
+<video controls src="../cosmic_velocities_vivid_alternate.gif.mp4" title="Title"></video>
 
 ---
 

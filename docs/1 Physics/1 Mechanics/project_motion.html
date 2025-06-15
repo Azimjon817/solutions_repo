@@ -1,92 +1,116 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projectile Motion Analysis</title>
-    <link rel="stylesheet" href="style1.css">
+    <title>Thrown Ball Simulator</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            margin: 10px;
+        }
+        .controls {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        label {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Projectile Motion Analysis</h1>
-        <div class="simulation-container">
-            <div class="canvas-wrapper">
-                <canvas id="projectileCanvas" width="800" height="600"></canvas>
-                <div class="trajectory-overlay"></div>
-            </div>
-            <div class="control-panel">
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-label">Initial Velocity:</span>
-                        <span id="velocity" class="stat-value">0 m/s</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Angle:</span>
-                        <span id="angle" class="stat-value">0°</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Max Height:</span>
-                        <span id="maxHeight" class="stat-value">0 m</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Range:</span>
-                        <span id="range" class="stat-value">0 m</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Time of Flight:</span>
-                        <span id="timeOfFlight" class="stat-value">0 s</span>
-                    </div>
-                </div>
-                <div class="controls">
-                    <div class="control-group">
-                        <label for="velocitySlider">Initial Velocity (m/s):</label>
-                        <input type="range" id="velocitySlider" min="10" max="100" value="50">
-                        <span id="velocityValue">50</span>
-                    </div>
-                    <div class="control-group">
-                        <label for="angleSlider">Launch Angle (degrees):</label>
-                        <input type="range" id="angleSlider" min="0" max="90" value="45">
-                        <span id="angleValue">45°</span>
-                    </div>
-                    <div class="control-group">
-                        <label for="gravitySlider">Gravity (m/s²):</label>
-                        <input type="range" id="gravitySlider" min="1" max="20" value="9.81" step="0.1">
-                        <span id="gravityValue">9.81</span>
-                    </div>
-                    <div class="control-group">
-                        <label>
-                            <input type="checkbox" id="showTrajectory" checked>
-                            Show Trajectory
-                        </label>
-                    </div>
-                    <div class="control-group">
-                        <label>
-                            <input type="checkbox" id="showVectors">
-                            Show Vectors
-                        </label>
-                    </div>
-                    <div class="button-group">
-                        <button id="startBtn" class="btn">Start</button>
-                        <button id="resetBtn" class="btn">Reset</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="info-panel">
-            <h2>About Projectile Motion</h2>
-            <p>Projectile motion is the motion of an object thrown or projected into the air, subject to only the acceleration of gravity.</p>
-            <div class="formulas">
-                <h3>Key Formulas:</h3>
-                <ul>
-                    <li>Horizontal Position: x = v₀t cos(θ)</li>
-                    <li>Vertical Position: y = v₀t sin(θ) - ½gt²</li>
-                    <li>Time of Flight: t = 2v₀sin(θ)/g</li>
-                    <li>Maximum Height: h = v₀²sin²(θ)/2g</li>
-                    <li>Range: R = v₀²sin(2θ)/g</li>
-                </ul>
-            </div>
-        </div>
+    <div class="controls">
+        <label>Initial Velocity (m/s): <input type="number" id="velocity" value="20" min="1" max="100"></label>
+        <label>Angle (degrees): <input type="number" id="angle" value="45" min="0" max="90"></label>
+        <label>Gravity (m/s²): <input type="number" id="gravity" value="9.81" min="1" max="20" step="0.1"></label>
+        <label>Height (m): <input type="number" id="height" value="0" min="0" max="100"></label>
+        <button onclick="startSimulation()">Start Simulation</button>
     </div>
-    <script src="script1.js"></script>
+    <canvas id="projectileCanvas" width="800" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('projectileCanvas');
+        const ctx = canvas.getContext('2d');
+        let animationId = null;
+
+        class Ball {
+            constructor(v0, theta, g, h) {
+                this.v0 = v0;
+                this.theta = theta * Math.PI / 180; // Convert to radians
+                this.g = g;
+                this.initialHeight = h;
+                this.x = 0;
+                this.y = h;
+                this.vx = v0 * Math.cos(this.theta);
+                this.vy = v0 * Math.sin(this.theta);
+                this.time = 0;
+                this.scale = 10; // Scale factor for visualization
+            }
+
+            update(dt) {
+                this.time += dt;
+                this.x = this.vx * this.time;
+                this.y = this.initialHeight + (this.vy * this.time) - (0.5 * this.g * this.time * this.time);
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(50 + this.x * this.scale, 350 - this.y * this.scale, 5, 0, 2 * Math.PI);
+                ctx.fillStyle = 'red';
+                ctx.fill();
+            }
+
+            isDone() {
+                return this.y <= 0 && this.vy < 0;
+            }
+        }
+
+        function drawGround() {
+            ctx.beginPath();
+            ctx.moveTo(0, 350);
+            ctx.lineTo(800, 350);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+        }
+
+        function startSimulation() {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+
+            const v0 = parseFloat(document.getElementById('velocity').value);
+            const theta = parseFloat(document.getElementById('angle').value);
+            const g = parseFloat(document.getElementById('gravity').value);
+            const h = parseFloat(document.getElementById('height').value);
+
+            const ball = new Ball(v0, theta, g, h);
+            let lastTime = null;
+
+            function animate(currentTime) {
+                if (!lastTime) lastTime = currentTime;
+                const dt = (currentTime - lastTime) / 1000; // Convert to seconds
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawGround();
+                
+                ball.update(dt);
+                ball.draw();
+
+                if (!ball.isDone()) {
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    animationId = null;
+                }
+                
+                lastTime = currentTime;
+            }
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // Initial draw
+        drawGround();
+    </script>
 </body>
 </html>
