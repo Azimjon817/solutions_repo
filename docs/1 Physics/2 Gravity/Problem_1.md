@@ -71,7 +71,7 @@ This equation is a form of **Kepler’s Third Law** for circular orbits. It stat
 This relation holds **independently of the orbiting object’s mass**—a profound insight enabling early astronomers to model the solar system.
 
 ![alt text](<../image-1 (1).png>)
-<video controls src="../kepler_orbit_simulation.gif.mp4" title="Title"></video>
+>
 ![alt text](<../image-2 (1).png>)
 
 ---
@@ -149,6 +149,7 @@ $$
 * Simulate **N-body systems** to account for gravitational interactions
 * Introduce **relativistic corrections** for high-precision astrophysics
 ---
-
+## HTML simulation
+*[Simulation](project1.html)*
 
 
