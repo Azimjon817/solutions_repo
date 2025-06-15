@@ -39,6 +39,20 @@ The algorithm handles **nested combinations** by:
 * The approach mimics human reduction: local series/parallel simplifications gradually lead to a fully reduced circuit.
 
 ---
+![alt text](5935809163336730114.jpg)
+![alt text](5935809163336730115.jpg)
+![alt text](../5935809163336730116.jpg)
+![alt text](../5935809163336730117.jpg)
+![alt text](../5935809163336730116.jpg)
+![alt text](../5935809163336730117.jpg)
+![alt text](../5935809163336730118.jpg)
+![alt text](../5935809163336730108.jpg)
+![alt text](../5935809163336730110.jpg)
+![alt text](../5935809163336730111.jpg)
+![alt text](../5935809163336730112.jpg)
+![alt text](../5935809163336730113.jpg)
+
+
 
 ## **5. Example Cases**
 
