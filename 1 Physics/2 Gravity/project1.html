@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Moon Orbit Simulation</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background: radial-gradient(circle at center, #1a1a2e, #16213e 60%, #0f3460 90%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #f0f0f5;
+        overflow: hidden;
+      }
+
+      #space {
+        position: relative;
+        width: 520px;
+        height: 520px;
+        background: linear-gradient(135deg, #3a506b, #5bc0be);
+        border-radius: 50%;
+        box-shadow: 0 0 50px #5bc0becc inset, 0 0 25px #3a506bcc;
+        margin-bottom: 30px;
+      }
+
+      #earth {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90px;
+        height: 90px;
+        background: radial-gradient(circle at 30% 30%, #2e86de, #0a2342);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 30px #2e86decc, inset 0 0 15px #0a2342cc;
+        filter: drop-shadow(0 0 6px #7ed6df);
+      }
+
+      #moon {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle at 40% 40%, #f0ebe1, #888f8f);
+        border-radius: 50%;
+        box-shadow: 0 0 15px #e0e0e0bb;
+        filter: drop-shadow(0 0 4px #d6d6d6);
+        transition: transform 0.1s ease-out;
+      }
+
+      #shadow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(10, 10, 10, 0.7), transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        mix-blend-mode: multiply;
+      }
+
+      #controls {
+        margin-top: 20px;
+        font-size: 1rem;
+        user-select: none;
+      }
+
+      #speedRange {
+        width: 300px;
+        height: 8px;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #0a2342, #2e86de);
+        -webkit-appearance: none;
+      }
+
+      #speedRange::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #f0ebe1;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 10px #f0ebe1bb;
+        transition: background 0.3s ease;
+      }
+      #speedRange::-webkit-slider-thumb:hover {
+        background: #ffffff;
+      }
+
+      #speedRange::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: #f0ebe1;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 10px #f0ebe1bb;
+      }
+    </style>
+</head>
+<body>
+    <div id="space">
+        <div id="earth"></div>
+        <div id="moon"></div>
+        <div id="shadow"></div>
+    </div>
+    
+    <div id="controls">
+        <label for="speedRange"> Orbital Speed :</label>
+        <input type="range" id="speedRange" min="0.001" max="0.05" value="0.01" step="0.001" />
+    </div>
+
+    <script>
+        const moon = document.getElementById('moon');
+        const earth = document.getElementById('earth');
+        const shadow = document.getElementById('shadow');
+        const speedRange = document.getElementById('speedRange');
+
+        let angle = 0;
+        const orbitRadius = 200;
+        let speed = parseFloat(speedRange.value);
+
+        speedRange.addEventListener('input', () => {
+            speed = parseFloat(speedRange.value);
+        });
+
+        function animate() {
+            angle += speed;
+
+            // Calculate Moon's new position
+            const x = orbitRadius * Math.cos(angle);
+            const y = orbitRadius * Math.sin(angle);
+            moon.style.transform = `translate(${x + 220}px, ${y + 220}px)`;
+
+            // Adjust shadow position (darken side opposite the moon)
+            shadow.style.background = `radial-gradient(circle at ${50 - (x / 4)}% ${50 - (y / 4)}%, rgba(10, 10, 10, 0.7), transparent)`;
+
+            // Earth rotation around its own axis
+            earth.style.transform = `translate(-50%, -50%) rotate(${angle * 50}deg)`;
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
