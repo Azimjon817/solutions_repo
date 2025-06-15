@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Electromagnetic Field Simulation</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    /* Dark neon theme */
+    body {
+        margin: 0;
+        padding: 20px;
+        background: #0a0a0a;
+        font-family: 'Orbitron', monospace, Arial, sans-serif;
+        color: #0ff; /* cyan */
+        text-align: center;
+        user-select: none;
+    }
+
+    h1 {
+        font-weight: 700;
+        font-size: 2.8rem;
+        text-shadow:
+            0 0 8px #0ff,
+            0 0 20px #0ff,
+            0 0 30px #00ffffcc,
+            0 0 40px #00ffffaa;
+        margin-bottom: 15px;
+    }
+
+    canvas {
+        display: block;
+        margin: 20px auto;
+        border: 1.5px solid #00ffffaa;
+        background: #000;
+        box-shadow:
+            0 0 20px #00ffffbb,
+            inset 0 0 10px #00ffff88;
+        border-radius: 10px;
+    }
+
+    #controls, #parameters {
+        max-width: 700px;
+        margin: 25px auto;
+        background: #111;
+        border-radius: 12px;
+        box-shadow:
+            0 0 15px #00ffff99,
+            inset 0 0 15px #00333399;
+        padding: 20px 30px;
+        color: #0ff;
+    }
+
+    #controls h3, #parameters h3 {
+        margin-bottom: 18px;
+        text-shadow: 0 0 8px #0ff;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+    }
+
+    button {
+        background: linear-gradient(90deg, #00ffffcc, #007777cc);
+        border: none;
+        padding: 12px 28px;
+        margin: 8px 10px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1rem;
+        color: #000;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow:
+            0 0 8px #00ffffbb,
+            0 0 12px #00ffffbb inset;
+    }
+
+    button:hover {
+        background: linear-gradient(90deg, #00ffff, #00aaaa);
+        color: #fff;
+        box-shadow:
+            0 0 20px #00ffffee,
+            0 0 25px #00ffffee inset;
+        transform: scale(1.05);
+    }
+
+    label {
+        font-size: 14px;
+        margin: 10px 15px 6px 15px;
+        display: inline-block;
+        color: #0ff;
+        text-shadow: 0 0 6px #00ffffcc;
+        cursor: default;
+    }
+
+    input[type="number"] {
+        width: 75px;
+        background: #002222;
+        border: 1px solid #00ffffaa;
+        border-radius: 8px;
+        padding: 7px 10px;
+        font-size: 14px;
+        color: #0ff;
+        text-align: center;
+        box-shadow:
+            0 0 8px #00ffff88 inset;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+        outline: none;
+        border-color: #00ffffee;
+        box-shadow:
+            0 0 20px #00ffffee inset;
+        background: #003333;
+        color: #aaffff;
+    }
+
+    #viewToggle, #fieldToggle {
+        margin-top: 18px;
+        font-size: 14px;
+        color: #0ff;
+        text-shadow: 0 0 6px #00ffffcc;
+    }
+
+    #viewToggle label, #fieldToggle label {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        margin: 0 6px 0 12px;
+        cursor: pointer;
+        accent-color: #00ffff;
+    }
+
+    .info {
+        max-width: 700px;
+        margin: 15px auto 50px auto;
+        font-size: 13px;
+        color: #0ff;
+        opacity: 0.8;
+        text-shadow: 0 0 5px #00ccccaa;
+        font-style: italic;
+    }
+
+    /* Scrollbar for inputs container if needed */
+    #parameters, #controls {
+        overflow-x: auto;
+    }
+</style>
+</head>
+<body>
+    <h1>Electromagnetic Field Simulation</h1>
+    <canvas id="simulationCanvas" width="600" height="600"></canvas>
+    <div id="controls">
+        <h3>Select Field Configuration</h3>
+        <button onclick="startSimulation('magnetic')">Magnetic Field</button>
+        <button onclick="startSimulation('electric')">Electric Field</button>
+        <button onclick="startSimulation('crossed')">Crossed E & B Fields</button>
+        <button onclick="resetSimulation()">Reset</button>
+    </div>
+    <div id="parameters">
+        <h3>Adjust Parameters</h3>
+        <label>Charge (q): <input type="number" id="charge" value="1" step="0.1" /></label>
+        <label>Mass (m): <input type="number" id="mass" value="1" step="0.1" /></label><br />
+        <label>Initial Vx: <input type="number" id="vx" value="2" step="0.1" /></label>
+        <label>Initial Vy: <input type="number" id="vy" value="0" step="0.1" /></label>
+        <label>Initial Vz: <input type="number" id="vz" value="0" step="0.1" /></label><br />
+        <label>Electric Field (Ex): <input type="number" id="Ex" value="1" step="0.1" /></label>
+        <label>Electric Field (Ey): <input type="number" id="Ey" value="0" step="0.1" /></label>
+        <label>Electric Field (Ez): <input type="number" id="Ez" value="0" step="0.1" /></label><br />
+        <label>Magnetic Field (Bz): <input type="number" id="Bz" value="1" step="0.1" /></label>
+        <div id="viewToggle">
+            <label>View:
+                <input type="radio" name="view" value="2D" checked /> 2D
+                <input type="radio" name="view" value="3D" /> 3D
+            </label>
+        </div>
+        <div id="fieldToggle">
+            <label>Show Fields:
+                <input type="checkbox" id="showFields" checked /> Show E & B Vectors
+            </label>
+        </div>
+    </div>
+    <div class="info">
+        <p>Visualize the motion of a charged particle in electromagnetic fields. Red arrows represent the electric field (E), blue arrows represent the magnetic field (B).</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script>
+        // The JavaScript code you already have here, unchanged
+        // Canvas and 2D context
+        const canvas = document.getElementById('simulationCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 3D setup with Three.js
+        let scene, camera, renderer, line;
+        let is3D = false;
+        let positions3D = [];
+
+        function init3D() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(canvas.width, canvas.height);
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(600 * 3), 3));
+            const material = new THREE.LineBasicMaterial({ color: 0x00ffff }); // Neon cyan
+            line = new THREE.Line(geometry, material);
+            scene.add(line);
+
+            camera.position.z = 500;
+            camera.position.y = 300;
+            camera.lookAt(0, 0, 0);
+        }
+
+        // Particle properties
+        let particle = {
+            x: 300,
+            y: 300,
+            z: 0,
+            vx: 2,
+            vy: 0,
+            vz: 0,
+            q: 1,
+            m: 1
+        };
+
+        // Field configurations
+        let electricField = { x: 1, y: 0, z: 0 };
+        let magneticField = { x: 0, y: 0, z: 1 };
+
+        const dt = 0.05; // Time step
+        let path = []; // Store the particle's path for 2D drawing
+        let simulationRunning = false;
+        let showFields = true;
+
+        // Clear the canvas
+        function clearCanvas() {
+            if (!is3D) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            } else {
+                renderer.render(scene, camera);
+            }
+        }
+
+        // Draw the particle and its path in 2D
+        function drawParticle2D() {
+            // Draw the field vectors if enabled
+            if (showFields && !is3D) {
+                drawFieldVectors();
+            }
+
+            // Draw the path
+            ctx.beginPath();
+            ctx.strokeStyle = '#00ffff';
+            ctx.lineWidth = 1.2;
+            for (let i = 0; i < path.length; i++) {
+                if (i === 0) {
+                    ctx.moveTo(path[i].x, path[i].y);
+                } else {
+                    ctx.lineTo(path[i].x, path[i].y);
+                }
+            }
+            ctx.stroke();
+
+            // Draw the particle as a glowing dot
+            let grad = ctx.createRadialGradient(particle.x, particle.y, 2, particle.x, particle.y, 8);
+            grad.addColorStop(0, '#00ffff');
+            grad.addColorStop(1, 'rgba(0,255,255,0)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, 6, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        // Draw electric and magnetic field vectors in 2D
+        function drawFieldVectors() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            // Electric field - red arrows
+            ctx.strokeStyle = '#ff4444';
+            ctx.fillStyle = '#ff4444';
+            drawArrow(ctx, centerX, centerY, centerX + electricField.x * 60, centerY - electricField.y * 60);
+
+            // Magnetic field - blue arrows (assuming B along z)
+            ctx.strokeStyle = '#4488ff';
+            ctx.fillStyle = '#4488ff';
+            if (magneticField.z !== 0) {
+                // Draw a circle with dot or cross at center representing B field direction
+                ctx.beginPath();
+                ctx.lineWidth = 3;
+                if (magneticField.z > 0) {
+                    // Dot (into screen)
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, 12, 0, 2 * Math.PI);
+                    ctx.fill();
+                } else {
+                    // Cross (out of screen)
+                    ctx.moveTo(centerX - 9, centerY - 9);
+                    ctx.lineTo(centerX + 9, centerY + 9);
+                    ctx.moveTo(centerX - 9, centerY + 9);
+                    ctx.lineTo(centerX + 9, centerY - 9);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Utility to draw an arrow in 2D canvas
+        function drawArrow(ctx, fromX, fromY, toX, toY) {
+            const headlen = 12;
+            const dx = toX - fromX;
+            const dy = toY - fromY;
+            const angle = Math.atan2(dy, dx);
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(toX, toY);
+            ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.stroke();
+        }
+
+        // Update particle velocity and position using Lorentz force
+        function updateParticle() {
+            // Lorentz force: F = q(E + v × B)
+            // Calculate cross product v × B
+            const vx = particle.vx;
+            const vy = particle.vy;
+            const vz = particle.vz;
+            const Bx = magneticField.x;
+            const By = magneticField.y;
+            const Bz = magneticField.z;
+
+            const vCrossB = {
+                x: vy * Bz - vz * By,
+                y: vz * Bx - vx * Bz,
+                z: vx * By - vy * Bx
+            };
+
+            // Calculate acceleration
+            const ax = (particle.q / particle.m) * (electricField.x + vCrossB.x);
+            const ay = (particle.q / particle.m) * (electricField.y + vCrossB.y);
+            const az = (particle.q / particle.m) * (electricField.z + vCrossB.z);
+
+            // Update velocity
+            particle.vx += ax * dt;
+            particle.vy += ay * dt;
+            particle.vz += az * dt;
+
+            // Update position
+            particle.x += particle.vx * dt * 20; // scale for visibility
+            particle.y += particle.vy * dt * 20;
+            particle.z += particle.vz * dt * 20;
+
+            // Keep particle within canvas bounds for 2D
+            if (!is3D) {
+                if (particle.x < 0) particle.x = canvas.width;
+                if (particle.x > canvas.width) particle.x = 0;
+                if (particle.y < 0) particle.y = canvas.height;
+                if (particle.y > canvas.height) particle.y = 0;
+            }
+        }
+
+        // Animate 2D simulation
+        function animate2D() {
+            if (!simulationRunning || is3D) return;
+
+            clearCanvas();
+
+            updateParticle();
+
+            path.push({ x: particle.x, y: particle.y });
+            if (path.length > 1500) path.shift();
+
+            drawParticle2D();
+
+            requestAnimationFrame(animate2D);
+        }
+
+        // Animate 3D simulation
+        function animate3D() {
+            if (!simulationRunning || !is3D) return;
+
+            updateParticle();
+
+            // Add current position to positions3D array
+            if (positions3D.length >= 600) {
+                positions3D.shift();
+            }
+            positions3D.push([particle.x - 300, particle.z, particle.y - 300]);
+
+            // Update line geometry positions
+            const positions = line.geometry.attributes.position.array;
+            for (let i = 0; i < positions3D.length; i++) {
+                positions[i * 3] = positions3D[i][0];
+                positions[i * 3 + 1] = positions3D[i][1];
+                positions[i * 3 + 2] = positions3D[i][2];
+            }
+            line.geometry.setDrawRange(0, positions3D.length);
+            line.geometry.attributes.position.needsUpdate = true;
+
+            renderer.render(scene, camera);
+
+            requestAnimationFrame(animate3D);
+        }
+
+        // Start simulation with selected field config
+        function startSimulation(type) {
+            // Read parameters
+            particle.q = parseFloat(document.getElementById('charge').value);
+            particle.m = parseFloat(document.getElementById('mass').value);
+            particle.vx = parseFloat(document.getElementById('vx').value);
+            particle.vy = parseFloat(document.getElementById('vy').value);
+            particle.vz = parseFloat(document.getElementById('vz').value);
+
+            electricField.x = parseFloat(document.getElementById('Ex').value);
+            electricField.y = parseFloat(document.getElementById('Ey').value);
+            electricField.z = parseFloat(document.getElementById('Ez').value);
+            magneticField.z = parseFloat(document.getElementById('Bz').value);
+
+            // Reset particle position
+            particle.x = canvas.width / 2;
+            particle.y = canvas.height / 2;
+            particle.z = 0;
+
+            path = [];
+            positions3D = [];
+
+            // Configure fields based on type
+            switch (type) {
+                case 'magnetic':
+                    electricField = { x: 0, y: 0, z: 0 };
+                    magneticField = { x: 0, y: 0, z: parseFloat(document.getElementById('Bz').value) };
+                    break;
+                case 'electric':
+                    electricField = {
+                        x: parseFloat(document.getElementById('Ex').value),
+                        y: parseFloat(document.getElementById('Ey').value),
+                        z: parseFloat(document.getElementById('Ez').value)
+                    };
+                    magneticField = { x: 0, y: 0, z: 0 };
+                    break;
+                case 'crossed':
+                    electricField = {
+                        x: parseFloat(document.getElementById('Ex').value),
+                        y: parseFloat(document.getElementById('Ey').value),
+                        z: parseFloat(document.getElementById('Ez').value)
+                    };
+                    magneticField = { x: 0, y: 0, z: parseFloat(document.getElementById('Bz').value) };
+                    break;
+            }
+
+            simulationRunning = true;
+
+            // Check view mode
+            const view = document.querySelector('input[name="view"]:checked').value;
+            if (view === '3D') {
+                is3D = true;
+                init3D();
+                animate3D();
+            } else {
+                is3D = false;
+                animate2D();
+            }
+        }
+
+        // Reset simulation
+        function resetSimulation() {
+            simulationRunning = false;
+            is3D = false;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            path = [];
+            positions3D = [];
+        }
+
+        // Toggle showing fields
+        document.getElementById('showFields').addEventListener('change', e => {
+            showFields = e.target.checked;
+        });
+
+        // Restart animation on view change
+        document.querySelectorAll('input[name="view"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (simulationRunning) {
+                    startSimulation('crossed'); // or retain previous mode if you want
+                }
+            });
+        });
+    </script>
+</body>
+</html>

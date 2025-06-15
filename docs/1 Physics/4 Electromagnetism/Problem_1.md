@@ -148,4 +148,4 @@ Visualizations help interpret physical phenomena:
 ---
 
 ### Simulating the effects of the Lorentz Force
-[Simulation](index.html)
+[Simulation](project1.html)

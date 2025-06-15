@@ -87,6 +87,12 @@ $$
 * Stable nodes (destructive) and antinodes (constructive) form spatially static interference fringes
 
 
+![
+](<../wave 0.png>)
+![
+](<../wave 1.png>)
+![alt text](<../wave 2.png>)
+![alt text](../wave.png)
 
 ---
 
