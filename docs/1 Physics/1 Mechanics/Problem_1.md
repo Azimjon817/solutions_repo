@@ -111,3 +111,5 @@ A computational tool (e.g., Python script) can numerically simulate projectile m
 * Use numerical solvers (Euler, Runge-Kutta) for systems with drag or wind
 * Account for terrain elevation and variable gravitational fields
 ---
+## Simulation 
+[3d simulation](project_motion.html)
