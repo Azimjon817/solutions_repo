@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forced Damped Pendulum Simulation</title>
+  <script src="p5.min.js"></script>
+  <script src="sketch.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .controls {
+      margin: 20px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 400px;
+    }
+
+    .controls label {
+      display: inline-block;
+      width: 180px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .controls input[type="range"] {
+      width: 150px;
+      accent-color: #0288d1;
+    }
+
+    .controls span {
+      margin-left: 10px;
+      font-weight: bold;
+      color: #0288d1;
+    }
+
+    button {
+      align-self: center;
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #0288d1;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0277bd;
+    }
+
+    canvas {
+      border: 2px solid #333;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <div>
+      <label for="dampingSlider">Damping Coefficient (λ):</label>
+      <input type="range" id="dampingSlider" min="0" max="1" value="0.2" step="0.01" oninput="updateDamping(this.value)" onchange="updateDamping(this.value)">
+      <span id="dampingValue">0.2</span>
+    </div>
+    <div>
+      <label for="amplitudeSlider">Driving Amplitude (f):</label>
+      <input type="range" id="amplitudeSlider" min="0" max="2" value="0.5" step="0.01" oninput="updateAmplitude(this.value)" onchange="updateAmplitude(this.value)">
+      <span id="amplitudeValue">0.5</span>
+    </div>
+    <div>
+      <label for="frequencySlider">Driving Frequency (Ω):</label>
+      <input type="range" id="frequencySlider" min="0" max="5" value="2" step="0.01" oninput="updateFrequency(this.value)" onchange="updateFrequency(this.value)">
+      <span id="frequencyValue">2</span>
+    </div>
+    <button onclick="resetSimulation()">Reset</button>
+  </div>
+
+  <script>
+    let theta, omega, t;
+    let L = 1; // Pendulum length (m)
+    let g = 9.81; // Gravity (m/s^2)
+    let lambda = 0.2; // Damping coefficient
+    let f = 0.5; // Driving amplitude
+    let Omega = 2; // Driving frequency
+    let omega0 = Math.sqrt(g / L); // Natural frequency
+    let dt = 0.01; // Time step
+
+    function setup() {
+      createCanvas(600, 400);
+      resetSimulation();
+    }
+
+    function resetSimulation() {
+      theta = PI / 4; // Initial angle (45 degrees)
+      omega = 0; // Initial angular velocity
+      t = 0; // Reset time
+      console.log("Simulation reset: theta =", theta, "omega =", omega, "t =", t);
+    }
+
+    function updateDamping(value) {
+      lambda = Math.max(0, Math.min(1, parseFloat(value))); // Clamp between 0 and 1
+      document.getElementById("dampingValue").textContent = lambda.toFixed(2);
+      console.log("Damping updated: λ =", lambda);
+    }
+
+    function updateAmplitude(value) {
+      f = Math.max(0, Math.min(2, parseFloat(value))); // Clamp between 0 and 2
+      document.getElementById("amplitudeValue").textContent = f.toFixed(2);
+      console.log("Amplitude updated: f =", f);
+    }
+
+    function updateFrequency(value) {
+      Omega = Math.max(0, Math.min(5, parseFloat(value))); // Clamp between 0 and 5
+      document.getElementById("frequencyValue").textContent = Omega.toFixed(2);
+      console.log("Frequency updated: Ω =", Omega);
+    }
+
+    function derivatives(state, t) {
+      let theta = state[0];
+      let omega = state[1];
+      let dtheta = omega;
+      let domega = -omega0 * omega0 * Math.sin(theta) - lambda * omega + f * Math.cos(Omega * t);
+      return [dtheta, domega];
+    }
+
+    function rungeKutta(state, t, dt) {
+      let k1 = derivatives(state, t);
+      let k2 = derivatives([state[0] + k1[0] * dt / 2, state[1] + k1[1] * dt / 2], t + dt / 2);
+      let k3 = derivatives([state[0] + k2[0] * dt / 2, state[1] + k2[1] * dt / 2], t + dt / 2);
+      let k4 = derivatives([state[0] + k3[0] * dt, state[1] + k3[1] * dt], t + dt);
+      let newTheta = state[0] + (dt / 6) * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]);
+      let newOmega = state[1] + (dt / 6) * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]);
+      if (isNaN(newTheta) || isNaN(newOmega) || Math.abs(newTheta) > 100 || Math.abs(newOmega) > 100) {
+        console.warn("Numerical instability detected, resetting state");
+        resetSimulation();
+        return [theta, omega];
+      }
+      return [newTheta, newOmega];
+    }
+
+    function draw() {
+      background(255);
+      translate(width / 2, height / 4); // Pivot at center-top
+
+      let state = rungeKutta([theta, omega], t, dt);
+      theta = state[0];
+      omega = state[1];
+      t += dt;
+
+      let x = 200 * sin(theta);
+      let y = 200 * cos(theta);
+      stroke(0);
+      strokeWeight(2);
+      line(0, 0, x, y); // Rod
+      fill(30, 144, 255);
+      stroke(0);
+      ellipse(x, y, 24, 24); // Bob
+
+      fill(255, 69, 0);
+      stroke(0);
+      ellipse(0, 0, 14, 14); // Pivot
+    }
+  </script>
+</body>
+</html>
