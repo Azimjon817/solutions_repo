@@ -85,6 +85,9 @@ $$
 x \leq \frac{L}{2} \sin(\theta)
 $$
 
+![alt text](../output.png)
+![alt text](../output1.png)
+
 ---
 
 ### **Analysis**
@@ -99,4 +102,4 @@ The method is sensitive to correct angle sampling and needle positioning. While 
 
 ---
 ## Monte Carlo simulation
-*[Link to simulation](index1.html)*
+*[Simulation](index1.html)*

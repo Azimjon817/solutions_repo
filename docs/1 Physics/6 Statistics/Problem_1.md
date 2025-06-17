@@ -70,5 +70,6 @@ From each population distribution, we draw random samples of different sizes—5
 ---
 ### Exploring the Central Limit Theorem through simulations
 *[Simulation](iindex.html)*
+*[Simulation](project.html)*
 
 
