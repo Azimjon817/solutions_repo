@@ -3,112 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLT Visualizer</title>
+    <title>Central Limit Visualizer</title>
     <style>
         body {
-            background-color: #000000;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
             padding: 20px;
+            margin: 0;
         }
-
         h1 {
             text-align: center;
-            color: #00ffff;
-            font-size: 2.5em;
+            color: #00bcd4;
         }
-
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
         }
-
-        .description {
-            text-align: center;
-            max-width: 800px;
-            color: #b0b0b0;
-            margin-bottom: 20px;
-        }
-
         .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            background-color: #111;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #00ffff88;
+            margin: 20px;
+            text-align: center;
         }
-
         .controls label {
-            font-weight: 600;
-            margin-right: 5px;
+            margin-right: 10px;
+            font-weight: bold;
+            color: #ccc;
         }
-
         .controls input {
+            padding: 5px;
             width: 80px;
-            padding: 6px;
-            border: 2px solid #00ffff;
+            border: 1px solid #555;
+            border-radius: 4px;
             background-color: #222;
             color: #fff;
-            border-radius: 4px;
         }
-
         .controls button {
-            background: linear-gradient(135deg, #00ffff, #0088ff);
-            color: black;
-            font-weight: bold;
+            padding: 8px 16px;
+            background-color: #00bcd4;
+            color: #000;
             border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: 0.3s ease;
         }
-
         .controls button:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #00ffaa, #00f);
+            background-color: #008c9e;
         }
-
         .plot-container {
-            width: 100%;
-            max-width: 650px;
+            margin: 20px;
             background-color: #111;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 12px #333;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+            width: 100%;
+            max-width: 700px;
         }
-
         .plot-container h2 {
             text-align: center;
-            color: #00ffcc;
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            color: #fff;
+            margin-top: 0;
         }
-
         canvas {
-            background-color: #1a1a1a;
-            border-radius: 8px;
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+        }
+        .description {
+            text-align: center;
+            margin: 20px;
+            max-width: 800px;
+            color: #aaa;
         }
     </style>
+
+    <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>CLT Visualizer</h1>
+    <h1>Central Limit Visualizer</h1>
 
     <div class="container">
         <div class="description">
-            <p>Explore how the Central Limit Theorem works by generating sample means from different distributions. Adjust the settings and click "Generate" to see how the sampling distribution of the mean behaves.</p>
+            <p>This simulation demonstrates the Central Limit Theorem (CLT) by showing the sampling distributions of sample means from different population distributions. Adjust the sample size and number of samples below, then click "Generate" to see how the distribution of sample means approaches a normal distribution as sample size increases.</p>
         </div>
 
         <div class="controls">
-            <label for="sampleSize">Sample Size:</label>
+            <label for="sampleSize">Sample Size (n):</label>
             <input type="number" id="sampleSize" value="30" min="1" max="1000">
-            <label for="numSamples"># Samples:</label>
+            <label for="numSamples">Number of Samples:</label>
             <input type="number" id="numSamples" value="1000" min="1" max="10000">
             <button onclick="generatePlots()">Generate</button>
         </div>
@@ -142,8 +124,14 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: { title: { display: true, text: 'Sample Mean', color: '#ccc' }, ticks: { color: '#ccc' } },
-                    y: { title: { display: true, text: 'Frequency', color: '#ccc' }, ticks: { color: '#ccc' } }
+                    x: {
+                        title: { display: true, text: 'Sample Mean', color: '#ccc' },
+                        ticks: { color: '#ccc' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Frequency', color: '#ccc' },
+                        ticks: { color: '#ccc' }
+                    }
                 },
                 plugins: {
                     legend: { display: false },
@@ -153,25 +141,25 @@
 
             uniformChart = new Chart(document.getElementById('uniformChart'), {
                 type: 'bar',
-                data: { labels: [], datasets: [{ data: [], backgroundColor: '#00ffff' }] },
+                data: { labels: [], datasets: [{ data: [], backgroundColor: '#3498db' }] },
                 options: chartOptions
             });
 
             exponentialChart = new Chart(document.getElementById('exponentialChart'), {
                 type: 'bar',
-                data: { labels: [], datasets: [{ data: [], backgroundColor: '#ff6b6b' }] },
+                data: { labels: [], datasets: [{ data: [], backgroundColor: '#e74c3c' }] },
                 options: chartOptions
             });
 
             binomialChart = new Chart(document.getElementById('binomialChart'), {
                 type: 'bar',
-                data: { labels: [], datasets: [{ data: [], backgroundColor: '#7bed9f' }] },
+                data: { labels: [], datasets: [{ data: [], backgroundColor: '#2ecc71' }] },
                 options: chartOptions
             });
 
             normalChart = new Chart(document.getElementById('normalChart'), {
                 type: 'bar',
-                data: { labels: [], datasets: [{ data: [], backgroundColor: '#ffe66d' }] },
+                data: { labels: [], datasets: [{ data: [], backgroundColor: '#f1c40f' }] },
                 options: chartOptions
             });
         }
@@ -201,11 +189,11 @@
         function generateSampleMeans(distributionFunc, sampleSize, numSamples) {
             const sampleMeans = [];
             for (let i = 0; i < numSamples; i++) {
-                let total = 0;
+                let sum = 0;
                 for (let j = 0; j < sampleSize; j++) {
-                    total += distributionFunc();
+                    sum += distributionFunc();
                 }
-                sampleMeans.push(total / sampleSize);
+                sampleMeans.push(sum / sampleSize);
             }
             return sampleMeans;
         }
@@ -215,7 +203,7 @@
             const max = Math.max(...data);
             const binWidth = (max - min) / bins;
             const labels = [];
-            const frequencies = new Array(bins).fill(0);
+            const frequencies = Array(bins).fill(0);
 
             for (let i = 0; i < bins; i++) {
                 labels.push((min + i * binWidth).toFixed(2));
@@ -230,9 +218,9 @@
         }
 
         function updateChart(chart, data) {
-            const histogram = createHistogram(data);
-            chart.data.labels = histogram.labels;
-            chart.data.datasets[0].data = histogram.frequencies;
+            const hist = createHistogram(data);
+            chart.data.labels = hist.labels;
+            chart.data.datasets[0].data = hist.frequencies;
             chart.update();
         }
 
@@ -241,7 +229,7 @@
             const numSamples = parseInt(document.getElementById('numSamples').value);
 
             if (sampleSize < 1 || numSamples < 1 || sampleSize > 1000 || numSamples > 10000) {
-                alert('Sample Size (1–1000), Number of Samples (1–10000)');
+                alert('Please enter valid values: Sample Size (1–1000), Number of Samples (1–10000)');
                 return;
             }
 
