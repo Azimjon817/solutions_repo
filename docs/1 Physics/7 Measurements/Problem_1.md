@@ -43,6 +43,4 @@ $$
 This allows us to report $g$ with a meaningful uncertainty, reflecting the reliability of our measurements.
 
 ---
-#### **4. Earth's Gravitational Acceleration simulation**
-**[Link to simulation](index.html)**
 
