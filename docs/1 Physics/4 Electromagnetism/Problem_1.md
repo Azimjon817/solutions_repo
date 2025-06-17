@@ -96,6 +96,8 @@ And observe the resulting 2D and 3D trajectories.
 
 ---
 
+![alt text](360_F_142819305_zazuHLLzGg5a5GIVuBVUEu5PTsniLoHB.jpg)
+
 ### **4. Visualization Techniques**
 
 Visualizations help interpret physical phenomena:

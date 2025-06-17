@@ -103,6 +103,8 @@ Understanding these speeds is critical in:
 * Selecting launch windows
 * Ensuring mission success
 
+![alt text](OIP.jpg)
+
 ---
 
 ### **5. Implementation**
